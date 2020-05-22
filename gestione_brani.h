@@ -15,12 +15,12 @@ typedef struct {
 /* -------------------------
 	Funzioni di lettura
 ------------------------- */
-int leggi_id_brano(brano *brano_selezionato);
+int leggi_id_brano(brano brano_selezionato);
 void leggi_titolo_brano(brano brano_selezionato, char *titolo_letto);
-int leggi_durata_brano(brano *brano_selezionato);
-int leggi_anno_brano(brano *brano_selezionato);
-int leggi_ascolti_brano(brano *brano_selezionato);
-int leggi_flag_eliminato_brano(brano *brano_selezionato);
+int leggi_durata_brano(brano brano_selezionato);
+int leggi_anno_brano(brano brano_selezionato);
+int leggi_ascolti_brano(brano brano_selezionato);
+int leggi_flag_eliminato_brano(brano brano_selezionato);
 
 /* -------------------------
 	Funzioni di scrittura

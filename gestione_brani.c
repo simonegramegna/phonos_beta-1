@@ -6,28 +6,28 @@
 /* -------------------------
 	Funzioni di lettura
 ------------------------- */
-int leggi_id_brano(brano *brano_selezionato){
-	return brano_selezionato->id;
+int leggi_id_brano(brano brano_selezionato){
+	return brano_selezionato.id;
 }
 
 void leggi_titolo_brano(brano brano_selezionato, char *titolo_letto){
 	strcpy(titolo_letto, brano_selezionato.titolo);
 }
 
-int leggi_durata_brano(brano *brano_selezionato){
-	return brano_selezionato->durata;
+int leggi_durata_brano(brano brano_selezionato){
+	return brano_selezionato.durata;
 }
 
-int leggi_anno_brano(brano *brano_selezionato){
-	return brano_selezionato->anno;
+int leggi_anno_brano(brano brano_selezionato){
+	return brano_selezionato.anno;
 }
 
-int leggi_ascolti_brano(brano *brano_selezionato){
-	return brano_selezionato->ascolti;
+int leggi_ascolti_brano(brano brano_selezionato){
+	return brano_selezionato.ascolti;
 }
 
-int leggi_flag_eliminato_brano(brano *brano_selezionato){
-	return brano_selezionato->eliminato;
+int leggi_flag_eliminato_brano(brano brano_selezionato){
+	return brano_selezionato.eliminato;
 }
 
 /* -------------------------
@@ -82,7 +82,7 @@ int rimuovi_brano(int id_brano){
 	if(tabella_brani != NULL){
 		while(!feof(tabella_brani) && rimosso == 0){
 			fread(&brano_corrente, sizeof(brano), 1, tabella_brani);
-			if(leggi_id_brano(&brano_corrente) == id_brano){
+			if(leggi_id_brano(brano_corrente) == id_brano){
 				scrivi_flag_eliminato_brano(&brano_corrente, 1);
 				fwrite(&brano_corrente, sizeof(brano), 1, tabella_brani);
 				rimosso = 1;
