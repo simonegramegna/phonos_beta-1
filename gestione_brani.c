@@ -9,23 +9,18 @@
 int leggi_id_brano(brano brano_selezionato){
 	return brano_selezionato.id;
 }
-
 void leggi_titolo_brano(brano brano_selezionato, char *titolo_letto){
 	strcpy(titolo_letto, brano_selezionato.titolo);
 }
-
 int leggi_durata_brano(brano brano_selezionato){
 	return brano_selezionato.durata;
 }
-
 int leggi_anno_brano(brano brano_selezionato){
 	return brano_selezionato.anno;
 }
-
 int leggi_ascolti_brano(brano brano_selezionato){
 	return brano_selezionato.ascolti;
 }
-
 int leggi_flag_eliminato_brano(brano brano_selezionato){
 	return brano_selezionato.eliminato;
 }
