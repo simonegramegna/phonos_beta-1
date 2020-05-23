@@ -76,6 +76,8 @@ void mostra_brani(){
 			mostra_brano(brano_corrente);
 		}
 	}
+
+	fclose(tabella_brani);
 }
 void mostra_brano(brano brano_selezionato){
 	if(brano_selezionato.eliminato != 1){
@@ -122,8 +124,12 @@ int elimina_brano(int id_brano){
 	scrivi_flag_eliminato_brano(&brano_trovato, 1);
 	tabella_brani = fopen("brani.dat", "rb+");
 	if(tabella_brani != NULL){
-		fseek(tabella_brani, posizione, SEEK_SET);
-		fwrite(&brano_trovato, sizeof(brano), 1, tabella_brani);
+		if(posizione != -1){
+			fseek(tabella_brani, posizione, SEEK_SET);
+			fwrite(&brano_trovato, sizeof(brano), 1, tabella_brani);
+		} else {
+			printf("Brano non trovato \n");
+		}
 		eliminato = 1;
 	}
 
