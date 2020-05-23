@@ -55,7 +55,6 @@ void scrivi_flag_eliminato_brano(brano *brano_selezionato, int flag_eliminato){
 /* -------------------------
 	Funzioni su file
 ------------------------- */
-
 int aggiungi_brano(brano *brano_selezionato){
 	// TODO: genera id
 	scrivi_flag_eliminato_brano(brano_selezionato, 0);
@@ -72,29 +71,6 @@ int aggiungi_brano(brano *brano_selezionato){
 
 	return aggiunto;
 }
-
-int rimuovi_brano(int id_brano){
-	FILE *tabella_brani;
-	brano brano_corrente;
-	int rimosso = 0;
-
-	tabella_brani = fopen("brani.dat", "rb+");
-	if(tabella_brani != NULL){
-		while(!feof(tabella_brani) && rimosso == 0){
-			fread(&brano_corrente, sizeof(brano), 1, tabella_brani);
-			if(leggi_id_brano(brano_corrente) == id_brano){
-				scrivi_flag_eliminato_brano(&brano_corrente, 1);
-				fwrite(&brano_corrente, sizeof(brano), 1, tabella_brani);
-				rimosso = 1;
-			}
-		}
-	}
-
-	fclose(tabella_brani);
-
-	return rimosso;
-}
-
 void mostra_brani(){
 	brano brano_corrente;
 	FILE *tabella_brani;
@@ -106,7 +82,6 @@ void mostra_brani(){
 		}
 	}
 }
-
 void mostra_brano(brano brano_selezionato){
 	if(brano_selezionato.eliminato != 1){
 		printf("ID: %d				\n", brano_selezionato.id);
@@ -118,3 +93,62 @@ void mostra_brano(brano brano_selezionato){
 	}
 	printf("\n");
 }
+long posizione_brano(int id_brano){
+    long posizione;
+    FILE *tabella_brani;
+    brano brano_corrente;
+    int id_corrente;
+
+    posizione = -1;
+    tabella_brani = fopen("brani.dat", "rb");
+    if (tabella_brani != NULL){
+        while(!feof(tabella_brani) && posizione == -1){
+            fread(&brano_corrente, sizeof(brano), 1, tabella_brani);
+            id_corrente = leggi_id_brano(brano_corrente);
+            if(id_corrente == id_brano){
+                posizione = ftell(tabella_brani) - sizeof(brano); // perche' la ftell restituisce blocco successivo
+            }
+        }
+    }
+
+    fclose(tabella_brani);
+
+    return posizione;
+}
+int elimina_brano(int id_brano){
+	long posizione;
+	FILE *tabella_brani;
+	int eliminato;
+	brano brano_trovato;
+
+	eliminato = 0;
+	posizione = posizione_brano(id_brano);
+	brano_trovato = cerca_brano(id_brano);
+	scrivi_flag_eliminato_brano(&brano_trovato, 1);
+	tabella_brani = fopen("brani.dat", "rb+");
+	if(tabella_brani != NULL){
+		fseek(tabella_brani, posizione, SEEK_SET);
+		fwrite(&brano_trovato, sizeof(brano), 1, tabella_brani);
+		eliminato = 1;
+	}
+
+	return eliminato;
+}
+brano cerca_brano(int id_brano){
+	long posizione;
+	FILE *tabella_brani;
+	brano brano_trovato;
+
+	posizione = posizione_brano(id_brano);
+	tabella_brani = fopen("brani.dat", "rb");
+	if(tabella_brani != NULL){
+		fseek(tabella_brani, posizione, SEEK_SET);
+		fread(&brano_trovato, sizeof(brano), 1, tabella_brani);
+	}
+
+	return brano_trovato;
+}
+
+
+
+

@@ -36,9 +36,10 @@ void scrivi_flag_eliminato_brano(brano *brano_selezionato, int flag_eliminato);
 	Funzioni su file
 ------------------------- */
 int aggiungi_brano(brano *brano_selezionato);
-int rimuovi_brano(int id_brano);
 void mostra_brani();
 void mostra_brano(brano brano_selezionato);
-
+long posizione_brano(int id_brano);
+int elimina_brano(int id_brano);
+brano cerca_brano(int id_brano);
 
 #endif /* GESTIONE_BRANI_H_ */
