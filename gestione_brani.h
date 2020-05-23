@@ -41,5 +41,6 @@ void mostra_brano(brano brano_selezionato);
 long posizione_brano(int id_brano);
 int elimina_brano(int id_brano);
 brano cerca_brano(int id_brano);
+int modifica_brano(int id_brano, brano brano_modificato);
 
 #endif /* GESTIONE_BRANI_H_ */

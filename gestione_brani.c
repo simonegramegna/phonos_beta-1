@@ -143,7 +143,31 @@ brano cerca_brano(int id_brano){
 
 	return brano_trovato;
 }
+int modifica_brano(int id_brano, brano brano_modificato){
+	long posizione;
+	FILE *tabella_brani;
+	int modificato;
+	brano brano_trovato;
+
+	modificato = 0;
+	posizione = posizione_brano(id_brano);
+	brano_trovato = cerca_brano(id_brano);
+
+	scrivi_titolo_brano(&brano_trovato, brano_modificato.titolo);
+	scrivi_durata_brano(&brano_trovato, brano_modificato.durata);
+	scrivi_anno_brano(&brano_trovato, brano_modificato.anno);
+	scrivi_ascolti_brano(&brano_trovato, brano_modificato.ascolti);
+	scrivi_flag_eliminato_brano(&brano_trovato, brano_modificato.eliminato);
 
 
+	tabella_brani = fopen("brani.dat", "rb+");
+	if(tabella_brani != NULL){
+		fseek(tabella_brani, posizione, SEEK_SET);
+		fwrite(&brano_trovato, sizeof(brano), 1, tabella_brani);
+		modificato = 1;
+	}
+
+	return modificato;
+}
 
 

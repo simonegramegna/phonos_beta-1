@@ -4,5 +4,6 @@
 
 int main(){
 
+	mostra_brani();
 	return 0;
 }
