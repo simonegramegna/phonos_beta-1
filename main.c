@@ -5,10 +5,11 @@
 #include "gestione_artisti.h"
 #include "gestione_album.h"
 #include "gestione_generi.h"
+#include "gestione_playlist.h"
 #include "genera_id.h"
 
 int main(){
-	printf(":)");
+	printf("Funziona tutto :)");
 
 	return 0;
 }
