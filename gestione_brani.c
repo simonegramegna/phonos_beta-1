@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "gestione_brani.h"
+#include "genera_id.h"
 
 /* -------------------------
 	Funzioni di lettura
@@ -51,7 +52,7 @@ void scrivi_flag_eliminato_brano(brano *brano_selezionato, int flag_eliminato){
 	Funzioni su file
 ------------------------- */
 int aggiungi_brano(brano *brano_selezionato){
-	// TODO: genera id
+	scrivi_id_brano(brano_selezionato, genera_id());
 	scrivi_flag_eliminato_brano(brano_selezionato, 0);
 	FILE *tabella_brani;
 	int aggiunto = 0;

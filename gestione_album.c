@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "gestione_album.h"
+#include "genera_id.h"
 
 /* -------------------------
 	Funzioni di lettura
@@ -39,7 +40,7 @@ void scrivi_flag_eliminato_album(album *album_selezionato, int flag_eliminato){
 	Funzioni su file
 ------------------------- */
 int aggiungi_album(album *album_selezionato){
-	// TODO: genera id
+	scrivi_id_album(album_selezionato, genera_id());
 	scrivi_flag_eliminato_album(album_selezionato, 0);
 	FILE *tabella_album;
 	int aggiunto = 0;

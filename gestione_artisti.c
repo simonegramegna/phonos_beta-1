@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "gestione_artisti.h"
+#include "genera_id.h"
 
 /* -------------------------
 	Funzioni di lettura
@@ -45,7 +46,7 @@ void scrivi_flag_eliminato_artista(artista *artista_selezionato, int flag_elimin
 	Funzioni su file
 ------------------------- */
 int aggiungi_artista(artista *artista_selezionato){
-	// TODO: genera id
+	scrivi_id_artista(artista_selezionato, genera_id());
 	scrivi_flag_eliminato_artista(artista_selezionato, 0);
 	FILE *tabella_artisti;
 	int aggiunto = 0;

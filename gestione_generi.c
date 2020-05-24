@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "gestione_generi.h"
+#include "genera_id.h"
 
 /* -------------------------
 	Funzioni di lettura
@@ -33,7 +34,7 @@ void scrivi_flag_eliminato_genere(genere *genere_selezionato, int flag_eliminato
 	Funzioni su file
 ------------------------- */
 int aggiungi_genere(genere *genere_selezionato){
-	// TODO: genera id
+	scrivi_id_genere(genere_selezionato, genera_id());
 	scrivi_flag_eliminato_genere(genere_selezionato, 0);
 	FILE *tabella_generi;
 	int aggiunto = 0;
