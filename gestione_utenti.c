@@ -168,3 +168,54 @@ int modifica_utente(int id_utente, utente utente_modificato){
 
 	return modificato;
 }
+
+int controllo_presenza_utente(utente utente_selezionato)
+{
+	int controllo = 0;
+
+	FILE* tabella_utenti = fopen("utenti.dat","rb");
+
+	if( tabella_utenti != NULL )
+	{
+		char username_utente[DIMUSER];
+
+		leggi_username_utente(utente_selezionato, username_utente );
+
+		while( !feof(tabella_utenti) && controllo == 0 )
+		{
+			utente utente_confronto;
+			char username_confronto[DIMUSER];
+
+			fread(&utente_confronto, sizeof(utente),1, tabella_utenti);
+
+			leggi_username_utente(utente_confronto, username_confronto);
+
+			if( strcmp(username_utente, username_confronto) == 0 )
+			{
+				controllo = 1;
+			}
+		}
+	}
+	else
+	{
+		perror("fopen");
+	}
+	return controllo;
+}
+
+void inserisci_admin( utente* admin_inserito )
+{
+	scrivi_id_utente(admin_inserito, genera_id());
+	scrivi_admin_utente(admin_inserito, 1);
+	scrivi_flag_eliminato_utente(admin_inserito, 0);
+	FILE *tabella_utenti;
+	int aggiunto = 0;
+
+	tabella_utenti = fopen("utenti.dat", "ab");
+	if(tabella_utenti != NULL){
+		fwrite(admin_inserito, sizeof(utente), 1, tabella_utenti);
+		aggiunto = 1;
+	}
+
+	fclose(tabella_utenti);
+}
