@@ -39,7 +39,7 @@ void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, brano brano_le
 int leggi_flag_branoAlbum( brano_album relazione_letta );
 
 // funzione per scrivere il flag di un brano album in base ad album e brano in input
-void scrivi_flag_branoAlbum( brano_album* relazione_scritta, brano brano_letto, album album_appartenenza, int flag_branoAlbum );
+void scrivi_flag_branoAlbum( brano_album* relazione_scritta, brano brano_letto, album album_appartenenza );
 
 /**
  * Operazioni su file per brano_album
@@ -55,10 +55,10 @@ long posizione_branoAlbum( int id_branoAlbum );
 int elimina_branoAlbum( int id_branoAlbum );
 
 // funzione per leggere una branoAlbum con un determinato identificativo
-brano_album leggi_branoAlbum( int id_branoAlbum );
+brano_album cerca_branoAlbum( int id_branoAlbum );
 
 // funzione per modificare un branoAlbum con un determinato identificativo
-int modifica_branoAlbum( int id_branoAlbum, brano_album relazione_modificata );
+int modifica_branoAlbum( brano_album relazione_modificata );
 
 
 // funzione di test per stampare tutti i recor
