@@ -5,6 +5,7 @@
 #include "gestione_album.h"
 #include "gestione_generi.h"
 #include "gestione_artisti.h"
+#include "gestione_playlist.h"
 
 // definisco tipo di dato branoAlbum
 typedef struct{
@@ -16,14 +17,32 @@ typedef struct{
 
 }brano_album;
 
+
+// definisco tipo di dato branoArtista
+typedef struct{
+
+    int id_brano_artista;
+    int id_brano;
+    int id_artista;
+    int flag_brano_artista;
+
+}brano_artista;
+
+
+/*********************************************
+ * 
+ * Funzioni BranoAlbum
+ * 
+ *********************************************/
+
 /*
  * Operazioni su campi brano_album
 */
 
-// funzione per leggere l'id del brano contenuto in branoalbum
+// funzione per leggere l'id del branoalbum
 int leggi_id_branoAlbum( brano_album relazione_letta );
 
-// funzione per scrivere l'identificativo del branoalbum
+// funzione per scrivere l'id del branoalbum
 void scrivi_id_branoAlbum( brano_album* relazione_scritta, int id_assegnato );
 
 // funzione per leggere l'id dell'album contenuto in branoalbum
@@ -61,8 +80,65 @@ brano_album cerca_branoAlbum( int id_branoAlbum );
 int modifica_branoAlbum( brano_album relazione_modificata );
 
 
-// funzione di test per stampare tutti i recor
-void stampa_relazioni();
+/*********************************************
+ * 
+ * Funzioni BranoArtista
+ * 
+ *********************************************/
+
+/*
+ * Operazioni su campi brano_artista
+*/
+
+// funzione per leggere l'id del brano_artista
+int leggi_id_branoArtista( brano_artista relazione_letta );
+
+// funzione per scrivere l'id del brano_artista
+void scrivi_id_branoArtista( brano_artista* relazione_scritta, int id_assegnato );
+
+// funzione per leggere l'id del brano contenuto nella relazione brano_artista
+int id_brano_branoArtista( brano_artista relazione_letta );
+
+// funzione per leggere l'id dell'artista nella relazione brano_artista
+int id_artista_branoArtista( brano_artista relazione_letta );
+
+// funzione per scrivere una relazione brano_artista
+void scrivi_relazione_branoArtista( brano_artista* relazione_scritta, brano brano_letto, artista artista_appartenenza );
+
+// funzione per leggere il flag del brano artista
+int leggi_flag_branoArtista( brano_artista relazione_letta );
+
+// funzione per scrivere il flag del brano_artista
+void scrivi_flag_branoArtista( brano_artista* relazione_scritta, int flag_relazione );
+
+/**
+ * Operazioni su file per brano_artista
+*/
+
+// funzione per aggiungere una relazione branoArtista
+int aggiungi_branoArtista( brano_artista* relazione_inserita );
+
+// funzione per cercare la posizione nella tabella di un record branoArtista con un determinato id
+long posizione_branoArtista( int id_branoArtista );
+
+// funzione per eliminare un record branoArtista
+int elimina_branoArtista( int id_branoArtista );
+
+// funzione per leggere un branoArtista con determinato identificativo
+brano_artista cerca_branoArtista( int id_branoArtista );
+
+// funzione per modificare una relazione brano_artista
+int modifica_branoArtista( brano_artista relazione_modificata );
+
+// test stampa relazioni
+void stampa_brano_artista();
+
+/*********************************************
+ * 
+ * Funzioni BranoGenere
+ * 
+ *********************************************/
+
 
 
 #endif /* GESTIONE_RELAZIONI_H_ */
