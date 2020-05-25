@@ -53,34 +53,16 @@ int leggi_flag_branoAlbum( brano_album relazione_letta )
     return relazione_letta.flag_brano_album;
 }
 
-void scrivi_flag_branoAlbum( brano_album* relazione_scritta, brano brano_letto, album album_appartenenza )
+void scrivi_flag_branoAlbum( brano_album* relazione_scritta, int flag_relazione )
 {
-    // controllo i flag del brano e dell'album messi in relazione
-    int flag_brano;  
-    int flag_album; 
-    
-    flag_brano = leggi_flag_eliminato_brano(brano_letto);
-    flag_album = leggi_flag_eliminato_album(album_appartenenza);
-
-    /**
-     * La relazione esiste se e solo se sia brano 
-     * che album esistono
-    */
-    if( flag_brano == 0 && flag_album == 0 )
-    {
-        relazione_scritta->flag_brano_album = 0;
-    }
-    else
-    {
-        relazione_scritta->flag_brano_album = 1;
-    }
+    relazione_scritta->flag_brano_album = flag_relazione;
 }
 
 /**
  * Operazioni su file branoAlbum
 */
 
-int aggiungi_branoAlbum( brano_album* relazione_inserita, brano brano_letto, album album_appartenenza )
+int aggiungi_branoAlbum( brano_album* relazione_inserita )
 {
     int aggiunto;
     FILE* tabella_brano_album;
@@ -90,8 +72,8 @@ int aggiungi_branoAlbum( brano_album* relazione_inserita, brano brano_letto, alb
 
     if( tabella_brano_album != NULL )
     {
-        scrivi_id_branoAlbum(relazione_inserita,genera_id());
-        scrivi_flag_branoAlbum(relazione_inserita, brano_letto, album_appartenenza );
+        scrivi_id_branoAlbum( relazione_inserita, genera_id() );
+        scrivi_flag_branoAlbum( relazione_inserita, 0 );
 
         fwrite(relazione_inserita, sizeof(brano_album), 1, tabella_brano_album );
         aggiunto = 1;
@@ -163,6 +145,8 @@ int elimina_branoAlbum( int id_branoAlbum )
     FILE* tabella_branoAlbum;
     
     eliminato = 0;
+
+    // posizione del record da eliminare
     posizione = posizione_branoAlbum(id_branoAlbum);
     
     tabella_branoAlbum = fopen("brano_album.dat","rb+");
@@ -170,30 +154,17 @@ int elimina_branoAlbum( int id_branoAlbum )
     if( tabella_branoAlbum != NULL && posizione != -1 )
     {
         brano_album relazione_eliminata;
-        brano brano_relazione;
-        album album_relazione;
-
-        // elimino il brano se o il brano oppure l'album non esiste
         relazione_eliminata = cerca_branoAlbum(id_branoAlbum);
-        brano_relazione = cerca_brano( id_brano_branoAlbum(relazione_eliminata) );
-        album_relazione = cerca_album( id_album_branoAlbum(relazione_eliminata) );
 
-        scrivi_flag_branoAlbum(&relazione_eliminata, brano_relazione, album_relazione);
+        // imposto a eliminato il record
+        scrivi_flag_branoAlbum(&relazione_eliminata, 1 );
 
         // mi porto in posizione del branoalbum da eliminare
         fseek(tabella_branoAlbum, posizione, SEEK_SET );
 
         // scrivo la relazione eliminata 
         fwrite(&relazione_eliminata, sizeof(brano_album), 1, tabella_branoAlbum );
-
-        // elimino il record branoalbum se o il brano oppure l'album non esiste
-        if( leggi_flag_eliminato_brano(brano_relazione) == 1 || leggi_flag_eliminato_album(album_relazione) == 1 )
-        {
-            eliminato = 1;
-            printf("La relazione selezionata e' stata eliminata \n");
-        }
     }
-
     fclose(tabella_branoAlbum);
 
     return eliminato;

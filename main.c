@@ -57,9 +57,9 @@ int main()
 	scrivi_relazione_branoAlbum(&r2, b2, a2);
 
 	// aggiungo le relazioni alle basi dati
-	aggiungi_branoAlbum(&r3,b1,a1);
-	aggiungi_branoAlbum(&r1,b3,a1);
-	aggiungi_branoAlbum(&r2,b2, a2);
+	aggiungi_branoAlbum(&r3);
+	aggiungi_branoAlbum(&r1);
+	aggiungi_branoAlbum(&r2);
 
 
 	// stampo i risultati dell'inserimento
@@ -73,7 +73,41 @@ int main()
 
 	stampa_relazioni();
 
+	printf("\nModifica di una relazione\n");
+	
+	brano b4;
 
+	scrivi_titolo_brano(&b4,"Boulevard of broken dreams\0");
+	scrivi_anno_brano(&b4, 2006);
+	scrivi_durata_brano(&b4, 400);
+	scrivi_ascolti_brano(&b4, 5000);
+
+	aggiungi_brano(&b4);
+
+	scrivi_relazione_branoAlbum(&r3,b4,a1);
+
+	modifica_branoAlbum(r3);
+
+	mostra_brani();
+
+	printf("\n");
+
+	mostra_album();
+
+	printf("\n");
+
+	stampa_relazioni();
+
+	elimina_brano(128);
+
+	printf("brani senza 128: \n");
+	mostra_brani();
+
+	elimina_branoAlbum(170);
+
+	printf("rimozione..\n");
+
+	stampa_relazioni();
 
 	return 0;
 }

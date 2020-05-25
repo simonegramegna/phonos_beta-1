@@ -39,14 +39,14 @@ void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, brano brano_le
 int leggi_flag_branoAlbum( brano_album relazione_letta );
 
 // funzione per scrivere il flag di un brano album in base ad album e brano in input
-void scrivi_flag_branoAlbum( brano_album* relazione_scritta, brano brano_letto, album album_appartenenza );
+void scrivi_flag_branoAlbum( brano_album* relazione_scritta, int flag_relazione );
 
 /**
  * Operazioni su file per brano_album
 */
 
 // funzione per aggiungere una relazione branoAlbum 
-int aggiungi_branoAlbum( brano_album* relazione_inserita, brano brano_letto, album album_appartenenza );
+int aggiungi_branoAlbum( brano_album* relazione_inserita );
 
 // funzione per cercare la posizione di un branoAlbum con determinato id
 long posizione_branoAlbum( int id_branoAlbum );
