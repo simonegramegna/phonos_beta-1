@@ -50,7 +50,7 @@ int main()
 
 	printf("\n\n");
 
-	stampa_brano_artista();
+	//stampa_brano_artista();
 
 	// provo a modificare una relazione brano_artista dandogli un artista diverso
 	artista vasco;
@@ -72,7 +72,7 @@ int main()
 
 	printf("relazione modificata...\n");
 
-	stampa_brano_artista();
+	//stampa_brano_artista();
 
 
 

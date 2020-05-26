@@ -40,8 +40,11 @@ void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, brano brano_le
     // verifico che sia il brano che l'album esistano
     if( flag_brano == 0 && flag_album == 0 )
     {
-        int id_brano = leggi_id_brano(brano_letto);
-        int id_album = leggi_id_album(album_appartenenza);
+        int id_brano;
+        int id_album;
+         
+        id_brano = leggi_id_brano(brano_letto);
+        id_album = leggi_id_album(album_appartenenza);
 
         relazione_scritta->id_brano = id_brano;
         relazione_scritta->id_album = id_album;
@@ -210,6 +213,10 @@ int modifica_branoAlbum( brano_album relazione_modificata )
  * 
  *********************************************/
 
+/*
+ * Operazioni su campi brano_artista
+*/
+
 int leggi_id_branoArtista( brano_artista relazione_letta )
 {
     return relazione_letta.id_brano_artista;
@@ -297,7 +304,7 @@ long posizione_branoArtista( int id_branoArtista )
         while( !feof(tabella_branoArtista) && posizione == -1 )
         {
             brano_artista confronto;
-            fread(&confronto, sizeof(brano_artista), 1, tabella_branoArtista );
+            fread( &confronto, sizeof(brano_artista), 1, tabella_branoArtista );
 
             if( leggi_id_branoArtista(confronto) == id_branoArtista )
             {
@@ -351,10 +358,10 @@ int elimina_branoArtista( int id_branoArtista )
         // imposto il flag a eliminato
         scrivi_flag_branoArtista(&relazione_eliminata,1);
 
-        // mi porto in posizione del recor da eliminare
+        // mi porto in posizione del record da eliminare
         fseek(tabella_branoArtisti, posizione, SEEK_SET);
 
-        fwrite(&relazione_eliminata, sizeof(brano_artista), 1, tabella_branoArtisti );
+        fwrite(&relazione_eliminata, sizeof(brano_artista), 1, tabella_branoArtisti);
         eliminato = 1;
     }
     fclose(tabella_branoArtisti);
@@ -378,8 +385,8 @@ int modifica_branoArtista( brano_artista relazione_modificata )
         id_relazione = leggi_id_branoArtista(relazione_modificata);
         posizione = posizione_branoArtista(id_relazione);
 
-        // mi porto nella poszione del recor modificato
-        fseek( tabella_branoArtista, posizione, SEEK_SET );
+        // mi porto nella poszione del record modificato
+        fseek(tabella_branoArtista, posizione, SEEK_SET);
 
         fwrite(&relazione_modificata, sizeof(brano_artista), 1, tabella_branoArtista );
         modificato = 1;
@@ -390,23 +397,222 @@ int modifica_branoArtista( brano_artista relazione_modificata )
     return modificato;
 }
 
-void stampa_brano_artista()
+/*********************************************
+ * 
+ * Funzioni BranoGenere
+ * 
+ *********************************************/
+
+/*
+ * Operazioni su campi brano_genere 
+*/
+
+int leggi_id_branoGenere( brano_genere relazione_letta )
 {
-    FILE* tab = fopen("brano_artista.dat","rb");
+    return relazione_letta.id_branoGenere;
+}
+
+void scrivi_id_branoGenere( brano_genere* relazione_scritta, int id_assegnato )
+{
+    relazione_scritta->id_branoGenere = id_assegnato;
+}
+
+int id_brano_branoGenere( brano_genere relazione_letta )
+{
+    return relazione_letta.id_brano;
+}
+
+int id_genere_branoGenere( brano_genere relazione_letta )
+{
+    return relazione_letta.id_genere;
+}
+
+void scrivi_relazione_branoGenere( brano_genere* relazione_scritta, brano brano_letto, genere genere_appartenenza )
+{
+    int flag_brano;
+    int flag_genere;
+
+    flag_brano = leggi_flag_eliminato_brano(brano_letto);
+    flag_genere = leggi_flag_eliminato_genere(genere_appartenenza);
+
+    // verifico che sia il brano che il genere esistano nella base dati
+    if( flag_brano == 0 && flag_genere == 0 )
+    {
+        int id_brano;
+        int id_genere;
+        
+        id_brano = leggi_id_brano(brano_letto);
+        id_genere = leggi_id_genere(genere_appartenenza);
+
+        relazione_scritta->id_brano = id_brano;
+        relazione_scritta->id_genere = id_genere;
+    }
+}
+
+int leggi_flag_branoGenere( brano_genere relazione_letta )
+{
+    return relazione_letta.flag_brano_genere;
+}
+
+void scrivi_flag_branoGenere( brano_genere* relazione_scritta, int flag_relazione )
+{
+    relazione_scritta->flag_brano_genere = flag_relazione;
+}
+
+/*
+ * Operazioni su file per brano_genere
+*/
+
+int aggiungi_branoGenere( brano_genere* relazione_inserita )
+{
+    int aggiunto;
+    FILE* tabella_brano_genere;
+
+    aggiunto = 0;
+    tabella_brano_genere = fopen("brano_genere.dat","ab");
+
+    if( tabella_brano_genere != NULL )
+    {
+        scrivi_id_branoGenere( relazione_inserita, genera_id() );
+        scrivi_flag_branoGenere( relazione_inserita, 0 );
+
+        fwrite(relazione_inserita, sizeof(brano_genere), 1, tabella_brano_genere );
+        aggiunto = 1;
+    }
+    fclose(tabella_brano_genere);
+
+    return aggiunto;
+}
+
+long posizione_branoGenere( int id_branoGenere )
+{
+    long posizione;
+    FILE* tabella_brano_genere;
+
+    posizione = -1;
+    tabella_brano_genere = fopen("brano_genere.dat","rb");
+
+    if( tabella_brano_genere != NULL )
+    {
+        while( !feof(tabella_brano_genere) && posizione == -1 )
+        {
+            brano_genere confronto;
+            fread( &confronto, sizeof(brano_genere), 1, tabella_brano_genere );
+
+            if( leggi_id_branoGenere(confronto) == id_branoGenere )
+            {
+                posizione = ftell(tabella_brano_genere) - sizeof(brano_genere); // la ftell prende il blocco successivo
+            }
+        }
+    }
+    fclose(tabella_brano_genere);
+
+    return posizione;
+}
+
+int elimina_branoGenere( int id_branoGenere )
+{
+    int eliminato;
+    FILE* tabella_branoGenere;
+
+    eliminato = 0;
+    tabella_branoGenere = fopen("brano_genere.dat","rb+");
+
+    if( tabella_branoGenere != NULL )
+    {
+        long posizione;
+        brano_genere relazione_eliminata;
+
+        posizione = posizione_branoGenere(id_branoGenere);
+        relazione_eliminata = cerca_branoGenere(id_branoGenere);
+
+        // imposto il flag a eliminato
+        scrivi_flag_branoGenere(&relazione_eliminata,1);
+
+        // mi porto in posizione del record da eliminare
+        fseek(tabella_branoGenere, posizione, SEEK_SET);
+
+        fwrite(&relazione_eliminata, sizeof(brano_genere), 1, tabella_branoGenere);
+        eliminato = 1;
+    }
+    fclose(tabella_branoGenere);
+
+    return eliminato;
+}
+
+brano_genere cerca_branoGenere( int id_branoGenere )
+{
+    brano_genere relazione_trovata;
+    FILE* tabella_branoGenere;
+
+    tabella_branoGenere = fopen("brano_genere.dat","rb");
+
+    if( tabella_branoGenere != NULL )
+    {
+        long posizione;
+        posizione = posizione_branoGenere( id_branoGenere );
+
+        // posiziono la testina sul record del file
+        fseek( tabella_branoGenere, posizione, SEEK_SET );
+
+        fread(&relazione_trovata, sizeof(brano_genere), 1, tabella_branoGenere);
+    }
+    fclose(tabella_branoGenere);
+
+    return relazione_trovata;
+}
+
+int modifica_branoGenere( brano_genere relazione_modificata )
+{
+    int modificato;
+    FILE* tabella_branoGenere;
+
+    modificato = 0;
+    tabella_branoGenere = fopen("brano_genere.dat","rb+");
+
+    if( tabella_branoGenere != NULL )
+    {
+       int id_relazione;
+       long posizione;
+
+       id_relazione = leggi_id_branoGenere(relazione_modificata);
+       posizione = posizione_branoGenere(id_relazione);
+
+        // mi porto nella poszione del record modificato
+        fseek(tabella_branoGenere, posizione, SEEK_SET );
+
+        fwrite(&relazione_modificata, sizeof(brano_genere), 1, tabella_branoGenere);
+        modificato = 1; 
+   
+    }
+    fclose(tabella_branoGenere);
+
+    return modificato;
+}
+
+void stampa_branogenere()
+{
+    FILE* tab = fopen("brano_genere.dat","rb");
 
     if( tab != NULL )
     {
-        brano_artista letto;
+        brano_genere conf;
 
-        while( fread(&letto, sizeof(brano_artista), 1, tab) )
+        while( fread(&conf, sizeof(brano_genere), 1,tab) )
         {
-            int id = leggi_id_branoArtista(letto);
-            int art = id_artista_branoArtista(letto);
-            int br = id_brano_branoArtista(letto);
-            int flag = leggi_flag_branoArtista(letto);
+            int id_gen = leggi_id_branoGenere(conf);
+            int br = id_brano_branoGenere(conf);
+            int gen = id_genere_branoGenere(conf);
+            int flag = leggi_flag_branoGenere(conf);
 
-            printf("id: %d, artista: %d, brano: %d, flag: %d\n",id,art,br,flag);
+            printf("id: %d, brano: %d, genere: %d, flag:%d \n",id_gen, br,gen, flag );
         }
     }
     fclose(tab);
 }
+
+/*********************************************
+ * 
+ * Funzioni PlaylistBrano
+ * 
+ *********************************************/

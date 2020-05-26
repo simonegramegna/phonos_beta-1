@@ -28,6 +28,16 @@ typedef struct{
 
 }brano_artista;
 
+// definisco tipo di dato branoGenere
+typedef struct{
+
+    int id_branoGenere;
+    int id_brano;
+    int id_genere;
+    int flag_brano_genere;
+
+}brano_genere;
+
 
 /*********************************************
  * 
@@ -51,7 +61,7 @@ int id_album_branoAlbum( brano_album relazione_letta );
 // funzione per leggere l'id del brano contenuto in branoAlbum
 int id_brano_branoAlbum( brano_album relazione_letta );
 
-// funnzione per scrivere l'id dell'album contenuto nel branoAlbum
+// funzione per scrivere la relazione branoalbum
 void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, brano brano_letto, album album_appartenenza );
 
 // funzione per leggere il flag di eliminazione di un branoAlbum
@@ -60,23 +70,23 @@ int leggi_flag_branoAlbum( brano_album relazione_letta );
 // funzione per scrivere il flag di un brano album in base ad album e brano in input
 void scrivi_flag_branoAlbum( brano_album* relazione_scritta, int flag_relazione );
 
-/**
+/*
  * Operazioni su file per brano_album
 */
 
-// funzione per aggiungere una relazione branoAlbum 
+// funzione per aggiungere alla tabella una relazione branoAlbum 
 int aggiungi_branoAlbum( brano_album* relazione_inserita );
 
 // funzione per cercare la posizione di un branoAlbum con determinato id
 long posizione_branoAlbum( int id_branoAlbum );
 
-// funzione per eliminare un brano album
+// funzione per eliminare un branoAlbum
 int elimina_branoAlbum( int id_branoAlbum );
 
 // funzione per leggere una branoAlbum con un determinato identificativo
 brano_album cerca_branoAlbum( int id_branoAlbum );
 
-// funzione per modificare un branoAlbum con un determinato identificativo
+// funzione per modificare nella tabella un branoAlbum 
 int modifica_branoAlbum( brano_album relazione_modificata );
 
 
@@ -130,8 +140,6 @@ brano_artista cerca_branoArtista( int id_branoArtista );
 // funzione per modificare una relazione brano_artista
 int modifica_branoArtista( brano_artista relazione_modificata );
 
-// test stampa relazioni
-void stampa_brano_artista();
 
 /*********************************************
  * 
@@ -139,6 +147,57 @@ void stampa_brano_artista();
  * 
  *********************************************/
 
+/*
+ * Operazioni su campi brano_genere 
+*/
 
+// funzione per leggere l'id del branogenere
+int leggi_id_branoGenere( brano_genere relazione_letta );
+
+// funzione per scrivere l'id del branogenere
+void scrivi_id_branoGenere( brano_genere* relazione_scritta, int id_assegnato );
+
+// funzione per leggere l'id del brano contenuto in branogenere
+int id_brano_branoGenere( brano_genere relazione_letta );
+
+// funzione per leggere l'id del genere contenuto in branogenere
+int id_genere_branoGenere( brano_genere relazione_letta );
+
+// funzione per scrivere la relazione branogenere
+void scrivi_relazione_branoGenere( brano_genere* relazione_scritta, brano brano_letto, genere genere_appartenenza );
+
+// funzione per leggere il flag di eliminazione di un branogenere
+int leggi_flag_branoGenere( brano_genere relazione_letta );
+
+// funzione per scrivere il flag di eliminazione di un branogenere
+void scrivi_flag_branoGenere( brano_genere* relazione_scritta, int flag_relazione );
+
+/*
+ * Operazioni su file per brano_genere
+*/
+
+// funzione per aggiungere alla tabella una relazione branoGenere
+int aggiungi_branoGenere( brano_genere* relazione_inserita );
+
+// funzione per cercare la poszione di un record branoGenere con determinato id
+long posizione_branoGenere( int id_branoGenere );
+
+// funzione per eliminare un branoGenere
+int elimina_branoGenere( int id_branoGenere );
+
+// funzione per leggere un brenoGenere con determinato identificativo 
+brano_genere cerca_branoGenere( int id_branoGenere );
+
+// funzione per modificare nella tabella un branoGenere
+int modifica_branoGenere( brano_genere relazione_modificata );
+
+// funzione di test per stampare i record branogenere inseriti
+void stampa_branogenere();
+
+/*********************************************
+ * 
+ * Funzioni PlaylistBrano
+ * 
+ *********************************************/
 
 #endif /* GESTIONE_RELAZIONI_H_ */
