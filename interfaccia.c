@@ -60,7 +60,7 @@ void interfaccia_principale()
 	}
 	else if(scelta == 4)
 	{
-		mostra_playlists();
+		//mostra_playlists();
 	}
 	else if(scelta == 5)
 	{

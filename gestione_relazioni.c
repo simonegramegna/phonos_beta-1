@@ -137,7 +137,6 @@ brano_album cerca_branoAlbum( int id_branoAlbum )
     return relazione_trovata;
 }
 
-
 int elimina_branoAlbum( int id_branoAlbum )
 {
     int eliminato;
@@ -207,7 +206,7 @@ int modifica_branoAlbum( brano_album relazione_modificata )
 
 /*********************************************
  * 
- * Funzioni BranoAlbum
+ * Funzioni BranoArtista
  * 
  *********************************************/
 
@@ -243,10 +242,10 @@ void scrivi_relazione_branoArtista( brano_artista* relazione_scritta, brano bran
     if( flag_brano == 0 && flag_artista == 0 )
     {
         int id_brano = leggi_id_brano(brano_letto);
-        int id_album = leggi_id_album(artista_appartenenza);
+        int id_artista = leggi_id_artista(artista_appartenenza);
 
         relazione_scritta->id_brano = id_brano;
-        relazione_scritta->id_album = id_album;
+        relazione_scritta->id_artista = id_artista;
     }
 }
 
@@ -274,7 +273,11 @@ int aggiungi_branoArtista( brano_artista* relazione_inserita )
 
     if( tabella_brano_artista != NULL )
     {
-        
+        scrivi_id_branoArtista( relazione_inserita, genera_id() );
+        scrivi_flag_branoArtista( relazione_inserita, 0 );
+
+        fwrite(relazione_inserita, sizeof(brano_artista), 1, tabella_brano_artista);
+        aggiunto = 1;
     }
     fclose(tabella_brano_artista);
 
@@ -312,7 +315,7 @@ brano_artista cerca_branoArtista( int id_branoArtista )
     brano_artista relazione_trovata;
     FILE* tabella_branoArtista;
 
-    tabella_branoArtista = fopen("brano_album.dat","rb");
+    tabella_branoArtista = fopen("brano_artista.dat","rb");
 
     if( tabella_branoArtista != NULL )
     {
@@ -335,14 +338,14 @@ int elimina_branoArtista( int id_branoArtista )
     FILE* tabella_branoArtisti;
 
     eliminato = 0;
-    tabella_branoArtisti = fopen("brano_album.dat","rb+");
+    tabella_branoArtisti = fopen("brano_artista.dat","rb+");
 
     if( tabella_branoArtisti != NULL )
     {
         long posizione;
         brano_artista relazione_eliminata;
 
-        posizione = posizione_branoArtista(id_artista_branoArtista);
+        posizione = posizione_branoArtista(id_branoArtista);
         relazione_eliminata = cerca_branoArtista(id_branoArtista);
 
         // imposto il flag a eliminato
@@ -365,7 +368,7 @@ int modifica_branoArtista( brano_artista relazione_modificata )
     FILE* tabella_branoArtista;
 
     modificato = 0;
-    tabella_branoArtista = fopen("brano_album.dat","rb+");
+    tabella_branoArtista = fopen("brano_artista.dat","rb+");
 
     if( tabella_branoArtista != NULL )
     {
@@ -389,7 +392,7 @@ int modifica_branoArtista( brano_artista relazione_modificata )
 
 void stampa_brano_artista()
 {
-    FILE* tab = fopen("brano_album.dat","rb");
+    FILE* tab = fopen("brano_artista.dat","rb");
 
     if( tab != NULL )
     {
