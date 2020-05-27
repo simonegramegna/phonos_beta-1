@@ -590,29 +590,89 @@ int modifica_branoGenere( brano_genere relazione_modificata )
     return modificato;
 }
 
-void stampa_branogenere()
-{
-    FILE* tab = fopen("brano_genere.dat","rb");
-
-    if( tab != NULL )
-    {
-        brano_genere conf;
-
-        while( fread(&conf, sizeof(brano_genere), 1,tab) )
-        {
-            int id_gen = leggi_id_branoGenere(conf);
-            int br = id_brano_branoGenere(conf);
-            int gen = id_genere_branoGenere(conf);
-            int flag = leggi_flag_branoGenere(conf);
-
-            printf("id: %d, brano: %d, genere: %d, flag:%d \n",id_gen, br,gen, flag );
-        }
-    }
-    fclose(tab);
-}
 
 /*********************************************
  * 
  * Funzioni PlaylistBrano
  * 
  *********************************************/
+
+/*
+ * Operazioni su campi playlist_brano 
+*/
+
+int leggi_id_playlistBrano( playlist_brano relazione_letta )
+{
+    return relazione_letta.id_playlistBrano;
+}
+
+void scrivi_id_playlistBrano( playlist_brano* relazione_scritta, int id_assegnato )
+{
+    relazione_scritta->id_playlistBrano = id_assegnato;
+}
+
+int id_playlist_playlistBrano( playlist_brano relazione_letta )
+{
+    return relazione_letta.id_playlist;
+}
+
+int id_brano_playlistBrano( playlist_brano relazione_letta )
+{
+    relazione_letta.id_brano;
+}
+
+void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, brano brano_letto, playlist playlist_appartenenza )
+{
+    int flag_brano;
+    int flag_playlist;
+
+    flag_brano = leggi_flag_eliminato_brano(brano_letto);
+    flag_playlist = leggi_flag_eliminato_playlist(playlist_appartenenza);
+
+    if( flag_brano == 0 && flag_playlist == 0 )
+    {
+        int id_brano;
+        int id_playlist;
+
+        id_brano = leggi_id_brano(brano_letto);
+        id_playlist = leggi_id_playlist(playlist_appartenenza);
+
+        relazione_scritta->id_brano = id_brano;
+        relazione_scritta->id_playlist = id_playlist;
+    }
+}
+
+int leggi_flag_playlistBrano( playlist_brano relazione_letta )
+{
+    return relazione_letta.flag_playlist_brano;
+}
+
+void scrivi_flag_playlistBrano( playlist_brano* relazione_scritta, int flag_relazione )
+{
+    relazione_scritta->flag_palylistBrano = flag_relazione; 
+}
+
+/*
+ * Operazioni su file 
+*/
+
+int aggiungi_playlistBrano( playlist_brano* relazione_aggiunta )
+{
+    FILE* tabella_playlist_brani;
+    int aggiunto;
+
+    tabella_playlist_brani = fopen("playlist_brani.dat","ab");
+    aggiunto = 0;
+
+    if( tabella_playlist_brani != NULL )
+    {
+        scrivi_id_playlistBrano( relazione_aggiunta, genera_id() );
+        scrivi_flag_playlistBrano( relazione_aggiunta, 0 );
+
+        fwrite(relazione_aggiunta, sizeof(playlist_brano), 1, tabella_playlist_brani);
+        aggiunto = 1;
+    }
+    fclose(tabella_playlist_brani);
+
+    return aggiunto;
+}

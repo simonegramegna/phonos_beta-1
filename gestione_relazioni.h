@@ -7,6 +7,7 @@
 #include "gestione_artisti.h"
 #include "gestione_playlist.h"
 
+
 // definisco tipo di dato branoAlbum
 typedef struct{
 
@@ -37,6 +38,16 @@ typedef struct{
     int flag_brano_genere;
 
 }brano_genere;
+
+// definisco tipo di dato playlistBrano
+typedef struct{
+
+    int id_playlistBrano;
+    int id_playlist;
+    int id_brano;
+    int flag_playlist_brano;
+
+}playlist_brano;
 
 
 /*********************************************
@@ -179,25 +190,70 @@ void scrivi_flag_branoGenere( brano_genere* relazione_scritta, int flag_relazion
 // funzione per aggiungere alla tabella una relazione branoGenere
 int aggiungi_branoGenere( brano_genere* relazione_inserita );
 
-// funzione per cercare la poszione di un record branoGenere con determinato id
+// funzione per cercare la posizione di un record branoGenere con determinato id
 long posizione_branoGenere( int id_branoGenere );
 
-// funzione per eliminare un branoGenere
+// funzione per eliminare una relazione branoGenere
 int elimina_branoGenere( int id_branoGenere );
 
-// funzione per leggere un brenoGenere con determinato identificativo 
+// funzione per leggere un brenoGenere con determinato id
 brano_genere cerca_branoGenere( int id_branoGenere );
 
 // funzione per modificare nella tabella un branoGenere
 int modifica_branoGenere( brano_genere relazione_modificata );
 
-// funzione di test per stampare i record branogenere inseriti
-void stampa_branogenere();
 
 /*********************************************
  * 
  * Funzioni PlaylistBrano
  * 
  *********************************************/
+
+/*
+ * Operazioni su campi playlist_brano 
+*/
+
+// funzione per leggere l'id della relazione playlistBrano
+int leggi_id_playlistBrano( playlist_brano relazione_letta );
+
+// funzione per scrivere l'id della relazione playlistBrano
+void scrivi_id_playlistBrano( playlist_brano* relazione_scritta, int id_assegnato );
+
+// funzione per leggere l'id della playlist contenuto in playlistBrano
+int id_playlist_playlistBrano( playlist_brano relazione_letta );
+
+// funzione per leggere l'id del brano in playlistBrano
+int id_brano_playlistBrano( playlist_brano relazione_letta );
+
+// funzione per scrivere una relazione playlistBrano
+void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, brano brano_letto, playlist playlist_appartenenza );
+
+// funzione per leggere il flag di eliminazione della relazione playlistBrano
+int leggi_flag_playlistBrano( playlist_brano relazione_letta );
+
+// funzione per scrivere il flag di eliminazione della relazione playlistBrano
+void scrivi_flag_playlistBrano( playlist_brano* relazione_scritta, int flag_relazione );
+
+/*
+ * Operazioni su file 
+*/
+
+// funzione per aggiungere alla tabella una relazione playlistBrano
+int aggiungi_playlistBrano( playlist_brano* relazione_aggiunta );
+
+// funzione per cercare la posizione di un record playlistBrano con un determinato id
+long posizione_playlistBrano( int id_playlistBrano );
+
+// funzione per eliminare una relazione playlistBrano con determinato id
+int elimina_playlistBrano( int id_playlistBrano );
+
+// funzione per leggere una relazione playlistBrano con determinato id
+playlist_brano cerca_playlistBrano( int id_playlistBrano );
+
+// funzione per modificare una relazione playlistBrano
+int modifica_playlistBrano( playlist_brano relazione_modificata );
+
+// funzione di test per la stampa
+void stampa_playlist_brano();
 
 #endif /* GESTIONE_RELAZIONI_H_ */
