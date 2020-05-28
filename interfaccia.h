@@ -27,4 +27,8 @@ void interfaccia_inserimento_genere();
 
 void interfaccia_inserimento_playlist();
 
+void interfaccia_registrazione();
+
+void interfaccia_login();
+
 #endif /* INTERFACCIA_H_ */

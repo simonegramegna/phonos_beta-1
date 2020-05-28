@@ -168,7 +168,6 @@ int modifica_utente(int id_utente, utente utente_modificato){
 
 	return modificato;
 }
-
 int controllo_presenza_utente(utente utente_selezionato)
 {
 	int controllo = 0;
@@ -202,7 +201,6 @@ int controllo_presenza_utente(utente utente_selezionato)
 	}
 	return controllo;
 }
-
 int inserisci_admin( utente* admin_inserito )
 {
 	scrivi_id_utente(admin_inserito, genera_id());
@@ -220,4 +218,27 @@ int inserisci_admin( utente* admin_inserito )
 	fclose(tabella_utenti);
 
 	return aggiunto;
+}
+int controllo_credenziali(char *username, char *password){
+	FILE *tabella_utenti;
+	utente utente_confronto;
+	char username_confronto[DIMUSER];
+	char password_confronto[DIMPASS];
+	int autenticato = 0;
+
+	tabella_utenti = fopen("utenti.dat", "rb");
+	if(tabella_utenti != NULL){
+		while(!feof(tabella_utenti)){
+			fread(&utente_confronto, sizeof(utente), 1, tabella_utenti);
+			leggi_username_utente(utente_confronto, username_confronto);
+			leggi_password_utente(utente_confronto, password_confronto);
+			if(strcmp(username_confronto, username) == 0 && strcmp(password_confronto, password) == 0){
+				autenticato = 1;
+			}
+		}
+	}
+
+	fclose(tabella_utenti);
+
+	return autenticato;
 }

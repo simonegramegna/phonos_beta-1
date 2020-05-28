@@ -35,6 +35,9 @@ void leggi_nome_playlist(playlist playlist_selezionata, char *nome_letto);
 // funzione per leggere la descrizione di una playlist
 void leggi_descrizione_playlist(playlist playlist_selezionata, char *descrizione_letta);
 
+// funzione per leggere il flag pubblica di una playlist
+int leggi_flag_pubblica_playlist(playlist playlist_selezionata);
+
 // funzione per leggere il flag di eliminazione di una playlist
 int leggi_flag_eliminato_playlist(playlist playlist_selezionata);
 
@@ -53,6 +56,9 @@ void scrivi_nome_playlist(playlist *playlist_selezionata, char *nome);
 
 // funzione per scrivere la descrizione di una playlist
 void scrivi_descrizione_playlist(playlist *playlist_selezionata, char *descrizione);
+
+// funzione per rendere pubblica o privata una playlist
+void scrivi_flag_pubblica_playlist(playlist *playlist_selezionata, int flag_pubblica);
 
 // funzione per scrivere il flag di eliminazione di una playlist
 void scrivi_flag_eliminato_playlist(playlist *playlist_selezionata, int flag_eliminato);

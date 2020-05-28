@@ -69,6 +69,7 @@ void interfaccia_principale()
 	printf("[8] Aggiungi una playlist			\n");
 	printf("[9] Registrati						\n");
 	printf("[10] Accedi							\n");
+	printf("[11] Mostra tutti gli utenti		\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -115,17 +116,22 @@ void interfaccia_principale()
 	}
 	else if (scelta == 9)
 	{
-		//interfaccia_registrazione();
+		interfaccia_registrazione();
 		replay();
 	}
 	else if (scelta == 10)
 	{
-		//interfaccia_login();
+		interfaccia_login();
+		replay();
+	}
+	else if (scelta == 11)
+	{
+		mostra_utenti();
 		replay();
 	}
 	else
 	{
-		printf("Valore non valido, si prega di riprovare \n");
+		printf("\nValore non valido, si prega di riprovare \n");
 		replay();
 	}
 }
@@ -264,4 +270,63 @@ void interfaccia_inserimento_playlist()
 	{
 		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 	}
+}
+
+void interfaccia_registrazione(){
+	utente nuovo_utente;
+	char nome_utente[DIMUSER];
+	char password[DIMPASS];
+	int aggiunto;
+
+	titolo();
+
+	printf("Scegli un nome utente ");
+	leggere_stringa(nome_utente);
+
+	printf("Scegli una password sicura ");
+	leggere_stringa(password);
+
+	scrivi_username_utente(&nuovo_utente, nome_utente);
+	scrivi_password_utente(&nuovo_utente, password);
+
+	aggiunto = aggiungi_utente(&nuovo_utente);
+
+	if(aggiunto == 1){
+		printf("\nUtente aggiunto con successo \n");
+	} else {
+		printf("\nQualcosa è andato storto. Ti preghiamo di riprovare \n");
+	}
+}
+
+void interfaccia_login(){
+	utente utente_login;
+	char nome_utente[DIMUSER];
+	char password[DIMPASS];
+	int utente_esiste;
+	int autenticato;
+
+	titolo();
+
+	printf("Nome utente: ");
+	leggere_stringa(nome_utente);
+
+	printf("Password: ");
+	leggere_stringa(password);
+
+	scrivi_username_utente(&utente_login, nome_utente);
+	scrivi_password_utente(&utente_login, password);
+
+	utente_esiste = controllo_presenza_utente(utente_login);
+
+	if(utente_esiste == 1){
+		autenticato = controllo_credenziali(nome_utente, password);
+		if(autenticato == 1){
+			printf("\nBentornato, %s \n", nome_utente);
+		} else {
+			printf("\nControlla le credenziali e riprova \n");
+		}
+	} else {
+		printf("\nL'utente non esiste \n");
+	}
+
 }

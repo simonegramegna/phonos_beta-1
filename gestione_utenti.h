@@ -40,11 +40,8 @@ long posizione_utente(int id_utente);
 int elimina_utente(int id_utente);
 utente cerca_utente(int id_utente);
 int modifica_utente(int id_utente, utente utente_modificato);
-
 int inserisci_admin( utente* admin_inserito );
-
-// funzione che controlla la presenza di un utente con xdeterminato username
 int controllo_presenza_utente(utente utente_selezionato);
-
+int controllo_credenziali(char *username, char *password);
 
 #endif /* GESTIONE_UTENTI_H_ */
