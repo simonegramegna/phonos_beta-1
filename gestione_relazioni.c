@@ -618,7 +618,7 @@ int id_playlist_playlistBrano( playlist_brano relazione_letta )
 
 int id_brano_playlistBrano( playlist_brano relazione_letta )
 {
-    relazione_letta.id_brano;
+    return relazione_letta.id_brano;
 }
 
 void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, brano brano_letto, playlist playlist_appartenenza )
@@ -649,7 +649,7 @@ int leggi_flag_playlistBrano( playlist_brano relazione_letta )
 
 void scrivi_flag_playlistBrano( playlist_brano* relazione_scritta, int flag_relazione )
 {
-    relazione_scritta->flag_palylistBrano = flag_relazione; 
+    relazione_scritta->flag_playlist_brano = flag_relazione;
 }
 
 /*
@@ -675,4 +675,131 @@ int aggiungi_playlistBrano( playlist_brano* relazione_aggiunta )
     fclose(tabella_playlist_brani);
 
     return aggiunto;
+}
+
+long posizione_playlistBrano( int id_playlistBrano )
+{
+    long posizione;
+    FILE* tabella_playlist_brani;
+
+    tabella_playlist_brani = fopen("playlist_brani.dat","rb");
+    posizione = -1;
+
+    if( tabella_playlist_brani != NULL )
+    {
+        while( !feof(tabella_playlist_brani) && posizione == -1 )
+        {
+            playlist_brano confronto;
+
+            fread(&confronto, sizeof(playlist_brano), 1, tabella_playlist_brani);
+
+            if( leggi_id_playlistBrano(confronto) == id_playlistBrano )
+            {
+                posizione = ftell(tabella_playlist_brani) - sizeof(playlist_brano); // la ftell prende il blocco successivo
+            }
+        }
+    }
+    fclose(tabella_playlist_brani);
+
+    return posizione;
+}
+
+playlist_brano cerca_playlistBrano( int id_playlistBrano )
+{
+    playlist_brano relazione_trovata;
+    FILE* tabella_playlist_brano;
+
+    tabella_playlist_brano = fopen("playlist_brani.dat","rb");
+
+    if( tabella_playlist_brano != NULL )
+    {
+        long posizione;
+        posizione = posizione_playlistBrano(id_playlistBrano);
+
+        // mi porto nella posizione del record selezionato
+        fseek(tabella_playlist_brano, posizione, SEEK_SET);
+
+        fread(&relazione_trovata, sizeof(playlist_brano), 1, tabella_playlist_brano);
+    }
+    fclose(tabella_playlist_brano);
+
+    return relazione_trovata;
+}
+
+int elimina_playlistBrano( int id_playlistBrano )
+{
+    int eliminato;
+    FILE* tabella_playlist_brano;
+
+    tabella_playlist_brano = fopen("playlist_brani.dat","rb+");
+    eliminato = 0;
+
+    if( tabella_playlist_brano != NULL )
+    {
+        long posizione;
+        playlist_brano relazione_eliminata;
+
+        posizione = posizione_playlistBrano(id_playlistBrano);
+        relazione_eliminata = cerca_playlistBrano(id_playlistBrano);
+
+        // imposto il flag a eliminato
+        scrivi_flag_playlistBrano(&relazione_eliminata,1);
+
+        // mi porto nella posizione del record
+        fseek(tabella_playlist_brano, posizione, SEEK_SET);
+
+        fwrite(&tabella_playlist_brano, sizeof(playlist_brano), 1, tabella_playlist_brano);
+        eliminato = 1;
+    }
+    fclose(tabella_playlist_brano);
+
+    return eliminato;
+}
+
+int modifica_playlistBrano( playlist_brano relazione_modificata )
+{
+    int modificato;
+    FILE* tabella_playlist_brano;
+
+    tabella_playlist_brano = fopen("playlist_brani.dat","rb+");
+    modificato = 0;
+
+    if( tabella_playlist_brano != NULL )
+    {
+        int id_relazione;
+        long posizione;
+
+        id_relazione = leggi_id_playlistBrano(relazione_modificata);
+        posizione = posizione_playlistBrano(id_relazione);
+        
+        // mi porto nella posizione del record da modificare
+        fseek(tabella_playlist_brano, posizione, SEEK_SET);
+
+        fwrite(&relazione_modificata, sizeof(playlist_brano), 1, tabella_playlist_brano);
+        modificato = 1;
+    }
+    fclose(tabella_playlist_brano);
+
+    return modificato;
+}
+
+void stampa_playlist_brano()
+{
+    FILE* tab = fopen("playlist_brani.dat","rb");
+
+    if( tab != NULL )
+    {
+        playlist_brano conf;
+
+        while( fread(&conf, sizeof(playlist_brano), 1, tab) )
+        {
+            int id_rel = leggi_id_playlistBrano;
+            int brano = id_brano_playlistBrano(conf);
+            int play = id_playlist_playlistBrano(conf);
+            int flag = leggi_flag_playlistBrano(conf);
+
+            printf("id: %d, id_brano: %d, id_playlist: %d, flag: %d\n" ,id_rel, brano, play, flag);
+        }
+    }
+    fclose(tab);
 }
