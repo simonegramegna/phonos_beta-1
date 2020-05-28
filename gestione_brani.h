@@ -55,7 +55,7 @@ void scrivi_durata_brano( brano *brano_selezionato, int durata );
 void scrivi_anno_brano( brano *brano_selezionato, int anno );
 
 // funzione per scrivere il numero di ascolti del brano
-void scrivi_ascolti_brano(  *brano_selezionato, int ascolti );
+void scrivi_ascolti_brano( brano *brano_selezionato, int ascolti );
 
 // funzione per scrivere il flag di eliminazione del brano
 void scrivi_flag_eliminato_brano( brano *brano_selezionato, int flag_eliminato );

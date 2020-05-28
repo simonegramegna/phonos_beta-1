@@ -27,8 +27,8 @@ int main()
 
 	mostra_brani();
 
-	elimina_brano(9);
-	elimina_brano(10);
+	//elimina_brano(9);
+	elimina_brano(12);
 
 	printf("eliminati..\n");
 	mostra_brani();
