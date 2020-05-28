@@ -203,7 +203,7 @@ int controllo_presenza_utente(utente utente_selezionato)
 	return controllo;
 }
 
-void inserisci_admin( utente* admin_inserito )
+int inserisci_admin( utente* admin_inserito )
 {
 	scrivi_id_utente(admin_inserito, genera_id());
 	scrivi_admin_utente(admin_inserito, 1);
@@ -218,4 +218,6 @@ void inserisci_admin( utente* admin_inserito )
 	}
 
 	fclose(tabella_utenti);
+
+	return aggiunto;
 }

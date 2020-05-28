@@ -8,7 +8,7 @@
 	Funzioni di lettura
 ------------------------- */
 int leggi_id_playlist(playlist playlist_selezionata)
-
+{
 	return playlist_selezionata.id;
 }
 int leggi_utente_playlist(playlist playlist_selezionata)
