@@ -793,7 +793,7 @@ void stampa_playlist_brano()
 
         while( fread(&conf, sizeof(playlist_brano), 1, tab) )
         {
-            int id_rel = leggi_id_playlistBrano;
+            int id_rel = leggi_id_playlistBrano(conf);
             int brano = id_brano_playlistBrano(conf);
             int play = id_playlist_playlistBrano(conf);
             int flag = leggi_flag_playlistBrano(conf);
