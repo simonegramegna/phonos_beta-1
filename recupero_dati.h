@@ -61,4 +61,7 @@ int backup_generi();
 // funzione per eseguire il backup della tabella playlist
 int backup_playlist();
 
+// funzione per stampare il file di backup
+void stampa_backup_brani();
+
 #endif /* RECUPERO_DATI_H_ */
