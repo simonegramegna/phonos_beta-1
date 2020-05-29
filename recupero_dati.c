@@ -3,11 +3,13 @@
 
 #include "recupero_dati.h"
 
+#include "gestione_relazioni.h"
 #include "gestione_playlist.h"
 #include "gestione_artisti.h"
 #include "gestione_generi.h"
 #include "gestione_brani.h"
 #include "gestione_album.h"
+
 
 int ripristina_brani()
 {
@@ -164,3 +166,113 @@ int ripristina_playlist()
 
     return ripristinato;
 }
+
+/*
+ * Funzioni ripristino dati relazioni  
+*/
+
+int ripristina_tabella_branoAlbum()
+{
+    FILE* tabella_brano_album;
+    int ripristinata;
+
+    tabella_brano_album = fopen("brano_album.dat","rb+");
+    ripristinata =  0;
+
+    if( tabella_brano_album != NULL )
+    {
+        brano_album relazione_ripristinata;
+
+        while( fread(&relazione_ripristinata, sizeof(brano_album), 1, tabella_brano_album) )
+        {
+            scrivi_flag_branoAlbum(&relazione_ripristinata, 0);
+
+            modifica_branoAlbum(relazione_ripristinata);
+            ripristinata = 1;
+        }
+    }
+    fclose(tabella_brano_album);
+
+    return ripristinata;
+}
+
+int ripristina_tabella_branoArtista()
+{
+    FILE* tabella_brano_artista;
+    int ripristinata;
+
+    tabella_brano_artista = fopen("brano_artista.dat","rb+");
+    ripristinata = 0;
+
+    if( tabella_brano_artista != NULL )
+    {
+        brano_artista relazione_ripristinata;
+
+        while( fread(&relazione_ripristinata, sizeof(brano_artista), 1, tabella_brano_artista) )
+        {
+            scrivi_flag_branoArtista(&relazione_ripristinata, 0);
+
+            modifica_branoArtista(relazione_ripristinata);
+            ripristinata = 1;
+        }
+    }
+    fclose(tabella_brano_artista);
+
+    return ripristinata;
+}
+
+int ripristina_tabella_branoGenere()
+{
+    FILE* tabella_brano_genere;
+    int ripristinata;
+
+    tabella_brano_genere = fopen("brano_genere.dat","rb+");
+    ripristinata = 0;
+
+    if( tabella_brano_genere != NULL )
+    {
+        brano_genere relazione_ripristinata;
+
+        while( fread(&relazione_ripristinata, sizeof(brano_genere), 1, tabella_brano_genere) )
+        {
+            scrivi_flag_branoGenere(&relazione_ripristinata, 0);
+
+            modifica_branoGenere(relazione_ripristinata);
+            ripristinata = 1;
+        }
+    }
+    fclose(tabella_brano_genere);
+
+    return ripristinata;
+}
+
+int ripristina_tabella_playlistBrano()
+{
+    FILE* tabella_playlist_brano;
+    int ripristinata;
+
+    tabella_playlist_brano = fopen("playlist_brani.dat","rb+");
+    ripristinata = 0;
+
+    if( tabella_playlist_brano != NULL )
+    {
+        playlist_brano relazione_modificata;
+
+        while( fread(&relazione_modificata, sizeof(playlist_brano), 1, tabella_playlist_brano) )
+        {
+            scrivi_flag_playlistBrano(&relazione_modificata, 0);
+
+            modifica_playlistBrano(relazione_modificata);
+            ripristinata = 1;
+        }
+    }
+    fclose(tabella_playlist_brano);
+
+    return ripristinata;
+}
+
+/**************************************
+ * 
+ *  Funzioni backup dati
+ * 
+ *************************************/

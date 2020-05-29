@@ -101,15 +101,15 @@ void mostra_playlists(){
 }
 void mostra_playlist(playlist playlist_selezionata)
 {
-	if(playlist_selezionata.eliminata != 1)
-	{
+	//if(playlist_selezionata.eliminata != 1)
+	//{
 		printf("ID: %d				\n", playlist_selezionata.id);
 		printf("Nome: %s			\n", playlist_selezionata.nome);
 		printf("Descrizione: %s		\n", playlist_selezionata.descrizione);
 		printf("Utente: %d 			\n", playlist_selezionata.utente);
 		printf("Pubblica: %d		\n", playlist_selezionata.pubblica);
 		printf("Eliminata: %d		\n", playlist_selezionata.eliminata);
-	}
+	//}
 	printf("\n");
 }
 long posizione_playlist(int id_playlist)

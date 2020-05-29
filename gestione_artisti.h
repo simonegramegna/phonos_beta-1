@@ -38,6 +38,6 @@ void mostra_artista(artista artista_selezionato);
 long posizione_artista(int id_artista);
 int elimina_artista(int id_artista);
 artista cerca_artista(int id_artista);
-int modifica_artista(int id_artista, artista artista_modificato);
+int modifica_artista(artista artista_modificato);
 
 #endif /* GESTIONE_ARTISTI_H_ */

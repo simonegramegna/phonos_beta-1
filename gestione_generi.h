@@ -32,7 +32,7 @@ void mostra_genere(genere genere_selezionato);
 long posizione_genere(int id_genere);
 int elimina_genere(int id_genere);
 genere cerca_genere(int id_genere);
-int modifica_genere(int id_genere, genere genere_modificato);
+int modifica_genere(genere genere_modificato);
 
 
 #endif /* GESTIONE_GENERI_H_ */

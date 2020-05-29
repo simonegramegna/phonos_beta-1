@@ -69,11 +69,12 @@ void mostra_album(){
 	fclose(tabella_album);
 }
 void mostra_album_singolo(album album_selezionato){
-	if(album_selezionato.eliminato != 1){
+	//if(album_selezionato.eliminato != 1){
 		printf("ID: %d				\n", album_selezionato.id);
 		printf("Titolo: %s			\n", album_selezionato.titolo);
 		printf("Anno: %d			\n", album_selezionato.anno);
-	}
+		printf("flag: %d\n", album_selezionato.eliminato);
+	//}
 	printf("\n");
 }
 long posizione_album(int id_album){
@@ -114,6 +115,7 @@ int elimina_album(int id_album){
 		fwrite(&album_trovato, sizeof(album), 1, tabella_album);
 		eliminato = 1;
 	}
+	fclose(tabella_album);
 
 	return eliminato;
 }

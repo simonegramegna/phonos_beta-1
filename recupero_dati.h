@@ -27,6 +27,38 @@ int ripristina_playlist();
  * Funzioni ripristino dati relazioni  
 */
 
+// fuznione per ripristinare tutte le relazioni "brano_album"
+int ripristina_tabella_branoAlbum();
 
+// funzione per ripristinare tutte le relazioni "brano_album"
+int ripristina_tabella_branoArtista();
+
+// funzione per ripristinare tutte le relazioni "brano_genere"
+int ripristina_tabella_branoGenere();
+
+// funzione per ripristinare tutte le relazioni "playlist_brano"
+int ripristina_tabella_playlistBrano();
+
+
+/**************************************
+ * 
+ *  Funzioni backup dati
+ * 
+ *************************************/
+
+// funzione per eseguire il backup della tabella brani
+int backup_brani();
+
+// funzione per eseguire il backup della tabella artisti
+int backup_artisti();
+
+// funzione per eseguire il backup della tabella album
+int backup_album();
+
+// funzione per eseguire il backup della tabella generi
+int backup_generi();
+
+// funzione per eseguire il backup della tabella playlist
+int backup_playlist();
 
 #endif /* RECUPERO_DATI_H_ */

@@ -142,28 +142,30 @@ artista cerca_artista(int id_artista){
 
 	return artista_trovato;
 }
-int modifica_artista(int id_artista, artista artista_modificato){
-	long posizione;
+int modifica_artista(artista artista_modificato){
+	
 	FILE *tabella_artisti;
 	int modificato;
-	artista artista_trovato;
+	
 
 	modificato = 0;
-	posizione = posizione_artista(id_artista);
-	artista_trovato = cerca_artista(id_artista);
-
-	scrivi_nome_artista(&artista_trovato, artista_modificato.nome);
-	scrivi_cognome_artista(&artista_trovato, artista_modificato.cognome);
-	scrivi_nome_arte_artista(&artista_trovato, artista_modificato.nome_arte);
-	scrivi_flag_eliminato_artista(&artista_trovato, artista_modificato.eliminato);
-
-
+	
+	
 	tabella_artisti = fopen("artisti.dat", "rb+");
-	if(tabella_artisti != NULL){
+	if(tabella_artisti != NULL)
+	{
+		long posizione;
+
+		int id_artista;
+		id_artista = leggi_id_artista(artista_modificato);
+
+		posizione = posizione_artista(id_artista);
+
 		fseek(tabella_artisti, posizione, SEEK_SET);
-		fwrite(&artista_trovato, sizeof(artista), 1, tabella_artisti);
+		fwrite(&artista_modificato, sizeof(artista), 1, tabella_artisti);
 		modificato = 1;
 	}
+	fclose(tabella_artisti);
 
 	return modificato;
 }
