@@ -46,6 +46,10 @@ int ripristina_tabella_playlistBrano();
  * 
  *************************************/
 
+/* 
+ * Backup per i dati di base
+*/
+
 // funzione per eseguire il backup della tabella brani
 int backup_brani();
 
@@ -61,7 +65,24 @@ int backup_generi();
 // funzione per eseguire il backup della tabella playlist
 int backup_playlist();
 
-// funzione per stampare il file di backup
+/*
+ * funzione di backup per le tabelle delle relazioni 
+*/
+
+// funzione per il backup della relazione "brano_album"
+int backup_branoAlbum();
+
+// funzione per il backup della relazione "brano_artista"
+int backup_branoArtista();
+
+// funzione per il backup della relazione "brano_genere"
+int backup_branoGenere();
+
+// funzione per il backup della relazione "playlist_brano"
+int backup_playlistBrano();
+
+
+// funzione di test per stampare il file di backup
 void stampa_backup_brani();
 
 #endif /* RECUPERO_DATI_H_ */
