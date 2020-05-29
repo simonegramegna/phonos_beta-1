@@ -161,7 +161,9 @@ void interfaccia_inserimento_brano()
 	scrivi_ascolti_brano(&nuovo_brano, 0);
 
 	aggiunto = aggiungi_brano(&nuovo_brano);
-	if (aggiunto == 1)
+
+	// controllo che l'aggiunta del brano sia avvenuta con successo
+	if ( aggiunto == 1 )
 	{
 		printf("\nBrano aggiunto con successo! \n");
 	}
@@ -195,7 +197,9 @@ void interfaccia_inserimento_artista()
 	scrivi_nome_arte_artista(&nuovo_artista, nome_arte_artista);
 
 	aggiunto = aggiungi_artista(&nuovo_artista);
-	if (aggiunto == 1)
+
+	// controllo che l'aggiunta dell'artista sia avvenuta con successo
+	if ( aggiunto == 1 )
 	{
 		printf("\nArtista aggiunto con successo! \n");
 	}
@@ -219,7 +223,9 @@ void interfaccia_inserimento_genere()
 	scrivi_nome_genere(&nuovo_genere, nome_genere);
 
 	aggiunto = aggiungi_genere(&nuovo_genere);
-	if (aggiunto == 1)
+
+	// controllo che l'aggiunta del genere sia avvenuta con successo
+	if ( aggiunto == 1 )
 	{
 		printf("\nGenere aggiunto con successo! \n");
 	}
@@ -262,6 +268,8 @@ void interfaccia_inserimento_playlist()
 	}
 
 	aggiunta = aggiungi_playlist(&nuova_playlist);
+
+	// controllo che l'aggiunta della playlist sia avvenuta con successo
 	if (aggiunta == 1)
 	{
 		printf("\nPlaylist aggiunta con successo! \n");
@@ -272,7 +280,8 @@ void interfaccia_inserimento_playlist()
 	}
 }
 
-void interfaccia_registrazione(){
+void interfaccia_registrazione()
+{
 	utente nuovo_utente;
 	char nome_utente[DIMUSER];
 	char password[DIMPASS];
@@ -291,14 +300,19 @@ void interfaccia_registrazione(){
 
 	aggiunto = aggiungi_utente(&nuovo_utente);
 
-	if(aggiunto == 1){
+	// controllo che l'aggiunta dell'utente sia avvenuta con successo
+	if( aggiunto == 1 )
+	{
 		printf("\nUtente aggiunto con successo \n");
-	} else {
-		printf("\nQualcosa è andato storto. Ti preghiamo di riprovare \n");
+	} 
+	else 
+	{
+		printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
 	}
 }
 
-void interfaccia_login(){
+void interfaccia_login()
+{
 	utente utente_login;
 	char nome_utente[DIMUSER];
 	char password[DIMPASS];
@@ -318,15 +332,20 @@ void interfaccia_login(){
 
 	utente_esiste = controllo_presenza_utente(utente_login);
 
-	if(utente_esiste == 1){
+	if( utente_esiste == 1 )
+	{
 		autenticato = controllo_credenziali(nome_utente, password);
-		if(autenticato == 1){
+		if(autenticato == 1)
+		{
 			printf("\nBentornato, %s \n", nome_utente);
-		} else {
+		} 
+		else 
+		{
 			printf("\nControlla le credenziali e riprova \n");
 		}
-	} else {
+	} 
+	else 
+	{
 		printf("\nL'utente non esiste \n");
 	}
-
 }
