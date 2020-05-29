@@ -15,13 +15,17 @@ int ripristina_artisti();
 int ripristina_album();
 
 // funzione per ripristinare i generi nella tabella
-void ripristina_generi();
+int ripristina_generi();
 
 // funzione per ripristinare le palylist di un utente
-void ripristina_playlist_utente( int id_utente );
+int ripristina_playlist_utente( int id_utente );
 
 // funzione per ripristinare tutte le playlist di tutti gli utenti
+int ripristina_playlist();
 
+/*
+ * Funzioni ripristino dati relazioni  
+*/
 
 
 

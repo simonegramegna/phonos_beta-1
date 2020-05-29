@@ -76,10 +76,91 @@ int ripristina_album()
             scrivi_flag_eliminato_album(&album_ripristinato, 0);
 
             modifica_album(album_ripristinato);
+            ripristinato = 1;
         }
     }
 
     fclose(tabella_album);
+
+    return ripristinato;
+}
+
+int ripristina_generi()
+{
+    FILE* tabella_generi;
+   int ripristinato;
+
+    tabella_generi = fopen("generi.dat","rb+");
+    ripristinato = 0;
+
+    if( tabella_generi != NULL )
+    {
+        genere genere_ripristinato;
+
+        while( fread(&genere_ripristinato, sizeof(genere), 1, tabella_generi) )
+        {
+            scrivi_flag_eliminato_genere(&genere_ripristinato, 0);
+
+            modifica_genere(genere_ripristinato);
+            ripristinato = 1;
+        }
+    }
+    fclose(tabella_generi);
+
+    return 0;
+}
+
+int ripristina_playlist_utente( int id_utente )
+{
+    FILE* tabella_playlist;
+    int ripristinato;
+
+    tabella_playlist = fopen("playlists.dat","rb+");
+    ripristinato = 0;
+
+    if( tabella_playlist != NULL )
+    {
+        playlist playlist_ripristinata;
+
+        while( fread(&playlist_ripristinata, sizeof(playlist), 1, tabella_playlist) )
+        {
+            int id_utente_confronto = leggi_utente_playlist(playlist_ripristinata);
+
+            if( id_utente == id_utente_confronto )
+            {
+                scrivi_flag_eliminato_playlist(&playlist_ripristinata, 0);
+
+                modifica_playlist(playlist_ripristinata);
+                ripristinato = 1;
+            }
+        }
+    }
+    fclose(tabella_playlist);
+
+    return ripristinato;
+}
+
+int ripristina_playlist()
+{
+    FILE* tabella_playlist;
+    int ripristinato;
+
+    tabella_playlist = fopen("playlists.dat","rb+");
+    ripristinato = 0;
+
+    if( tabella_playlist != NULL )
+    {
+        playlist playlist_ripristinata;
+
+        while( fread(&playlist_ripristinata, sizeof(playlist), 1, tabella_playlist) )
+        {
+            scrivi_flag_eliminato_playlist(&playlist_ripristinata, 0);
+
+            modifica_playlist(playlist_ripristinata);
+            ripristinato = 1;
+        }
+    }
+    fclose(tabella_playlist);
 
     return ripristinato;
 }
