@@ -23,18 +23,63 @@ int ripristina_brani()
 
         while( fread(&brano_ripristinato, sizeof(brano), 1, tabella_brani) )
         {
-            int flag_eliminazione = leggi_flag_eliminato_brano(brano_ripristinato);
+            scrivi_flag_eliminato_brano(&brano_ripristinato, 0);
 
-            if( flag_eliminazione != 0 )
-            {
-                scrivi_flag_eliminato_brano(&brano_ripristinato, 0);
-
-                fwrite(&brano_ripristinato, sizeof(brano), 1, tabella_brani);
-                ripristinato = 1;
-            }
+            modifica_brano(brano_ripristinato);
+            ripristinato = 1;
         }
     }
     fclose(tabella_brani);
+
+    return ripristinato;
+}
+
+int ripristina_artisti()
+{
+    FILE* tabella_artisti;
+    int ripristinato;
+
+    tabella_artisti = fopen("artisti.dat","rb+");
+    ripristinato = 0;
+
+    if( tabella_artisti != NULL )
+    {
+        artista artista_ripristinato;
+
+        while( fread(&artista_ripristinato, sizeof(artista), 1, tabella_artisti) )
+        {
+            scrivi_flag_eliminato_artista(&artista_ripristinato, 0);
+
+            modifica_artista(artista_ripristinato);
+            ripristinato = 1;
+        }
+    }
+    fclose(tabella_artisti);
+
+    return ripristinato;
+}
+
+int ripristina_album()
+{
+    FILE* tabella_album;
+    int ripristinato;
+
+    tabella_album = fopen("album.dat","rb+");
+    ripristinato = 0;
+
+    if( tabella_album != NULL )
+    {
+        album album_ripristinato;
+
+        while( fread(&album_ripristinato, sizeof(album), 1, tabella_album) )
+        {
+            scrivi_flag_eliminato_album(&album_ripristinato, 0);
+
+            modifica_album(album_ripristinato);
+        }
+    }
+
+    fclose(tabella_album);
 
     return ripristinato;
 }

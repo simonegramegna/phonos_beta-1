@@ -9,10 +9,10 @@
 int ripristina_brani();
 
 // funzione per ripristinare gli artisti nella tabella
-void ripristina_artisti();
+int ripristina_artisti();
 
 // funzione per ripristinare gli album nella tabella
-void ripristina_album();
+int ripristina_album();
 
 // funzione per ripristinare i generi nella tabella
 void ripristina_generi();

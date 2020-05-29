@@ -135,26 +135,28 @@ album cerca_album(int id_album){
 
 	return album_trovato;
 }
-int modifica_album(int id_album, album album_modificato){
-	long posizione;
+int modifica_album(album album_modificato)
+{
+	
 	FILE *tabella_album;
 	int modificato;
-	album album_trovato;
+	
 
 	modificato = 0;
-	posizione = posizione_album(id_album);
-	album_trovato = cerca_album(id_album);
-
-	scrivi_titolo_album(&album_trovato, album_modificato.titolo);
-	scrivi_anno_album(&album_trovato, album_modificato.anno);
-	scrivi_flag_eliminato_album(&album_trovato, album_modificato.eliminato);
-
 	tabella_album = fopen("album.dat", "rb+");
-	if(tabella_album != NULL){
+
+	if(tabella_album != NULL)
+	{
+		long posizione;
+		int id_album = leggi_id_album(album_modificato);
+		posizione = posizione_album(id_album);
+
 		fseek(tabella_album, posizione, SEEK_SET);
-		fwrite(&album_trovato, sizeof(album), 1, tabella_album);
+		fwrite(&album_modificato, sizeof(album), 1, tabella_album);
 		modificato = 1;
 	}
+	fclose(tabella_album);
+
 
 	return modificato;
 }
