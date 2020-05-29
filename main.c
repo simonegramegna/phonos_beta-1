@@ -2,42 +2,46 @@
 #include <stdlib.h>
 
 #include "interfaccia.h"
-#include "gestione_brani.h"
+#include "gestione_album.h"
 #include "recupero_dati.h"
+#include "gestione_playlist.h"
 
 int main()
 {
 	//interfaccia_principale();
 
+
+	playlist p1, p2;
+
+	scrivi_utente_playlist(&p1, 10);
+	scrivi_nome_playlist(&p1, "ciao\0");
+	scrivi_descrizione_playlist(&p1, "e' bella \0");
+	scrivi_flag_pubblica_playlist(&p1, 1);
+
+	scrivi_utente_playlist(&p2, 101);
+	scrivi_nome_playlist(&p2, "hello\0");
+	scrivi_descrizione_playlist(&p2, "e' bella \0");
+	scrivi_flag_pubblica_playlist(&p2, 1);
+
+	aggiungi_playlist(&p1);
+	aggiungi_playlist(&p2);
 	
-	brano b1, b2;
+	printf("playlist aggiunte \n");
 
-	scrivi_titolo_brano(&b1, "felicita' puttana\0");
-	scrivi_durata_brano(&b1, 200);
-	scrivi_anno_brano(&b1, 2018);
-	scrivi_ascolti_brano(&b1, 12);
+	mostra_playlists();
 
-	scrivi_titolo_brano(&b2, "felicita' troia\0");
-	scrivi_durata_brano(&b2, 200);
-	scrivi_anno_brano(&b2, 2019);
-	scrivi_ascolti_brano(&b2, 12);
+	printf("playlist eliminate \n");
 
-	aggiungi_brano(&b1);
-	aggiungi_brano(&b2);
+	//elimina_playlist(8);
+	elimina_playlist(9);
 
-	mostra_brani();
+	mostra_playlists();
 
-	//elimina_brano(9);
-	elimina_brano(12);
+	printf("playlist ripristinate.. \n");
 
-	printf("eliminati..\n");
-	mostra_brani();
+	ripristina_playlist_utente(101);
 
-	ripristina_brani();
-
-	printf("\n brani ripristinati \n");
-
-	mostra_brani();
+	mostra_playlists();
 
 
 	return 0;

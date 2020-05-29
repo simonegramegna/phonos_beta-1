@@ -104,15 +104,15 @@ void mostra_brani()
 
 void mostra_brano(brano brano_selezionato)
 {
-	if( brano_selezionato.eliminato != 1 )
-	{
+	//if( brano_selezionato.eliminato != 1 )
+	//{
 		printf("ID: %d				\n", brano_selezionato.id);
 		printf("Titolo: %s			\n", brano_selezionato.titolo);
 		printf("Anno: %d 			\n", brano_selezionato.anno);
 		printf("Durata: %d secondi	\n", brano_selezionato.durata);
 		printf("Ascoltato %d volte	\n", brano_selezionato.ascolti);
 		printf("Eliminato: %d		\n", brano_selezionato.eliminato);
-	}
+	//}
 	printf("\n");
 }
 

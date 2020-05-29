@@ -53,7 +53,7 @@ void mostra_album_singolo(album album_selezionato);
 long posizione_album(int id_album);
 int elimina_album(int id_album);
 album cerca_album(int id_album);
-int modifica_album(int id_album, album album_modificato);
+int modifica_album( album album_modificato );
 
 
 #endif /* GESTIONE_ALBUM_H_ */

@@ -129,24 +129,21 @@ genere cerca_genere(int id_genere){
 
 	return genere_trovato;
 }
-int modifica_genere(int id_genere, genere genere_modificato){
+int modifica_genere(genere genere_modificato){
 	long posizione;
 	FILE *tabella_generi;
 	int modificato;
-	genere genere_trovato;
+	
 
 	modificato = 0;
+	int id_genere= leggi_id_genere(genere_modificato);
 	posizione = posizione_genere(id_genere);
-	genere_trovato = cerca_genere(id_genere);
-
-	scrivi_nome_genere(&genere_trovato, genere_modificato.nome);
-	scrivi_flag_eliminato_genere(&genere_trovato, genere_modificato.eliminato);
-
+	
 
 	tabella_generi = fopen("generi.dat", "rb+");
 	if(tabella_generi != NULL){
 		fseek(tabella_generi, posizione, SEEK_SET);
-		fwrite(&genere_trovato, sizeof(genere), 1, tabella_generi);
+		fwrite(&genere_modificato, sizeof(genere), 1, tabella_generi);
 		modificato = 1;
 	}
 
