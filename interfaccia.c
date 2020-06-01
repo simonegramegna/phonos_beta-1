@@ -74,66 +74,20 @@ void interfaccia_principale()
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
 
-	if (scelta == 1)
-	{
-		mostra_brani();
-		replay();
-	}
-	else if (scelta == 2)
-	{
-		mostra_artisti();
-		replay();
-	}
-	else if (scelta == 3)
-	{
-		mostra_generi();
-		replay();
-	}
-	else if (scelta == 4)
-	{
-		mostra_playlists();
-		replay();
-	}
-	else if (scelta == 5)
-	{
-		interfaccia_inserimento_brano();
-		replay();
-	}
-	else if (scelta == 6)
-	{
-		interfaccia_inserimento_artista();
-		replay();
-	}
-	else if (scelta == 7)
-	{
-		interfaccia_inserimento_genere();
-		replay();
-	}
-	else if (scelta == 8)
-	{
-		interfaccia_inserimento_playlist();
-		replay();
-	}
-	else if (scelta == 9)
-	{
-		interfaccia_registrazione();
-		replay();
-	}
-	else if (scelta == 10)
-	{
-		interfaccia_login();
-		replay();
-	}
-	else if (scelta == 11)
-	{
-		mostra_utenti();
-		replay();
-	}
-	else
-	{
-		printf("\nValore non valido, si prega di riprovare \n");
-		replay();
-	}
+	if (scelta == 1)			mostra_brani();
+	else if (scelta == 2)		mostra_artisti();
+	else if (scelta == 3)		mostra_generi();
+	else if (scelta == 4)		mostra_playlists();
+	else if (scelta == 5)		interfaccia_inserimento_brano();
+	else if (scelta == 6)		interfaccia_inserimento_artista();
+	else if (scelta == 7)		interfaccia_inserimento_genere();
+	else if (scelta == 8)		interfaccia_inserimento_playlist();
+	else if (scelta == 9)		interfaccia_registrazione();
+	else if (scelta == 10)		interfaccia_login();
+	else if (scelta == 11)		mostra_utenti();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+
+	replay();
 }
 
 void interfaccia_inserimento_brano()
