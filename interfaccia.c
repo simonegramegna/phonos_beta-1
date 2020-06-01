@@ -7,6 +7,8 @@
 #include "gestione_utenti.h"
 #include "gestione_artisti.h"
 #include "gestione_playlist.h"
+#include "gestione_relazioni.h"
+#include "ricerca.h"
 #include "interfaccia.h"
 
 void leggere_intero(int *valore)
@@ -93,10 +95,14 @@ void interfaccia_principale()
 void interfaccia_inserimento_brano()
 {
 	brano nuovo_brano;
+	artista artista_trovato;
+	brano_artista relazione_branoArtista;
 	char titolo_brano[DIMSTRING];
 	int anno_brano;
 	int durata_brano;
-	int aggiunto;
+	int id_artista;
+	int brano_aggiunto;
+	int relazione_aggiunta;
 
 	titolo();
 
@@ -109,22 +115,31 @@ void interfaccia_inserimento_brano()
 	printf("Indica la durata del brano (in secondi) ");
 	leggere_intero(&durata_brano);
 
+	printf("Scegli uno degli artisti presenti su Phonos \n\n");
+	mostra_artisti();
+	printf("ID artista: ");
+	leggere_intero(&id_artista);
+
+//	Cerco l'artista scelto dall'utente
+	artista_trovato = cerca_artista(id_artista);
+
+//	Scrivo le informazioni del brano
 	scrivi_titolo_brano(&nuovo_brano, titolo_brano);
 	scrivi_anno_brano(&nuovo_brano, anno_brano);
 	scrivi_durata_brano(&nuovo_brano, durata_brano);
 	scrivi_ascolti_brano(&nuovo_brano, 0);
 
-	aggiunto = aggiungi_brano(&nuovo_brano);
+//	Definisco le relazioni
+	scrivi_relazione_branoArtista(&relazione_branoArtista, nuovo_brano, artista_trovato);
 
-	// controllo che l'aggiunta del brano sia avvenuta con successo
-	if ( aggiunto == 1 )
-	{
-		printf("\nBrano aggiunto con successo! \n");
-	}
-	else
-	{
-		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
-	}
+//	Aggiungo il brano
+	brano_aggiunto = aggiungi_brano(&nuovo_brano);
+
+//	Aggiungo le relazioni
+	relazione_aggiunta = aggiungi_branoArtista(&relazione_branoArtista);
+
+	if (brano_aggiunto == 1 && relazione_aggiunta == 1)		printf("\nBrano aggiunto con successo! \n");
+	else													printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_inserimento_artista()
