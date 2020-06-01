@@ -40,4 +40,13 @@ void interfaccia_registrazione();
 // funzione per mostrare l'interfaccia di login
 void interfaccia_login();
 
+//funzione per mostrare il menu iniziale degli utenti non admin
+void interfaccia_utente();
+
+//funzione per mostrare il menu iniziale degli admin
+void interfaccia_admin();
+
+//funzione che permette all'utente di scegliere se accedere o registrarsi
+void interfaccia_iniziale();
+
 #endif /* INTERFACCIA_H_ */

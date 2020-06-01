@@ -57,6 +57,38 @@ void replay()
 
 void interfaccia_principale()
 {
+	utente utente_corrente;
+
+	titolo();
+
+	utente_corrente = leggi_utente_corrente();
+
+	if(utente_corrente.admin == 1){
+		interfaccia_admin();
+	} else if(utente_corrente.admin == 0){
+		interfaccia_utente();
+	} else {
+		interfaccia_iniziale();
+	}
+}
+
+void interfaccia_iniziale(){
+	int scelta;
+
+	printf("[1] Login				\n");
+	printf("[2] Registrati			\n");
+
+	printf("\nScegli una delle opzioni: ");
+	leggere_intero(&scelta);
+
+	if (scelta == 1)			interfaccia_login();
+	else if (scelta == 2)		interfaccia_registrazione();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+
+	replay();
+}
+
+void interfaccia_utente(){
 	int scelta;
 
 	titolo();
@@ -67,11 +99,7 @@ void interfaccia_principale()
 	printf("[4] Visualizza tutte le playlist	\n");
 	printf("[5] Aggiungi un brano				\n");
 	printf("[6] Aggiungi un artista				\n");
-	printf("[7] Aggiungi un genere				\n");
-	printf("[8] Aggiungi una playlist			\n");
-	printf("[9] Registrati						\n");
-	printf("[10] Accedi							\n");
-	printf("[11] Mostra tutti gli utenti		\n");
+	printf("[7] Aggiungi una playlist			\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -82,14 +110,14 @@ void interfaccia_principale()
 	else if (scelta == 4)		mostra_playlists();
 	else if (scelta == 5)		interfaccia_inserimento_brano();
 	else if (scelta == 6)		interfaccia_inserimento_artista();
-	else if (scelta == 7)		interfaccia_inserimento_genere();
-	else if (scelta == 8)		interfaccia_inserimento_playlist();
-	else if (scelta == 9)		interfaccia_registrazione();
-	else if (scelta == 10)		interfaccia_login();
-	else if (scelta == 11)		mostra_utenti();
+	else if (scelta == 7)		interfaccia_inserimento_playlist();
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
+}
+
+void interfaccia_admin(){
+	printf("\nDa fare :)\n");
 }
 
 void interfaccia_inserimento_brano()
