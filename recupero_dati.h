@@ -83,6 +83,6 @@ int backup_playlistBrano();
 
 
 // funzione di test per stampare il file di backup
-void stampa_backup_brani();
+void stampa_backup_playlist();
 
 #endif /* RECUPERO_DATI_H_ */

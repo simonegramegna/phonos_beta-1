@@ -509,23 +509,30 @@ int backup_playlistBrano()
     return esito_backup;
 }
 
-/*
-void stampa_backup_brani()
+
+void stampa_backup_playlist()
 {
-    FILE* backup = fopen("backup_brani.dat","rb");
+    FILE* backup = fopen("backup_playlists.dat","rb");
 
     if( backup != NULL )
     {
-        brano brano_letto;
+        playlist playlist_letta;
 
         printf("backup brani: \n\n");
-        while( fread(&brano_letto, sizeof(brano), 1, backup) )
+        while( fread(&playlist_letta, sizeof(playlist), 1, backup) )
         {
-            char titolo[DIMTITOLO];
+            char nome[DIMNOME];
+            char descr[DIMDESC];
 
-            leggi_titolo_brano(brano_letto, titolo);
+            int id = leggi_id_playlist(playlist_letta);
+            int user = leggi_utente_playlist(playlist_letta);
+            int pub = leggi_flag_pubblica_playlist(playlist_letta);
+            int flag = leggi_flag_eliminato_playlist(playlist_letta);
+            leggi_nome_playlist(playlist_letta, nome);
+            leggi_descrizione_playlist(playlist_letta, descr);
 
-            printf("id: %d, nome: %s flag: %d", brano_letto.id, titolo, brano_letto.eliminato);
+            printf("id: %d, user: %d, pub: %d, flag: %d, ",id,user, pub, flag);
+            printf("%s, %s\n", nome, descr);
 
             printf("\n");
 
@@ -539,4 +546,3 @@ void stampa_backup_brani()
 
     fclose(backup);
 }
-/*/
