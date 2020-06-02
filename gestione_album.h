@@ -2,12 +2,12 @@
 #define GESTIONE_ALBUM_H_
 
 // dimensione massima del titolo di un album
-#define DIMSTRING 30
+#define DIMTITOLO_ALBUM 30
 
 // definisco tipod di dato album
 typedef struct {
 	int id;
-	char titolo[DIMSTRING];
+	char titolo[DIMTITOLO_ALBUM];
 	int anno;
 	int eliminato;
 }album;
