@@ -256,4 +256,23 @@ int modifica_playlistBrano( playlist_brano relazione_modificata );
 // funzione di test per la stampa
 void stampa_playlist_brano();
 
+/*********************************************
+ * 
+ * Funzioni per mostrare leggere brani di 
+ * album/ artisti/ genere/ playlist
+ * 
+ *********************************************/
+
+// funzione per leggere i brani di un album
+void mostra_brani_album( int id_album_cercato );
+
+// funzione per leggere i brani di un artista
+void mostra_brani_artista( int id_artista_cercato );
+
+// funzione per leggere i brani di un genere
+void mostra_brani_genere( int id_genere_cercato );
+
+// funzione per leggere i brani di una playlist di un utente
+void mostra_playlist_utente( int id_playlist_cercato, int id_utente_cercato );
+
 #endif /* GESTIONE_RELAZIONI_H_ */

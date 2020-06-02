@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "gestione_utenti.h"
 #include "gestione_relazioni.h"
 #include "gestione_brani.h"
 #include "gestione_album.h"
@@ -802,4 +803,110 @@ void stampa_playlist_brano()
         }
     }
     fclose(tab);
+}
+
+/*********************************************
+ * 
+ * Funzioni per mostrare leggere brani di 
+ * album/ artisti/ genere/ palylist
+ * 
+ *********************************************/
+
+void mostra_brani_album( int id_album_cercato )
+{
+    FILE* tabella_branoAlbum;
+    tabella_branoAlbum = fopen("brano_album.dat","rb");
+
+    if( tabella_branoAlbum != NULL )
+    {
+        brano_album relazione_selezionata;
+
+        while( fread(&relazione_selezionata, sizeof(brano_album), 1, tabella_branoAlbum) )
+        {
+            int id_album_confronto;
+            id_album_confronto = id_album_branoAlbum(relazione_selezionata);
+
+            if( id_album_confronto == id_album_cercato )
+            {
+                brano brano_mostrato;
+                int id_brano_mostrato;
+                id_brano_mostrato = id_brano_branoAlbum(relazione_selezionata);
+
+                // cerco il brano da mostrare
+                brano_mostrato = cerca_brano(id_brano_mostrato);
+
+                // mostro a video
+                mostra_brano(brano_mostrato);
+            
+            }
+        }
+    }
+    
+    fclose(tabella_branoAlbum);
+}
+
+void mostra_brani_artista( int id_artista_cercato )
+{
+    FILE* tabella_branoArtista;
+    tabella_branoArtista = fopen("brano_artista.dat","rb");
+
+    if( tabella_branoArtista != NULL )
+    {
+        brano_artista relazione_selezionata;
+        
+        while( fread(&relazione_selezionata, sizeof(brano_artista), 1, tabella_branoArtista) )
+        {
+            int id_artista_confronto;
+            id_artista_confronto = id_artista_branoArtista(relazione_selezionata);
+
+            if( id_artista_cercato == id_artista_confronto )
+            {
+                brano brano_mostrato;
+                int id_brano_mostrato;
+
+                id_brano_mostrato = id_brano_branoArtista(relazione_selezionata);
+                brano_mostrato = cerca_brano(id_brano_mostrato);
+
+                mostra_brano(brano_mostrato);
+
+            }
+        }
+    }
+
+    fclose(tabella_branoArtista);
+}
+
+void mostra_brani_genere( int id_genere_cercato )
+{
+    FILE* tabella_branoGenere;
+    tabella_branoGenere = fopen("brano_genere.dat","rb");
+
+    if( tabella_branoGenere != NULL )
+    {
+        genere genere_selezionato;
+
+        while( fread(&genere_selezionato, sizeof(genere), 1, tabella_branoGenere) )
+        {
+            int id_genere_confronto;
+            id_genere_confronto = id_genere_branoGenere(genere_selezionato);
+
+            if( id_genere_cercato == id_genere_confronto )
+            {
+                brano brano_mostrato;
+                int id_brano_mostrato;
+
+                id_brano_mostrato = id_brano_branoGenere(genere_selezionato);
+                brano_mostrato = cerca_brano(id_brano_mostrato);
+
+                mostra_brano(brano_mostrato);
+            }
+        }
+    }
+
+    fclose(tabella_branoGenere);
+}
+
+void mostra_playlist_utente( int id_playlist_cercato, int id_utente_cercato )
+{
+    
 }
