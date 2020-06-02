@@ -397,6 +397,37 @@ int modifica_branoArtista( brano_artista relazione_modificata )
     return modificato;
 }
 
+void stampa_branoartista()
+{
+    FILE* tabella_branoartista = fopen("brano_artista.dat","rb");
+
+    if( tabella_branoartista != NULL )
+    {
+        brano_artista stampato;
+
+        printf("Infromazioni brani artisti: \n\n");
+
+        while( fread(&stampato, sizeof(brano_artista), 1, tabella_branoartista) )
+        {
+            int id = leggi_id_branoArtista(stampato);
+            int artista = id_artista_branoArtista(stampato);
+            int brano = id_brano_branoArtista(stampato);
+            int flag = leggi_flag_branoArtista(stampato);
+
+            printf("id: %d, brano: %d, artista: %d, flag: %d \n",id,brano, artista, flag);
+
+            
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+    
+
+    fclose(tabella_branoartista);
+}
+
 /*********************************************
  * 
  * Funzioni BranoGenere

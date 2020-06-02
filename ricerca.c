@@ -30,7 +30,7 @@ int controllo_anno( int anno_inserito )
 
 	if( anno_inserito > MIN_ANNO )
 	{
-		controllo = 1
+		controllo = 1;
 	}
 
 	return controllo;
@@ -109,7 +109,7 @@ void ricerca_brani_anno( int anno_cercato )
 	}
 	else
 	{
-		printf("Anno cercato non valido, deve essere maggiore di %d!\n",MIN_ANNO)
+		printf("Anno cercato non valido, deve essere maggiore di %d!\n",MIN_ANNO);
 	}
 }
 
@@ -218,7 +218,7 @@ void ricerca_album_titolo( char *titolo_cercato )
 
 		while( fread(&album_corrente, sizeof(album), 1, tabella_album) )
 		{
-			char titolo_confronto[DIMTITOLO_ALBUM];
+			char titolo_confronto[DIMSTRING];
 			leggi_titolo_album(album_corrente, titolo_confronto);
 
 			if( strtok(titolo_confronto, titolo_cercato) != NULL )

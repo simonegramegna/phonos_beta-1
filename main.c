@@ -47,6 +47,15 @@ int main()
 	// creo le relazioni tra i due brani e l'artista creato
 	brano_artista r1, r2;
 
+	scrivi_relazione_branoArtista(&r1, b1, a1);
+	scrivi_relazione_branoArtista(&r2, b2, a1);
+
+	// aggiungo le due relazioni alla base dati
+	aggiungi_branoArtista(&r1);
+	aggiungi_branoArtista(&r2);
+
+	// stampo le relazioni create
+	stampa_branoartista();
 
 
 
