@@ -748,7 +748,7 @@ int elimina_playlistBrano( int id_playlistBrano )
         // mi porto nella posizione del record
         fseek(tabella_playlist_brano, posizione, SEEK_SET);
 
-        fwrite(&tabella_playlist_brano, sizeof(playlist_brano), 1, tabella_playlist_brano);
+        fwrite(&relazione_eliminata, sizeof(playlist_brano), 1, tabella_playlist_brano);
         eliminato = 1;
     }
     fclose(tabella_playlist_brano);

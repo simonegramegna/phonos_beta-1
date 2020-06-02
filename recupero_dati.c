@@ -276,3 +276,273 @@ int ripristina_tabella_playlistBrano()
  *  Funzioni backup dati
  * 
  *************************************/
+
+int backup_brani()
+{
+    FILE* tabella_brani;
+    FILE* file_backup_brani;
+    int esito_backup;
+
+    esito_backup = 0;
+    tabella_brani = fopen("brani.dat","rb");
+    file_backup_brani = fopen("backup_brani.dat","wb+");
+
+    if( tabella_brani != NULL && file_backup_brani != NULL )
+    {
+        brano brano_backup;
+
+        while( fread(&brano_backup, sizeof(brano), 1, tabella_brani) )
+        {
+            fwrite(&brano_backup, sizeof(brano), 1, file_backup_brani);
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_brani);
+    fclose(file_backup_brani);
+
+    return esito_backup;
+}
+
+int backup_artisti()
+{
+    FILE* tabella_artisti;
+    FILE* file_backup_artisti;
+    int esito_backup;
+
+    tabella_artisti = fopen("artisti.dat","rb");
+    file_backup_artisti = fopen("backup_artisti.dat","wb+");
+    esito_backup = 0;
+
+    if( tabella_artisti != NULL && file_backup_artisti != NULL )
+    {
+        artista artista_backup;
+
+        while( fread(&artista_backup, sizeof(artista), 1, tabella_artisti) )
+        {
+            fwrite(&artista_backup, sizeof(artista), 1, file_backup_artisti);
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_artisti);
+    fclose(file_backup_artisti);
+
+    return esito_backup;
+}
+
+int backup_album()
+{
+    FILE* tabella_album;
+    FILE* file_backup_album;
+    int esito_backup;
+
+    tabella_album = fopen("album.dat","rb");
+    file_backup_album = fopen("backup_album.dat","wb+");
+    esito_backup = 0;
+
+    if( tabella_album != NULL && file_backup_album != NULL )
+    {
+        album album_backup;
+
+        while( fread(&album_backup, sizeof(album), 1, tabella_album) )
+        {
+            fwrite(&album_backup, sizeof(album), 1, file_backup_album );
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_album);
+    fclose(file_backup_album);
+
+    return esito_backup;
+}
+
+int backup_generi()
+{
+    FILE* tabella_generi;
+    FILE* file_backup_generi;
+    int esito_backup;
+
+    tabella_generi = fopen("generi.dat","rb");
+    file_backup_generi = fopen("backup_generi.dat","wb+");
+    esito_backup = 0;
+
+    if( tabella_generi != NULL && file_backup_generi != NULL )
+    {
+        genere genere_backup;
+
+        while( fread(&genere_backup, sizeof(genere), 1, tabella_generi) )
+        {
+            fwrite(&genere_backup, sizeof(genere), 1, file_backup_generi);
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_generi);
+    fclose(file_backup_generi);
+
+    return esito_backup;
+}
+
+int backup_playlist()
+{
+    FILE* tabella_playlist;
+    FILE* file_backup_playlist;
+    int esito_backup;
+
+    tabella_playlist = fopen("playlists.dat","rb");
+    file_backup_playlist = fopen("backup_playlists.dat","wb+");
+    esito_backup = 0;
+
+    if( tabella_playlist != NULL && file_backup_playlist != NULL )
+    {
+        playlist playlist_backup;
+
+        while( fread(&playlist_backup, sizeof(playlist), 1, tabella_playlist) )
+        {
+            fwrite(&playlist_backup, sizeof(playlist), 1, file_backup_playlist);
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_playlist);
+    fclose(file_backup_playlist);
+
+    return esito_backup;
+}
+
+int backup_branoAlbum()
+{
+    FILE* tabella_branoAlbum;
+    FILE* file_backup_branoAlbum;
+    int esito_backup;
+
+    tabella_branoAlbum = fopen("brano_album.dat","rb");
+    file_backup_branoAlbum = fopen("backup_brano_album.dat","wb+");
+    esito_backup = 0;
+
+    if( tabella_branoAlbum != NULL && file_backup_branoAlbum != NULL )
+    {
+        brano_album relazione_backup;
+
+        while( fread(&relazione_backup, sizeof(brano_album), 1, tabella_branoAlbum) )
+        {
+            fwrite(&relazione_backup, sizeof(brano_album), 1, file_backup_branoAlbum);
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_branoAlbum);
+    fclose(file_backup_branoAlbum);
+
+    return esito_backup;
+}
+
+int backup_branoArtista()
+{
+    FILE* tabella_branoArtista;
+    FILE* file_backup_branoArtista;
+    int esito_backup;
+
+    tabella_branoArtista = fopen("brano_artista.dat","rb");
+    file_backup_branoArtista = fopen("backup_brano_artista.dat","wb+");
+    esito_backup = 0;
+
+    if( tabella_branoArtista != NULL && file_backup_branoArtista != NULL )
+    {
+        brano_artista relazione_backup;
+
+        while( fread(&relazione_backup, sizeof(brano_artista), 1, tabella_branoArtista) )
+        {
+            fwrite(&relazione_backup, sizeof(brano_artista), 1, file_backup_branoArtista);
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_branoArtista);
+    fclose(file_backup_branoArtista);
+
+    return esito_backup;
+}
+
+int backup_branoGenere()
+{
+    FILE* tabella_branoGenere;
+    FILE* file_backup_branoGenere;
+    int esito_backup;
+
+    tabella_branoGenere = fopen("brano_genere.dat","rb");
+    file_backup_branoGenere = fopen("backup_brano_genere.dat","wb+");
+
+    if( tabella_branoGenere != NULL && file_backup_branoGenere != NULL )
+    {
+        brano_genere relazione_backup;
+
+        while( fread(&relazione_backup, sizeof(brano_genere), 1, tabella_branoGenere) )
+        {
+            fwrite(&relazione_backup, sizeof(brano_genere), 1, file_backup_branoGenere);
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_branoGenere);
+    fclose(file_backup_branoGenere);
+
+    return esito_backup;
+}
+
+int backup_playlistBrano()
+{
+    FILE* tabella_playlistBrano;
+    FILE* file_backup_playlistBrano;
+    int esito_backup;
+
+    tabella_playlistBrano = fopen("playlist_brano.dat","rb");
+    file_backup_playlistBrano = fopen("backup_playlist_brani.dat","wb+");
+
+    if( tabella_playlistBrano != NULL && file_backup_playlistBrano != NULL )
+    {
+        playlist_brano relazione_backup;
+
+        while( fread(&relazione_backup, sizeof(playlist_brano), 1, tabella_playlistBrano) )
+        {
+            fwrite(&relazione_backup, sizeof(playlist_brano), 1, file_backup_playlistBrano);
+            esito_backup = 1;
+        }
+    }
+    fclose(tabella_playlistBrano);
+    fclose(file_backup_playlistBrano);
+
+    return esito_backup;
+}
+
+
+void stampa_backup_playlist()
+{
+    FILE* backup = fopen("backup_playlists.dat","rb");
+
+    if( backup != NULL )
+    {
+        playlist playlist_letta;
+
+        printf("backup brani: \n\n");
+        while( fread(&playlist_letta, sizeof(playlist), 1, backup) )
+        {
+            char nome[DIMNOME];
+            char descr[DIMDESC];
+
+            int id = leggi_id_playlist(playlist_letta);
+            int user = leggi_utente_playlist(playlist_letta);
+            int pub = leggi_flag_pubblica_playlist(playlist_letta);
+            int flag = leggi_flag_eliminato_playlist(playlist_letta);
+            leggi_nome_playlist(playlist_letta, nome);
+            leggi_descrizione_playlist(playlist_letta, descr);
+
+            printf("id: %d, user: %d, pub: %d, flag: %d, ",id,user, pub, flag);
+            printf("%s, %s\n", nome, descr);
+
+            printf("\n");
+
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+    
+
+    fclose(backup);
+}

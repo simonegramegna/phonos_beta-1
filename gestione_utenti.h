@@ -43,5 +43,7 @@ int modifica_utente(int id_utente, utente utente_modificato);
 int inserisci_admin( utente* admin_inserito );
 int controllo_presenza_utente(utente utente_selezionato);
 int controllo_credenziali(char *username, char *password);
+void autentica(utente utente_autenticato);
+utente leggi_utente_corrente();
 
 #endif /* GESTIONE_UTENTI_H_ */

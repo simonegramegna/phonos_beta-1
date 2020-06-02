@@ -7,6 +7,8 @@
 #include "gestione_utenti.h"
 #include "gestione_artisti.h"
 #include "gestione_playlist.h"
+#include "gestione_relazioni.h"
+#include "ricerca.h"
 #include "interfaccia.h"
 
 void leggere_intero(int *valore)
@@ -55,6 +57,38 @@ void replay()
 
 void interfaccia_principale()
 {
+	utente utente_corrente;
+
+	titolo();
+
+	utente_corrente = leggi_utente_corrente();
+
+	if(utente_corrente.admin == 1){
+		interfaccia_admin();
+	} else if(utente_corrente.admin == 0){
+		interfaccia_utente();
+	} else {
+		interfaccia_iniziale();
+	}
+}
+
+void interfaccia_iniziale(){
+	int scelta;
+
+	printf("[1] Login				\n");
+	printf("[2] Registrati			\n");
+
+	printf("\nScegli una delle opzioni: ");
+	leggere_intero(&scelta);
+
+	if (scelta == 1)			interfaccia_login();
+	else if (scelta == 2)		interfaccia_registrazione();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+
+	replay();
+}
+
+void interfaccia_utente(){
 	int scelta;
 
 	titolo();
@@ -65,84 +99,38 @@ void interfaccia_principale()
 	printf("[4] Visualizza tutte le playlist	\n");
 	printf("[5] Aggiungi un brano				\n");
 	printf("[6] Aggiungi un artista				\n");
-	printf("[7] Aggiungi un genere				\n");
-	printf("[8] Aggiungi una playlist			\n");
-	printf("[9] Registrati						\n");
-	printf("[10] Accedi							\n");
-	printf("[11] Mostra tutti gli utenti		\n");
+	printf("[7] Aggiungi una playlist			\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
 
-	if (scelta == 1)
-	{
-		mostra_brani();
-		replay();
-	}
-	else if (scelta == 2)
-	{
-		mostra_artisti();
-		replay();
-	}
-	else if (scelta == 3)
-	{
-		mostra_generi();
-		replay();
-	}
-	else if (scelta == 4)
-	{
-		mostra_playlists();
-		replay();
-	}
-	else if (scelta == 5)
-	{
-		interfaccia_inserimento_brano();
-		replay();
-	}
-	else if (scelta == 6)
-	{
-		interfaccia_inserimento_artista();
-		replay();
-	}
-	else if (scelta == 7)
-	{
-		interfaccia_inserimento_genere();
-		replay();
-	}
-	else if (scelta == 8)
-	{
-		interfaccia_inserimento_playlist();
-		replay();
-	}
-	else if (scelta == 9)
-	{
-		interfaccia_registrazione();
-		replay();
-	}
-	else if (scelta == 10)
-	{
-		interfaccia_login();
-		replay();
-	}
-	else if (scelta == 11)
-	{
-		mostra_utenti();
-		replay();
-	}
-	else
-	{
-		printf("\nValore non valido, si prega di riprovare \n");
-		replay();
-	}
+	if (scelta == 1)			mostra_brani();
+	else if (scelta == 2)		mostra_artisti();
+	else if (scelta == 3)		mostra_generi();
+	else if (scelta == 4)		mostra_playlists();
+	else if (scelta == 5)		interfaccia_inserimento_brano();
+	else if (scelta == 6)		interfaccia_inserimento_artista();
+	else if (scelta == 7)		interfaccia_inserimento_playlist();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+
+	replay();
+}
+
+void interfaccia_admin(){
+	printf("\nDa fare :)\n");
 }
 
 void interfaccia_inserimento_brano()
 {
 	brano nuovo_brano;
+	artista artista_trovato;
+	brano_artista relazione_branoArtista;
 	char titolo_brano[DIMSTRING];
 	int anno_brano;
 	int durata_brano;
-	int aggiunto;
+	int id_artista;
+	int brano_aggiunto;
+	int relazione_aggiunta;
 
 	titolo();
 
@@ -155,20 +143,31 @@ void interfaccia_inserimento_brano()
 	printf("Indica la durata del brano (in secondi) ");
 	leggere_intero(&durata_brano);
 
+	printf("Scegli uno degli artisti presenti su Phonos \n\n");
+	mostra_artisti();
+	printf("ID artista: ");
+	leggere_intero(&id_artista);
+
+//	Cerco l'artista scelto dall'utente
+	artista_trovato = cerca_artista(id_artista);
+
+//	Scrivo le informazioni del brano
 	scrivi_titolo_brano(&nuovo_brano, titolo_brano);
 	scrivi_anno_brano(&nuovo_brano, anno_brano);
 	scrivi_durata_brano(&nuovo_brano, durata_brano);
 	scrivi_ascolti_brano(&nuovo_brano, 0);
 
-	aggiunto = aggiungi_brano(&nuovo_brano);
-	if (aggiunto == 1)
-	{
-		printf("\nBrano aggiunto con successo! \n");
-	}
-	else
-	{
-		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
-	}
+//	Definisco le relazioni
+	scrivi_relazione_branoArtista(&relazione_branoArtista, nuovo_brano, artista_trovato);
+
+//	Aggiungo il brano
+	brano_aggiunto = aggiungi_brano(&nuovo_brano);
+
+//	Aggiungo le relazioni
+	relazione_aggiunta = aggiungi_branoArtista(&relazione_branoArtista);
+
+	if (brano_aggiunto == 1 && relazione_aggiunta == 1)		printf("\nBrano aggiunto con successo! \n");
+	else													printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_inserimento_artista()
@@ -195,7 +194,9 @@ void interfaccia_inserimento_artista()
 	scrivi_nome_arte_artista(&nuovo_artista, nome_arte_artista);
 
 	aggiunto = aggiungi_artista(&nuovo_artista);
-	if (aggiunto == 1)
+
+	// controllo che l'aggiunta dell'artista sia avvenuta con successo
+	if ( aggiunto == 1 )
 	{
 		printf("\nArtista aggiunto con successo! \n");
 	}
@@ -219,7 +220,9 @@ void interfaccia_inserimento_genere()
 	scrivi_nome_genere(&nuovo_genere, nome_genere);
 
 	aggiunto = aggiungi_genere(&nuovo_genere);
-	if (aggiunto == 1)
+
+	// controllo che l'aggiunta del genere sia avvenuta con successo
+	if ( aggiunto == 1 )
 	{
 		printf("\nGenere aggiunto con successo! \n");
 	}
@@ -262,6 +265,8 @@ void interfaccia_inserimento_playlist()
 	}
 
 	aggiunta = aggiungi_playlist(&nuova_playlist);
+
+	// controllo che l'aggiunta della playlist sia avvenuta con successo
 	if (aggiunta == 1)
 	{
 		printf("\nPlaylist aggiunta con successo! \n");
@@ -272,7 +277,8 @@ void interfaccia_inserimento_playlist()
 	}
 }
 
-void interfaccia_registrazione(){
+void interfaccia_registrazione()
+{
 	utente nuovo_utente;
 	char nome_utente[DIMUSER];
 	char password[DIMPASS];
@@ -291,14 +297,19 @@ void interfaccia_registrazione(){
 
 	aggiunto = aggiungi_utente(&nuovo_utente);
 
-	if(aggiunto == 1){
+	// controllo che l'aggiunta dell'utente sia avvenuta con successo
+	if( aggiunto == 1 )
+	{
 		printf("\nUtente aggiunto con successo \n");
-	} else {
-		printf("\nQualcosa è andato storto. Ti preghiamo di riprovare \n");
+	} 
+	else 
+	{
+		printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
 	}
 }
 
-void interfaccia_login(){
+void interfaccia_login()
+{
 	utente utente_login;
 	char nome_utente[DIMUSER];
 	char password[DIMPASS];
@@ -318,15 +329,20 @@ void interfaccia_login(){
 
 	utente_esiste = controllo_presenza_utente(utente_login);
 
-	if(utente_esiste == 1){
+	if( utente_esiste == 1 )
+	{
 		autenticato = controllo_credenziali(nome_utente, password);
-		if(autenticato == 1){
+		if(autenticato == 1)
+		{
 			printf("\nBentornato, %s \n", nome_utente);
-		} else {
+		} 
+		else 
+		{
 			printf("\nControlla le credenziali e riprova \n");
 		}
-	} else {
+	} 
+	else 
+	{
 		printf("\nL'utente non esiste \n");
 	}
-
 }

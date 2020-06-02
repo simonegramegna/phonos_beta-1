@@ -209,6 +209,7 @@ int modifica_playlist(playlist playlist_modificata)
 		long posizione;
 		int id_playlist;
 
+		// cerco la poszione della playlist
 		id_playlist = leggi_id_playlist(playlist_modificata);
 		posizione = posizione_playlist(id_playlist);
 

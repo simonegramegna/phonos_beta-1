@@ -233,6 +233,7 @@ int controllo_credenziali(char *username, char *password){
 			leggi_username_utente(utente_confronto, username_confronto);
 			leggi_password_utente(utente_confronto, password_confronto);
 			if(strcmp(username_confronto, username) == 0 && strcmp(password_confronto, password) == 0){
+				autentica(utente_confronto);
 				autenticato = 1;
 			}
 		}
@@ -241,4 +242,29 @@ int controllo_credenziali(char *username, char *password){
 	fclose(tabella_utenti);
 
 	return autenticato;
+}
+
+void autentica(utente utente_autenticato){
+	FILE *file_autenticazione;
+
+	file_autenticazione = fopen("autenticazione.dat", "rb+");
+	if(file_autenticazione != NULL){
+		fwrite(&utente_autenticato, sizeof(utente), 1, file_autenticazione);
+	}
+
+	fclose(file_autenticazione);
+}
+
+utente leggi_utente_corrente(){
+	utente utente_autenticato;
+	FILE *file_autenticazione;
+
+	file_autenticazione = fopen("autenticazione.dat", "rb");
+	if(file_autenticazione != NULL){
+		fread(&utente_autenticato, sizeof(utente), 1, file_autenticazione);
+	}
+
+	fclose(file_autenticazione);
+
+	return utente_autenticato;
 }
