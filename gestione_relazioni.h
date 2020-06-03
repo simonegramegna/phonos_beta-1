@@ -73,7 +73,7 @@ int id_album_branoAlbum( brano_album relazione_letta );
 int id_brano_branoAlbum( brano_album relazione_letta );
 
 // funzione per scrivere la relazione branoalbum
-void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, brano brano_letto, album album_appartenenza );
+void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, int id_brano, int id_album );
 
 // funzione per leggere il flag di eliminazione di un branoAlbum
 int leggi_flag_branoAlbum( brano_album relazione_letta );
@@ -226,7 +226,7 @@ int id_playlist_playlistBrano( playlist_brano relazione_letta );
 int id_brano_playlistBrano( playlist_brano relazione_letta );
 
 // funzione per scrivere una relazione playlistBrano
-void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, brano brano_letto, playlist playlist_appartenenza );
+void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, int id_brano, int id_playlist );
 
 // funzione per leggere il flag di eliminazione della relazione playlistBrano
 int leggi_flag_playlistBrano( playlist_brano relazione_letta );
@@ -273,6 +273,6 @@ void mostra_brani_artista( int id_artista_cercato );
 void mostra_brani_genere( int id_genere_cercato );
 
 // funzione per leggere i brani di una playlist di un utente
-void mostra_playlist_utente( int id_playlist_cercato, int id_utente_cercato );
+void mostra_playlist_utente( int id_playlist_cercata, int id_utente_cercato );
 
 #endif /* GESTIONE_RELAZIONI_H_ */

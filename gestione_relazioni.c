@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "gestione_utenti.h"
-#include "gestione_relazioni.h"
+#include "genera_id.h"
 #include "gestione_brani.h"
 #include "gestione_album.h"
+#include "gestione_utenti.h"
 #include "gestione_generi.h"
 #include "gestione_artisti.h"
-#include "genera_id.h"
+#include "gestione_relazioni.h"
 
 
 int leggi_id_branoAlbum( brano_album relazione_letta )
@@ -30,26 +30,10 @@ int id_brano_branoAlbum( brano_album relazione_letta )
     return relazione_letta.id_brano;
 }
 
-void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, brano brano_letto, album album_appartenenza )
+void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, int id_brano, int id_album )
 {
-    int flag_brano;  
-    int flag_album; 
-    
-    flag_brano = leggi_flag_eliminato_brano(brano_letto);
-    flag_album = leggi_flag_eliminato_album(album_appartenenza);
-
-    // verifico che sia il brano che l'album esistano
-    if( flag_brano == 0 && flag_album == 0 )
-    {
-        int id_brano;
-        int id_album;
-         
-        id_brano = leggi_id_brano(brano_letto);
-        id_album = leggi_id_album(album_appartenenza);
-
-        relazione_scritta->id_brano = id_brano;
-        relazione_scritta->id_album = id_album;
-    }
+    relazione_scritta->id_brano = id_brano;
+    relazione_scritta->id_album = id_album;
 }
 
 int leggi_flag_branoAlbum( brano_album relazione_letta )
@@ -593,25 +577,10 @@ int id_brano_playlistBrano( playlist_brano relazione_letta )
     return relazione_letta.id_brano;
 }
 
-void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, brano brano_letto, playlist playlist_appartenenza )
+void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, int id_brano, int id_playlist )
 {
-    int flag_brano;
-    int flag_playlist;
-
-    flag_brano = leggi_flag_eliminato_brano(brano_letto);
-    flag_playlist = leggi_flag_eliminato_playlist(playlist_appartenenza);
-
-    if( flag_brano == 0 && flag_playlist == 0 )
-    {
-        int id_brano;
-        int id_playlist;
-
-        id_brano = leggi_id_brano(brano_letto);
-        id_playlist = leggi_id_playlist(playlist_appartenenza);
-
-        relazione_scritta->id_brano = id_brano;
-        relazione_scritta->id_playlist = id_playlist;
-    }
+    relazione_scritta->id_brano = id_brano;
+    relazione_scritta->id_playlist = id_playlist;
 }
 
 int leggi_flag_playlistBrano( playlist_brano relazione_letta )
@@ -859,14 +828,14 @@ void mostra_brani_genere( int id_genere_cercato )
         while( fread(&genere_selezionato, sizeof(genere), 1, tabella_branoGenere) )
         {
             int id_genere_confronto;
-//            id_genere_confronto = id_genere_branoGenere(genere_selezionato);
+            id_genere_confronto = id_genere_branoGenere(genere_selezionato);
 
             if( id_genere_cercato == id_genere_confronto )
             {
                 brano brano_mostrato;
                 int id_brano_mostrato;
 
-//                id_brano_mostrato = id_brano_branoGenere(genere_selezionato);
+                id_brano_mostrato = id_brano_branoGenere(genere_selezionato);
                 brano_mostrato = cerca_brano(id_brano_mostrato);
 
                 mostra_brano(brano_mostrato);
@@ -877,7 +846,46 @@ void mostra_brani_genere( int id_genere_cercato )
     fclose(tabella_branoGenere);
 }
 
-void mostra_playlist_utente( int id_playlist_cercato, int id_utente_cercato )
+void mostra_playlist_utente( int id_playlist_cercata, int id_utente_cercato )
 {
-    
+    int id_utente_confronto;
+    playlist playlist_utente;
+
+    playlist_utente = cerca_playlist(id_playlist_cercata);
+    id_utente_confronto = leggi_utente_playlist(playlist_utente);
+
+    if( id_utente_confronto == id_utente_cercato )
+    {
+        FILE* tabella_playlistBrano;
+        tabella_playlistBrano = fopen("playlist_brani.dat","rb");
+
+        if( tabella_playlistBrano != NULL )
+        {
+            playlist_brano relazione_selezionata;
+
+            while( fread(&relazione_selezionata, sizeof(playlist_brano), 1, tabella_playlistBrano) )
+            {
+                int id_playlist_confronto;
+                id_playlist_confronto = id_playlist_playlistBrano(relazione_selezionata);
+
+
+                if( id_playlist_cercata == id_playlist_confronto )
+                {
+                    int id_brano_mostrato;
+                    brano brano_mostrato;
+
+                    id_brano_mostrato = id_brano_playlistBrano(relazione_selezionata);
+                    brano_mostrato = cerca_brano(id_brano_mostrato);
+
+                    mostra_brano(brano_mostrato);
+                   
+                }
+            }
+        }
+        fclose(tabella_playlistBrano);
+    }
+    else
+    {
+        printf("La playlist selezionata non appartiene all'utente selezionato..\n");
+    }
 }
