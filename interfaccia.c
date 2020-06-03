@@ -125,13 +125,16 @@ void interfaccia_inserimento_brano()
 {
 	brano nuovo_brano;
 	brano_artista relazione_branoArtista;
+	brano_genere relazione_branoGenere;
 	char titolo_brano[DIMSTRING];
 	int anno_brano;
 	int durata_brano;
 	int id_brano;
 	int id_artista;
+	int id_genere;
 	int brano_aggiunto;
-	int relazione_aggiunta;
+	int relazione_branoArtista_aggiunta;
+	int relazione_branoGenere_aggiunta;
 
 	titolo();
 
@@ -149,6 +152,11 @@ void interfaccia_inserimento_brano()
 	printf("ID artista: ");
 	leggere_intero(&id_artista);
 
+	printf("Scegli uno dei generi musicali presenti su Phonos \n\n");
+	mostra_generi();
+	printf("ID genere: ");
+	leggere_intero(&id_genere);
+
 //	Scrivo le informazioni del brano
 	id_brano = genera_id();
 	scrivi_id_brano(&nuovo_brano, id_brano);
@@ -159,15 +167,21 @@ void interfaccia_inserimento_brano()
 
 //	Definisco le relazioni
 	scrivi_relazione_branoArtista(&relazione_branoArtista, id_brano, id_artista);
+	scrivi_relazione_branoGenere(&relazione_branoGenere, id_brano, id_genere);
 
 //	Aggiungo il brano
 	brano_aggiunto = aggiungi_brano(&nuovo_brano);
 
 //	Aggiungo le relazioni
-	relazione_aggiunta = aggiungi_branoArtista(&relazione_branoArtista);
+	relazione_branoArtista_aggiunta = aggiungi_branoArtista(&relazione_branoArtista);
+	relazione_branoGenere_aggiunta = aggiungi_branoGenere(&relazione_branoGenere);
 
-	if (brano_aggiunto == 1 && relazione_aggiunta == 1)		printf("\nBrano aggiunto con successo! \n");
-	else													printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+	if (brano_aggiunto == 1 && relazione_branoArtista_aggiunta == 1 && relazione_branoGenere_aggiunta == 1){
+		printf("\nBrano aggiunto con successo! \n");
+	}
+	else{
+		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+	}
 }
 
 void interfaccia_inserimento_artista()

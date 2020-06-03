@@ -175,7 +175,7 @@ int id_brano_branoGenere( brano_genere relazione_letta );
 int id_genere_branoGenere( brano_genere relazione_letta );
 
 // funzione per scrivere la relazione branogenere
-void scrivi_relazione_branoGenere( brano_genere* relazione_scritta, brano brano_letto, genere genere_appartenenza );
+void scrivi_relazione_branoGenere( brano_genere* relazione_scritta, int id_brano, int id_genere );
 
 // funzione per leggere il flag di eliminazione di un branogenere
 int leggi_flag_branoGenere( brano_genere relazione_letta );

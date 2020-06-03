@@ -415,26 +415,10 @@ int id_genere_branoGenere( brano_genere relazione_letta )
     return relazione_letta.id_genere;
 }
 
-void scrivi_relazione_branoGenere( brano_genere* relazione_scritta, brano brano_letto, genere genere_appartenenza )
+void scrivi_relazione_branoGenere( brano_genere* relazione_scritta, int id_brano, int id_genere )
 {
-    int flag_brano;
-    int flag_genere;
-
-    flag_brano = leggi_flag_eliminato_brano(brano_letto);
-    flag_genere = leggi_flag_eliminato_genere(genere_appartenenza);
-
-    // verifico che sia il brano che il genere esistano nella base dati
-    if( flag_brano == 0 && flag_genere == 0 )
-    {
-        int id_brano;
-        int id_genere;
-        
-        id_brano = leggi_id_brano(brano_letto);
-        id_genere = leggi_id_genere(genere_appartenenza);
-
-        relazione_scritta->id_brano = id_brano;
-        relazione_scritta->id_genere = id_genere;
-    }
+	relazione_scritta->id_brano = id_brano;
+	relazione_scritta->id_genere = id_genere;
 }
 
 int leggi_flag_branoGenere( brano_genere relazione_letta )
