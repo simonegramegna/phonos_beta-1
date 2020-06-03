@@ -79,7 +79,7 @@ int elimina_utente( int id_utente );
 utente cerca_utente( int id_utente );
 
 // fuznione per modificare un utente
-int modifica_utente( int id_utente, utente utente_modificato );
+int modifica_utente( utente utente_modificato );
 
 // funzione per inserire un admin
 int inserisci_admin( utente* admin_inserito );
@@ -95,5 +95,8 @@ void autentica( utente utente_autenticato );
 
 // funzione per leggere l'utente corrente
 utente leggi_utente_corrente();
+
+//funzione che verifica se un determinato unsername è già stato preso
+int username_esiste(char *username);
 
 #endif /* GESTIONE_UTENTI_H_ */
