@@ -74,7 +74,6 @@ int aggiungi_brano(brano *brano_selezionato)
 
 	if(tabella_brani != NULL)
 	{
-		scrivi_id_brano(brano_selezionato, genera_id());
 		scrivi_flag_eliminato_brano(brano_selezionato, 0);
 
 		fwrite(brano_selezionato, sizeof(brano), 1, tabella_brani);

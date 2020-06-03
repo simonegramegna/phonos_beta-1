@@ -238,23 +238,10 @@ int id_artista_branoArtista( brano_artista relazione_letta )
     return relazione_letta.id_artista;
 }
 
-void scrivi_relazione_branoArtista( brano_artista* relazione_scritta, brano brano_letto, artista artista_appartenenza )
+void scrivi_relazione_branoArtista( brano_artista* relazione_scritta, int id_brano, int id_artista )
 {
-    int flag_brano;
-    int flag_artista; 
-    
-    flag_brano = leggi_flag_eliminato_brano(brano_letto); 
-    flag_artista = leggi_flag_eliminato_artista(artista_appartenenza);
-
-    // verifico che il brano e l'artista esistano
-    if( flag_brano == 0 && flag_artista == 0 )
-    {
-        int id_brano = leggi_id_brano(brano_letto);
-        int id_artista = leggi_id_artista(artista_appartenenza);
-
-        relazione_scritta->id_brano = id_brano;
-        relazione_scritta->id_artista = id_artista;
-    }
+	relazione_scritta->id_brano = id_brano;
+	relazione_scritta->id_artista = id_artista;
 }
 
 int leggi_flag_branoArtista( brano_artista relazione_letta )
@@ -888,14 +875,14 @@ void mostra_brani_genere( int id_genere_cercato )
         while( fread(&genere_selezionato, sizeof(genere), 1, tabella_branoGenere) )
         {
             int id_genere_confronto;
-            id_genere_confronto = id_genere_branoGenere(genere_selezionato);
+//            id_genere_confronto = id_genere_branoGenere(genere_selezionato);
 
             if( id_genere_cercato == id_genere_confronto )
             {
                 brano brano_mostrato;
                 int id_brano_mostrato;
 
-                id_brano_mostrato = id_brano_branoGenere(genere_selezionato);
+//                id_brano_mostrato = id_brano_branoGenere(genere_selezionato);
                 brano_mostrato = cerca_brano(id_brano_mostrato);
 
                 mostra_brano(brano_mostrato);

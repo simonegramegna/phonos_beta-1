@@ -124,7 +124,7 @@ int id_brano_branoArtista( brano_artista relazione_letta );
 int id_artista_branoArtista( brano_artista relazione_letta );
 
 // funzione per scrivere una relazione brano_artista
-void scrivi_relazione_branoArtista( brano_artista* relazione_scritta, brano brano_letto, artista artista_appartenenza );
+void scrivi_relazione_branoArtista( brano_artista* relazione_scritta, int id_brano, int id_artista );
 
 // funzione per leggere il flag del brano artista
 int leggi_flag_branoArtista( brano_artista relazione_letta );

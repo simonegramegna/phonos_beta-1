@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "genera_id.h"
 #include "gestione_brani.h"
 #include "gestione_generi.h"
 #include "gestione_utenti.h"
@@ -123,11 +124,11 @@ void interfaccia_admin(){
 void interfaccia_inserimento_brano()
 {
 	brano nuovo_brano;
-	artista artista_trovato;
 	brano_artista relazione_branoArtista;
 	char titolo_brano[DIMSTRING];
 	int anno_brano;
 	int durata_brano;
+	int id_brano;
 	int id_artista;
 	int brano_aggiunto;
 	int relazione_aggiunta;
@@ -148,17 +149,16 @@ void interfaccia_inserimento_brano()
 	printf("ID artista: ");
 	leggere_intero(&id_artista);
 
-//	Cerco l'artista scelto dall'utente
-	artista_trovato = cerca_artista(id_artista);
-
 //	Scrivo le informazioni del brano
+	id_brano = genera_id();
+	scrivi_id_brano(&nuovo_brano, id_brano);
 	scrivi_titolo_brano(&nuovo_brano, titolo_brano);
 	scrivi_anno_brano(&nuovo_brano, anno_brano);
 	scrivi_durata_brano(&nuovo_brano, durata_brano);
 	scrivi_ascolti_brano(&nuovo_brano, 0);
 
 //	Definisco le relazioni
-	scrivi_relazione_branoArtista(&relazione_branoArtista, nuovo_brano, artista_trovato);
+	scrivi_relazione_branoArtista(&relazione_branoArtista, id_brano, id_artista);
 
 //	Aggiungo il brano
 	brano_aggiunto = aggiungi_brano(&nuovo_brano);
