@@ -7,7 +7,7 @@
 #define MINUTO 60 
 
 // valore minimo dell'anno
-#define MIN_ANNO 1700
+#define MIN_ANNO 1900
 
 #include "ricerca.h"
 #include "gestione_album.h"
