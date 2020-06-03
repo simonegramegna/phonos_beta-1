@@ -73,7 +73,7 @@ int id_album_branoAlbum( brano_album relazione_letta );
 int id_brano_branoAlbum( brano_album relazione_letta );
 
 // funzione per scrivere la relazione branoalbum
-void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, brano brano_letto, album album_appartenenza );
+void scrivi_relazione_branoAlbum( brano_album* relazione_scritta, int id_brano, int id_album );
 
 // funzione per leggere il flag di eliminazione di un branoAlbum
 int leggi_flag_branoAlbum( brano_album relazione_letta );
@@ -124,7 +124,7 @@ int id_brano_branoArtista( brano_artista relazione_letta );
 int id_artista_branoArtista( brano_artista relazione_letta );
 
 // funzione per scrivere una relazione brano_artista
-void scrivi_relazione_branoArtista( brano_artista* relazione_scritta, brano brano_letto, artista artista_appartenenza );
+void scrivi_relazione_branoArtista( brano_artista* relazione_scritta, int id_brano, int id_artista );
 
 // funzione per leggere il flag del brano artista
 int leggi_flag_branoArtista( brano_artista relazione_letta );
@@ -178,7 +178,7 @@ int id_brano_branoGenere( brano_genere relazione_letta );
 int id_genere_branoGenere( brano_genere relazione_letta );
 
 // funzione per scrivere la relazione branogenere
-void scrivi_relazione_branoGenere( brano_genere* relazione_scritta, brano brano_letto, genere genere_appartenenza );
+void scrivi_relazione_branoGenere( brano_genere* relazione_scritta, int id_brano, int id_genere );
 
 // funzione per leggere il flag di eliminazione di un branogenere
 int leggi_flag_branoGenere( brano_genere relazione_letta );
@@ -229,7 +229,7 @@ int id_playlist_playlistBrano( playlist_brano relazione_letta );
 int id_brano_playlistBrano( playlist_brano relazione_letta );
 
 // funzione per scrivere una relazione playlistBrano
-void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, brano brano_letto, playlist playlist_appartenenza );
+void scrivi_relazione_playlistBrano( playlist_brano* relazione_scritta, int id_brano, int id_playlist );
 
 // funzione per leggere il flag di eliminazione della relazione playlistBrano
 int leggi_flag_playlistBrano( playlist_brano relazione_letta );
@@ -258,5 +258,24 @@ int modifica_playlistBrano( playlist_brano relazione_modificata );
 
 // funzione di test per la stampa
 void stampa_playlist_brano();
+
+/*********************************************
+ * 
+ * Funzioni per mostrare leggere brani di 
+ * album/ artisti/ genere/ playlist
+ * 
+ *********************************************/
+
+// funzione per leggere i brani di un album
+void mostra_brani_album( int id_album_cercato );
+
+// funzione per leggere i brani di un artista
+void mostra_brani_artista( int id_artista_cercato );
+
+// funzione per leggere i brani di un genere
+void mostra_brani_genere( int id_genere_cercato );
+
+// funzione per leggere i brani di una playlist di un utente
+void mostra_playlist_utente( int id_playlist_cercata, int id_utente_cercato );
 
 #endif /* GESTIONE_RELAZIONI_H_ */

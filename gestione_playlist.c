@@ -35,25 +35,32 @@ int leggi_flag_eliminato_playlist(playlist playlist_selezionata)
 /* -------------------------
 	Funzioni di scrittura
 ------------------------- */
-void scrivi_id_playlist(playlist *playlist_selezionata, int id)
+
+void scrivi_id_playlist( playlist *playlist_selezionata, int id )
 {
 	playlist_selezionata->id = id;
 }
-void scrivi_utente_playlist(playlist *playlist_selezionata, int utente)
+
+void scrivi_utente_playlist( playlist *playlist_selezionata, int utente )
 {
 	playlist_selezionata->utente= utente;
 }
-void scrivi_flag_pubblica_playlist(playlist *playlist_selezionata, int flag_pubblica)
+
+void scrivi_flag_pubblica_playlist( playlist *playlist_selezionata, int flag_pubblica )
 {
-	playlist_selezionata->pubblica= flag_pubblica;
+	playlist_selezionata->pubblica = flag_pubblica;
 }
-void scrivi_nome_playlist(playlist *playlist_selezionata, char *nome){
+
+void scrivi_nome_playlist( playlist *playlist_selezionata, char *nome )
+{
     strcpy(playlist_selezionata->nome, nome);
 }
-void scrivi_descrizione_playlist(playlist *playlist_selezionata, char *descrizione)
+
+void scrivi_descrizione_playlist( playlist *playlist_selezionata, char *descrizione )
 {
     strcpy(playlist_selezionata->descrizione, descrizione);
 }
+
 void scrivi_flag_eliminato_playlist(playlist *playlist_selezionata, int flag_eliminato)
 {
 	playlist_selezionata->eliminata = flag_eliminato;
@@ -62,7 +69,8 @@ void scrivi_flag_eliminato_playlist(playlist *playlist_selezionata, int flag_eli
 /* -------------------------
 	Funzioni su file
 ------------------------- */
-int aggiungi_playlist(playlist *playlist_selezionata)
+
+int aggiungi_playlist( playlist *playlist_selezionata )
 {
 	FILE *tabella_playlist;
 	int aggiunto;
@@ -72,7 +80,6 @@ int aggiungi_playlist(playlist *playlist_selezionata)
 
 	if(tabella_playlist != NULL)
 	{
-		scrivi_id_playlist(playlist_selezionata, genera_id());
 		scrivi_flag_eliminato_playlist(playlist_selezionata, 0);
 
 		fwrite(playlist_selezionata, sizeof(playlist), 1, tabella_playlist);
@@ -82,10 +89,10 @@ int aggiungi_playlist(playlist *playlist_selezionata)
 
 	return aggiunto;
 }
-void mostra_playlists(){
-	
-	FILE *tabella_playlist;
 
+void mostra_playlists()
+{
+	FILE *tabella_playlist;
 	tabella_playlist = fopen("playlists.dat", "rb");
 
 	if(tabella_playlist != NULL)
@@ -99,19 +106,21 @@ void mostra_playlists(){
 	}
 	fclose(tabella_playlist);
 }
+
 void mostra_playlist(playlist playlist_selezionata)
 {
-	//if(playlist_selezionata.eliminata != 1)
-	//{
+	if(playlist_selezionata.eliminata != 1)
+	{
 		printf("ID: %d				\n", playlist_selezionata.id);
 		printf("Nome: %s			\n", playlist_selezionata.nome);
 		printf("Descrizione: %s		\n", playlist_selezionata.descrizione);
 		printf("Utente: %d 			\n", playlist_selezionata.utente);
 		printf("Pubblica: %d		\n", playlist_selezionata.pubblica);
 		printf("Eliminata: %d		\n", playlist_selezionata.eliminata);
-	//}
+	}
 	printf("\n");
 }
+
 long posizione_playlist(int id_playlist)
 {
     long posizione;
@@ -140,6 +149,7 @@ long posizione_playlist(int id_playlist)
 
     return posizione;
 }
+
 int elimina_playlist(int id_playlist)
 {
 	FILE *tabella_playlist;
@@ -175,6 +185,7 @@ int elimina_playlist(int id_playlist)
 
 	return eliminato;
 }
+
 playlist cerca_playlist(int id_playlist)
 {
 	FILE *tabella_playlist;
@@ -196,6 +207,7 @@ playlist cerca_playlist(int id_playlist)
 
 	return playlist_trovata;
 }
+
 int modifica_playlist(playlist playlist_modificata)
 {
 	FILE *tabella_playlist;

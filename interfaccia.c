@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "genera_id.h"
 #include "gestione_brani.h"
 #include "gestione_generi.h"
 #include "gestione_utenti.h"
@@ -123,14 +124,17 @@ void interfaccia_admin(){
 void interfaccia_inserimento_brano()
 {
 	brano nuovo_brano;
-	artista artista_trovato;
 	brano_artista relazione_branoArtista;
+	brano_genere relazione_branoGenere;
 	char titolo_brano[DIMSTRING];
 	int anno_brano;
 	int durata_brano;
+	int id_brano;
 	int id_artista;
+	int id_genere;
 	int brano_aggiunto;
-	int relazione_aggiunta;
+	int relazione_branoArtista_aggiunta;
+	int relazione_branoGenere_aggiunta;
 
 	titolo();
 
@@ -148,26 +152,36 @@ void interfaccia_inserimento_brano()
 	printf("ID artista: ");
 	leggere_intero(&id_artista);
 
-//	Cerco l'artista scelto dall'utente
-	artista_trovato = cerca_artista(id_artista);
+	printf("Scegli uno dei generi musicali presenti su Phonos \n\n");
+	mostra_generi();
+	printf("ID genere: ");
+	leggere_intero(&id_genere);
 
 //	Scrivo le informazioni del brano
+	id_brano = genera_id();
+	scrivi_id_brano(&nuovo_brano, id_brano);
 	scrivi_titolo_brano(&nuovo_brano, titolo_brano);
 	scrivi_anno_brano(&nuovo_brano, anno_brano);
 	scrivi_durata_brano(&nuovo_brano, durata_brano);
 	scrivi_ascolti_brano(&nuovo_brano, 0);
 
 //	Definisco le relazioni
-	scrivi_relazione_branoArtista(&relazione_branoArtista, nuovo_brano, artista_trovato);
+	scrivi_relazione_branoArtista(&relazione_branoArtista, id_brano, id_artista);
+	scrivi_relazione_branoGenere(&relazione_branoGenere, id_brano, id_genere);
 
 //	Aggiungo il brano
 	brano_aggiunto = aggiungi_brano(&nuovo_brano);
 
 //	Aggiungo le relazioni
-	relazione_aggiunta = aggiungi_branoArtista(&relazione_branoArtista);
+	relazione_branoArtista_aggiunta = aggiungi_branoArtista(&relazione_branoArtista);
+	relazione_branoGenere_aggiunta = aggiungi_branoGenere(&relazione_branoGenere);
 
-	if (brano_aggiunto == 1 && relazione_aggiunta == 1)		printf("\nBrano aggiunto con successo! \n");
-	else													printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+	if (brano_aggiunto == 1 && relazione_branoArtista_aggiunta == 1 && relazione_branoGenere_aggiunta == 1){
+		printf("\nBrano aggiunto con successo! \n");
+	}
+	else{
+		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+	}
 }
 
 void interfaccia_inserimento_artista()
@@ -234,13 +248,19 @@ void interfaccia_inserimento_genere()
 
 void interfaccia_inserimento_playlist()
 {
+	utente utente_corrente;
 	playlist nuova_playlist;
+	playlist_brano relazione_playlistBrano;
 	char nome_playlist[DIMSTRING];
 	char descrizione_playlist[DIMDESC];
+	int id_playlist;
 	int pubblica;
-	int aggiunta;
+	int playlist_aggiunta;
+	int id_brano;
 
 	titolo();
+
+	utente_corrente = leggi_utente_corrente();
 
 	printf("Qual e' il nome della playlist? ");
 	leggere_stringa(nome_playlist);
@@ -253,28 +273,39 @@ void interfaccia_inserimento_playlist()
 	printf("[2] Privata		\n");
 	leggere_intero(&pubblica);
 
+//	Scrivo i dati della playlist
+	id_playlist = genera_id();
+	scrivi_id_playlist(&nuova_playlist, id_playlist);
 	scrivi_nome_playlist(&nuova_playlist, nome_playlist);
 	scrivi_descrizione_playlist(&nuova_playlist, descrizione_playlist);
-	if (pubblica == 2)
-	{
-		scrivi_flag_pubblica_playlist(&nuova_playlist, 0);
-	}
-	else
-	{
-		scrivi_flag_pubblica_playlist(&nuova_playlist, 1);
-	}
+	scrivi_utente_playlist(&nuova_playlist, utente_corrente.id);
+	if (pubblica == 2)		scrivi_flag_pubblica_playlist(&nuova_playlist, 0);
+	else					scrivi_flag_pubblica_playlist(&nuova_playlist, 1);
 
-	aggiunta = aggiungi_playlist(&nuova_playlist);
+//	Aggiungo la playlist
+	playlist_aggiunta = aggiungi_playlist(&nuova_playlist);
 
-	// controllo che l'aggiunta della playlist sia avvenuta con successo
-	if (aggiunta == 1)
+	if (playlist_aggiunta == 1)
 	{
 		printf("\nPlaylist aggiunta con successo! \n");
+		do {
+			printf("Scegli un brano da aggiungere alla playlist. \n\n");
+			mostra_brani();
+			printf("ID brano: (-1 per terminare) ");
+			leggere_intero(&id_brano);
+
+			if(id_brano != -1){
+				scrivi_relazione_playlistBrano(&relazione_playlistBrano, id_brano, id_playlist);
+			}
+
+		} while (id_brano != -1);
 	}
 	else
 	{
 		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 	}
+
+
 }
 
 void interfaccia_registrazione()
@@ -295,16 +326,13 @@ void interfaccia_registrazione()
 	scrivi_username_utente(&nuovo_utente, nome_utente);
 	scrivi_password_utente(&nuovo_utente, password);
 
-	aggiunto = aggiungi_utente(&nuovo_utente);
-
-	// controllo che l'aggiunta dell'utente sia avvenuta con successo
-	if( aggiunto == 1 )
-	{
-		printf("\nUtente aggiunto con successo \n");
-	} 
-	else 
-	{
-		printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
+//	Controllo se lo username è stato già preso
+	if(username_esiste(nome_utente) == 0){
+		aggiunto = aggiungi_utente(&nuovo_utente);
+		if( aggiunto == 1 )			printf("\nUtente aggiunto con successo \n");
+		else 						printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
+	} else {
+		printf("\nLo username che hai scelto è già stato preso. Prova a sceglierne un altro! \n");
 	}
 }
 

@@ -92,9 +92,12 @@ void mostra_artisti()
 	fclose(tabella_artisti);
 }
 
-void mostra_artista(artista artista_selezionato)
+void mostra_artista( artista artista_selezionato )
 {
-	if( artista_selezionato.eliminato != 1 )
+	int flag_artista;
+	flag_artista = leggi_flag_eliminato_artista(artista_selezionato);
+
+	if( flag_artista != 1 )
 	{
 		printf("ID: %d				\n", artista_selezionato.id);
 		printf("Nome: %s			\n", artista_selezionato.nome);
