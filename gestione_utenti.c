@@ -114,6 +114,7 @@ void mostra_utente( utente utente_selezionato )
 	}
 	printf("\n");
 }
+
 long posizione_utente( int id_utente )
 {
 	FILE *tabella_utenti;
@@ -336,4 +337,23 @@ utente leggi_utente_corrente()
 	fclose(file_autenticazione);
 
 	return utente_autenticato;
+}
+
+int username_esiste(char *username){
+	FILE *tabella_utenti;
+	utente utente_corrente;
+	int username_esiste;
+
+	username_esiste = 0;
+	tabella_utenti = fopen("utenti.dat", "rb");
+	if(tabella_utenti != NULL){
+		while(!feof(tabella_utenti) && username_esiste == 0){
+			fread(&utente_corrente, sizeof(utente), 1, tabella_utenti);
+			if(strcmp(utente_corrente.username, username) == 0){
+				username_esiste = 1;
+			}
+		}
+	}
+
+	return username_esiste;
 }

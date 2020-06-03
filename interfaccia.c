@@ -248,13 +248,19 @@ void interfaccia_inserimento_genere()
 
 void interfaccia_inserimento_playlist()
 {
+	utente utente_corrente;
 	playlist nuova_playlist;
+	playlist_brano relazione_playlistBrano;
 	char nome_playlist[DIMSTRING];
 	char descrizione_playlist[DIMDESC];
+	int id_playlist;
 	int pubblica;
-	int aggiunta;
+	int playlist_aggiunta;
+	int id_brano;
 
 	titolo();
+
+	utente_corrente = leggi_utente_corrente();
 
 	printf("Qual e' il nome della playlist? ");
 	leggere_stringa(nome_playlist);
@@ -267,28 +273,39 @@ void interfaccia_inserimento_playlist()
 	printf("[2] Privata		\n");
 	leggere_intero(&pubblica);
 
+//	Scrivo i dati della playlist
+	id_playlist = genera_id();
+	scrivi_id_playlist(&nuova_playlist, id_playlist);
 	scrivi_nome_playlist(&nuova_playlist, nome_playlist);
 	scrivi_descrizione_playlist(&nuova_playlist, descrizione_playlist);
-	if (pubblica == 2)
-	{
-		scrivi_flag_pubblica_playlist(&nuova_playlist, 0);
-	}
-	else
-	{
-		scrivi_flag_pubblica_playlist(&nuova_playlist, 1);
-	}
+	scrivi_utente_playlist(&nuova_playlist, utente_corrente.id);
+	if (pubblica == 2)		scrivi_flag_pubblica_playlist(&nuova_playlist, 0);
+	else					scrivi_flag_pubblica_playlist(&nuova_playlist, 1);
 
-	aggiunta = aggiungi_playlist(&nuova_playlist);
+//	Aggiungo la playlist
+	playlist_aggiunta = aggiungi_playlist(&nuova_playlist);
 
-	// controllo che l'aggiunta della playlist sia avvenuta con successo
-	if (aggiunta == 1)
+	if (playlist_aggiunta == 1)
 	{
 		printf("\nPlaylist aggiunta con successo! \n");
+		do {
+			printf("Scegli un brano da aggiungere alla playlist. \n\n");
+			mostra_brani();
+			printf("ID brano: (-1 per terminare) ");
+			leggere_intero(&id_brano);
+
+			if(id_brano != -1){
+				scrivi_relazione_playlistBrano(&relazione_playlistBrano, id_brano, id_playlist);
+			}
+
+		} while (id_brano != -1);
 	}
 	else
 	{
 		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 	}
+
+
 }
 
 void interfaccia_registrazione()
@@ -309,16 +326,13 @@ void interfaccia_registrazione()
 	scrivi_username_utente(&nuovo_utente, nome_utente);
 	scrivi_password_utente(&nuovo_utente, password);
 
-	aggiunto = aggiungi_utente(&nuovo_utente);
-
-	// controllo che l'aggiunta dell'utente sia avvenuta con successo
-	if( aggiunto == 1 )
-	{
-		printf("\nUtente aggiunto con successo \n");
-	} 
-	else 
-	{
-		printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
+//	Controllo se lo username è stato già preso
+	if(username_esiste(nome_utente) == 0){
+		aggiunto = aggiungi_utente(&nuovo_utente);
+		if( aggiunto == 1 )			printf("\nUtente aggiunto con successo \n");
+		else 						printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
+	} else {
+		printf("\nLo username che hai scelto è già stato preso. Prova a sceglierne un altro! \n");
 	}
 }
 
