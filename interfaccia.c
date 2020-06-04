@@ -182,14 +182,14 @@ void interfaccia_inserimento_brano()
 	leggere_intero(&durata_brano);
 
 //	Scelta dell'artista
-	pulisci_schermo();
+	titolo();
 	printf("Scegli uno degli artisti presenti su Phonos \n\n");
 	mostra_artisti();
 	printf("ID artista: ");
 	leggere_intero(&id_artista);
 
 //	Scelta del genere
-	pulisci_schermo();
+	titolo();
 	printf("Scegli uno dei generi musicali presenti su Phonos \n\n");
 	mostra_generi();
 	printf("ID genere: ");
@@ -316,7 +316,7 @@ void interfaccia_inserimento_playlist()
 	{
 		printf("\nPlaylist aggiunta con successo! \n");
 		do {
-			pulisci_schermo();
+			titolo();
 			printf("Scegli un brano da aggiungere alla playlist. \n\n");
 			mostra_brani();
 			printf("ID brano: (-1 per terminare) ");
@@ -360,7 +360,7 @@ void interfaccia_registrazione()
 		if( aggiunto == 1 )			printf("\nUtente aggiunto con successo \n");
 		else 						printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
 	} else {
-		printf("\nLo username che hai scelto è già stato preso. Prova a sceglierne un altro! \n");
+		printf("\nLo username che hai scelto e' gia' stato preso. Prova a sceglierne un altro! \n");
 	}
 }
 
