@@ -31,7 +31,7 @@ int main()
 
 
 	// creo una playlist
-	
+	playlist p1;
 
 
 

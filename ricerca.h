@@ -69,7 +69,7 @@ void ricerca_genere_nome( char *nome_genere_cercato );
  ********************************************************/
 
 // funzione per ricercare per nome una playlist
-void ricerca_playlist_nome( char* nome_cercato );
+void ricerca_playlist_nome( char* nome_cercato, int id_utente_cercato );
 
 // funzione per cercare le playlist pubbliche
 void ricerca_playlist_pubbliche();
