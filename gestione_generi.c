@@ -91,12 +91,13 @@ void mostra_genere( genere genere_selezionato )
 	int flag_genere;
 	flag_genere = leggi_flag_eliminato_genere(genere_selezionato);
 
-	if( flag_genere != 1)
-	{
+	//if( flag_genere != 1)
+	//{
 		printf("ID: %d				\n", genere_selezionato.id);
 		printf("Nome: %s			\n", genere_selezionato.nome);
 		printf("Eliminato: %d		\n", genere_selezionato.eliminato);
-	}
+		printf("flag: %d	\n",genere_selezionato.eliminato);
+	//}
 	printf("\n");
 }
 

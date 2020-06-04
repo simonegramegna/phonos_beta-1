@@ -509,6 +509,97 @@ int backup_playlistBrano()
     return esito_backup;
 }
 
+/**
+ * 
+ *  Funzioni di test per backup
+ * 
+*/
+void stampa_backup_brani()
+{
+    FILE* tab = fopen("backup_brani.dat","rb");
+
+    if( tab != NULL )
+    {
+        brano input;
+
+        while( fread(&input, sizeof(brano), 1, tab) )
+        {
+            mostra_brano(input);
+
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+    
+
+    fclose(tab);
+}
+
+void stampa_backup_artisti()
+{
+    FILE* tab = fopen("backup_artisit.dat","rb");
+
+    if( tab != NULL )
+    {
+        artista input;
+
+        while( fread(&input, sizeof(input), 1, tab) )
+        {
+            mostra_artista(input);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+
+    fclose(tab);
+}
+
+void stampa_backup_album()
+{
+    FILE* tab = fopen("backup_album.dat","rb");
+
+    if( tab != NULL )
+    {
+        album input;
+
+        while( fread(&input, sizeof(album), 1, tab) )
+        {
+            mostra_album_singolo(input);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+
+
+    fclose(tab);
+}
+
+void stampa_backup_generi()
+{
+    FILE* tab = fopen("backup_genere.dat","rb");
+
+    if( tab != NULL )
+    {
+        genere input;
+
+        while( fread(&input, sizeof(genere), 1, tab) )
+        {
+            mostra_genere(input);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+
+    fclose(tab);
+}
 
 void stampa_backup_playlist()
 {

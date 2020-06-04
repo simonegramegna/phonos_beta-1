@@ -82,6 +82,24 @@ int backup_branoGenere();
 int backup_playlistBrano();
 
 
+/**
+ * 
+ *  Funzioni di test per backup
+ * 
+*/
+
+// funzione per stampare backup brani
+void stampa_backup_brani();
+
+// funzione per stampare backup artisti
+void stampa_backup_artisti();
+
+// funzione backup album
+void stampa_backup_album();
+
+// funzione per stampare il backup dei generi
+void stampa_backup_generi();
+
 // funzione di test per stampare il file di backup
 void stampa_backup_playlist();
 

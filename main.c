@@ -4,6 +4,7 @@
 #include  "gestione_brani.h"
 #include "gestione_playlist.h"
 #include "gestione_relazioni.h"
+#include "recupero_dati.h"
 
 int main()
 {
@@ -26,10 +27,18 @@ int main()
 	aggiungi_brano(&b2);
 
 
+	printf("brani in brani.dat\n");
 	// mostro i brani
 	mostra_brani();
 
+	// eseguo il backup dei brani
+	backup_brani();
 
+	printf("Brani backup..\n\n");
+	stampa_backup_brani();
+
+
+/*
 	// creo una playlist
 	playlist p1;
 
@@ -39,57 +48,8 @@ int main()
 	scrivi_flag_pubblica_playlist(&p1, 1);
 
 	aggiungi_playlist(&p1);
-
-	mostra_playlists();
-
-	int id_brano1 = leggi_id_brano(b1);
-	int id_brano2 = leggi_id_brano(b2);
-	int id_play = leggi_id_playlist(p1);
-
-	playlist_brano r1,r2;
-
-	scrivi_relazione_playlistBrano(&r1, id_brano1, id_play);
-	scrivi_relazione_playlistBrano(&r2, id_brano2, id_play);
-
-	aggiungi_playlistBrano(&r1);
-	aggiungi_playlistBrano(&r2);
-
-	printf("\n\n");
-
-	stampa_playlist_brano();
-
-	// modifica relazione
-	brano b3;
-
-	scrivi_titolo_brano(&b3," bycicle race\0");
-	scrivi_durata_brano(&b3, 300);
-	scrivi_anno_brano(&b3, 1986);
-	scrivi_ascolti_brano(&b3, 2500);
-
-	aggiungi_brano(&b3);
-
-	printf("\n\nbrani insweriti 2..\n");
-	mostra_brani();
-
-	// leggo l'id del brano aggiunto
-	int id3 = leggi_id_brano(b3);
-
-	// modifico una relazione
-	scrivi_relazione_playlistBrano(&r2, id3, id_play);
-
-	modifica_playlistBrano(r2);
-
-	printf("stampa modifica...\n");
-
-	stampa_playlist_brano();
-
-
-	printf("elimino relazione 45...\n");
-	elimina_playlistBrano(45);
-
-
-	stampa_playlist_brano();
-
+*/
+	
 
 
 

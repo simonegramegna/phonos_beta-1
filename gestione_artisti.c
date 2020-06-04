@@ -97,13 +97,14 @@ void mostra_artista( artista artista_selezionato )
 	int flag_artista;
 	flag_artista = leggi_flag_eliminato_artista(artista_selezionato);
 
-	if( flag_artista != 1 )
-	{
+	//if( flag_artista != 1 )
+	//{
 		printf("ID: %d				\n", artista_selezionato.id);
 		printf("Nome: %s			\n", artista_selezionato.nome);
 		printf("Cognome: %s			\n", artista_selezionato.cognome);
 		printf("Nome d'arte: %s		\n", artista_selezionato.nome_arte);
-	}
+		printf("flag  : %d\n", artista_selezionato.eliminato);
+	//}
 	printf("\n");
 }
 

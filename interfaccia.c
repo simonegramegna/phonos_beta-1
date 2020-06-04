@@ -327,13 +327,12 @@ void interfaccia_registrazione()
 	scrivi_password_utente(&nuovo_utente, password);
 
 //	Controllo se lo username è stato già preso
-	if(username_esiste(nome_utente) == 0){
+	//if(username_esiste(nome_utente) == 0){
 		aggiunto = aggiungi_utente(&nuovo_utente);
 		if( aggiunto == 1 )			printf("\nUtente aggiunto con successo \n");
 		else 						printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
-	} else {
-		printf("\nLo username che hai scelto è già stato preso. Prova a sceglierne un altro! \n");
-	}
+
+
 }
 
 void interfaccia_login()

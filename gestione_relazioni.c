@@ -858,19 +858,19 @@ void mostra_brani_genere( int id_genere_cercato )
 
         while( fread(&genere_selezionato, sizeof(genere), 1, tabella_branoGenere) )
         {
-            int id_genere_confronto;
-            id_genere_confronto = id_genere_branoGenere(genere_selezionato);
+            //int id_genere_confronto;
+            //id_genere_confronto = id_genere_branoGenere(genere_selezionato);
 
-            if( id_genere_cercato == id_genere_confronto )
+           /* if( id_genere_cercato == id_genere_confronto )
             {
                 brano brano_mostrato;
                 int id_brano_mostrato;
 
-                id_brano_mostrato = id_brano_branoGenere(genere_selezionato);
+                //id_brano_mostrato = id_brano_branoGenere(genere_selezionato);
                 brano_mostrato = cerca_brano(id_brano_mostrato);
 
-                mostra_brano(brano_mostrato);
-            }
+                mostra_brano(brano_mostrato);*/
+
         }
     }
 
