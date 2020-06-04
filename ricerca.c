@@ -223,7 +223,7 @@ void ricerca_artisti_nome( char *nome_cercato )
 	fclose(tabella_artisti);
 }
 
-void ricerca_artisti_nome_arte( char *nome_arte_cerca )
+void ricerca_artisti_nome_arte( char *nome_arte_cercato )
 {
 	FILE* tabella_artisti;
 	tabella_artisti = fopen("artisti.dat","rb");

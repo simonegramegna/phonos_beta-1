@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include  "gestione_brani.h"
-#include "gestione_artisti.h"
+#include "gestione_playlist.h"
 #include "gestione_relazioni.h"
 
 int main()
@@ -29,33 +29,10 @@ int main()
 	// mostro i brani
 	mostra_brani();
 
-	// creo l'artista
-	artista a1;
 
-	scrivi_nome_artista(&a1,"farrokh\0");
-	scrivi_cognome_artista(&a1, "bulsara\0");
-	scrivi_nome_arte_artista(&a1, "Freddie Mercury\0");
+	// creo una playlist
+	
 
-	// aggiungo l'artista 
-	aggiungi_artista(&a1);
-
-	printf("\n");
-
-	// mostro la gli artisti inseriti
-	mostra_artisti();
-
-	// creo le relazioni tra i due brani e l'artista creato
-	brano_artista r1, r2;
-
-	scrivi_relazione_branoArtista(&r1, b1, a1);
-	scrivi_relazione_branoArtista(&r2, b2, a1);
-
-	// aggiungo le due relazioni alla base dati
-	aggiungi_branoArtista(&r1);
-	aggiungi_branoArtista(&r2);
-
-	// stampo le relazioni create
-	stampa_branoartista();
 
 
 

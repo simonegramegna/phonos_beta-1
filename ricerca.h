@@ -39,7 +39,7 @@ void ricerca_brani_anno( int anno_cercato );
 void ricerca_artisti_nome( char *nome_cercato );
 
 // funzione per cercare un artista per noe d'arte
-void ricerca_artisti_nome_arte( char *nome_arte_cerca );
+void ricerca_artisti_nome_arte( char *nome_arte_cercato );
 
 /********************************************************
  * 
