@@ -75,7 +75,7 @@ int aggiungi_utente(utente *utente_selezionato)
 	if(tabella_utenti != NULL)
 	{
 		scrivi_id_utente(utente_selezionato, genera_id());
-		scrivi_admin_utente(utente_selezionato, 0);
+		scrivi_admin_utente(utente_selezionato, 1);
 		scrivi_flag_eliminato_utente(utente_selezionato, 0);
 
 		fwrite(utente_selezionato, sizeof(utente), 1, tabella_utenti);
