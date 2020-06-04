@@ -744,6 +744,7 @@ int modifica_playlistBrano( playlist_brano relazione_modificata )
     return modificato;
 }
 
+/*
 void stampa_playlist_brano()
 {
     FILE* tab = fopen("playlist_brani.dat","rb");
@@ -763,7 +764,7 @@ void stampa_playlist_brano()
         }
     }
     fclose(tab);
-}
+}*/
 
 /*********************************************
  * 
