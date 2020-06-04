@@ -240,7 +240,7 @@ void ricerca_artisti_nome_arte( char *nome_arte_cercato )
 			char nome_arte_corrente[DIMNOME];
 			leggi_nome_arte_artista(artista_corrente, nome_arte_corrente);
 
-			if( strtok(nome_arte_corrente, nome_arte_cerca) != NULL )
+			if( strtok(nome_arte_corrente, nome_arte_cercato) != NULL )
 			{
 				mostra_artista(artista_corrente);
 

@@ -80,6 +80,7 @@ int aggiungi_playlist( playlist *playlist_selezionata )
 
 	if(tabella_playlist != NULL)
 	{
+		scrivi_id_playlist(playlist_selezionata, genera_id());
 		scrivi_flag_eliminato_playlist(playlist_selezionata, 0);
 
 		fwrite(playlist_selezionata, sizeof(playlist), 1, tabella_playlist);
