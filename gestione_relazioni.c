@@ -369,6 +369,26 @@ int modifica_branoArtista( brano_artista relazione_modificata )
     return modificato;
 }
 
+void mostra_relazioni_brano_artista(){
+	FILE *tabella_branoArtista;
+	brano_artista brano_artista_corrente;
+
+	tabella_branoArtista = fopen("brano_artista.dat", "rb");
+	if(tabella_branoArtista != NULL){
+		while( fread(&brano_artista_corrente, sizeof(brano_artista), 1, tabella_branoArtista) ){
+			mostra_brano_artista(brano_artista_corrente);
+		}
+	}
+}
+
+void mostra_brano_artista(brano_artista brano_artista_selezionato){
+	printf("ID: %d 			\n", brano_artista_selezionato.id_brano_artista);
+	printf("ID brano: %d 	\n", brano_artista_selezionato.id_brano);
+	printf("ID artista: %d	\n", brano_artista_selezionato.id_artista);
+
+	printf("\n");
+}
+
 /*********************************************
  * 
  * Funzioni BranoGenere
@@ -823,19 +843,19 @@ void mostra_brani_genere( int id_genere_cercato )
 
     if( tabella_branoGenere != NULL )
     {
-        genere genere_selezionato;
+        brano_genere brano_genere_selezionato;
 
-        while( fread(&genere_selezionato, sizeof(genere), 1, tabella_branoGenere) )
+        while( fread(&brano_genere_selezionato, sizeof(brano_genere), 1, tabella_branoGenere) )
         {
             int id_genere_confronto;
-            id_genere_confronto = id_genere_branoGenere(genere_selezionato);
+            id_genere_confronto = id_genere_branoGenere(brano_genere_selezionato);
 
             if( id_genere_cercato == id_genere_confronto )
             {
                 brano brano_mostrato;
                 int id_brano_mostrato;
 
-                id_brano_mostrato = id_brano_branoGenere(genere_selezionato);
+                id_brano_mostrato = id_brano_branoGenere(brano_genere_selezionato);
                 brano_mostrato = cerca_brano(id_brano_mostrato);
 
                 mostra_brano(brano_mostrato);
