@@ -98,9 +98,10 @@ void interfaccia_utente(){
 	printf("[2] Visualizza tutti gli artisti	\n");
 	printf("[3] Visualizza tutti i generi		\n");
 	printf("[4] Visualizza tutte le playlist	\n");
-	printf("[5] Aggiungi un brano				\n");
-	printf("[6] Aggiungi un artista				\n");
-	printf("[7] Aggiungi una playlist			\n");
+	printf("[5] Visualizza tutti gli album		\n");
+	printf("[6] Aggiungi un brano				\n");
+	printf("[7] Aggiungi un artista				\n");
+	printf("[8] Aggiungi una playlist			\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -109,16 +110,49 @@ void interfaccia_utente(){
 	else if (scelta == 2)		mostra_artisti();
 	else if (scelta == 3)		mostra_generi();
 	else if (scelta == 4)		mostra_playlists();
-	else if (scelta == 5)		interfaccia_inserimento_brano();
-	else if (scelta == 6)		interfaccia_inserimento_artista();
-	else if (scelta == 7)		interfaccia_inserimento_playlist();
+	else if (scelta == 5)		mostra_album();
+	else if (scelta == 6)		interfaccia_inserimento_brano();
+	else if (scelta == 7)		interfaccia_inserimento_artista();
+	else if (scelta == 8)		interfaccia_inserimento_playlist();
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
 }
 
 void interfaccia_admin(){
-	printf("\nDa fare :)\n");
+	int scelta;
+
+	titolo();
+
+	printf("[1] Visualizza tutti i brani				\n");
+	printf("[2] Visualizza tutti gli artisti			\n");
+	printf("[3] Visualizza tutti i generi				\n");
+	printf("[4] Visualizza tutte le playlist			\n");
+	printf("[5] Visualizza tutti gli album				\n");
+	printf("[6] Aggiungi un brano						\n");
+	printf("[7] Aggiungi un artista						\n");
+	printf("[8] Aggiungi una playlist					\n");
+	printf("[9] Aggiungi un genere						\n");
+	printf("[10] Visualizza tutti gli utenti			\n");
+	printf("[11] Visualizza le relazioni brano-artista	\n");
+
+	printf("\nScegli una delle opzioni: ");
+	leggere_intero(&scelta);
+
+	if (scelta == 1)			mostra_brani();
+	else if (scelta == 2)		mostra_artisti();
+	else if (scelta == 3)		mostra_generi();
+	else if (scelta == 4)		mostra_playlists();
+	else if (scelta == 5)		mostra_album();
+	else if (scelta == 6)		interfaccia_inserimento_brano();
+	else if (scelta == 7)		interfaccia_inserimento_artista();
+	else if (scelta == 8)		interfaccia_inserimento_playlist();
+	else if (scelta == 9)		interfaccia_inserimento_genere();
+	else if (scelta == 10)		mostra_utenti();
+	else if (scelta == 11)		mostra_relazioni_brano_artista();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+
+	replay();
 }
 
 void interfaccia_inserimento_brano()
@@ -147,11 +181,15 @@ void interfaccia_inserimento_brano()
 	printf("Indica la durata del brano (in secondi) ");
 	leggere_intero(&durata_brano);
 
+//	Scelta dell'artista
+	titolo();
 	printf("Scegli uno degli artisti presenti su Phonos \n\n");
 	mostra_artisti();
 	printf("ID artista: ");
 	leggere_intero(&id_artista);
 
+//	Scelta del genere
+	titolo();
 	printf("Scegli uno dei generi musicali presenti su Phonos \n\n");
 	mostra_generi();
 	printf("ID genere: ");
@@ -210,14 +248,8 @@ void interfaccia_inserimento_artista()
 	aggiunto = aggiungi_artista(&nuovo_artista);
 
 	// controllo che l'aggiunta dell'artista sia avvenuta con successo
-	if ( aggiunto == 1 )
-	{
-		printf("\nArtista aggiunto con successo! \n");
-	}
-	else
-	{
-		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
-	}
+	if ( aggiunto == 1 )			printf("\nArtista aggiunto con successo! \n");
+	else							printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_inserimento_genere()
@@ -236,14 +268,8 @@ void interfaccia_inserimento_genere()
 	aggiunto = aggiungi_genere(&nuovo_genere);
 
 	// controllo che l'aggiunta del genere sia avvenuta con successo
-	if ( aggiunto == 1 )
-	{
-		printf("\nGenere aggiunto con successo! \n");
-	}
-	else
-	{
-		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
-	}
+	if ( aggiunto == 1 )			printf("\nGenere aggiunto con successo! \n");
+	else							printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_inserimento_playlist()
@@ -285,10 +311,12 @@ void interfaccia_inserimento_playlist()
 //	Aggiungo la playlist
 	playlist_aggiunta = aggiungi_playlist(&nuova_playlist);
 
+//	Aggiunta brani
 	if (playlist_aggiunta == 1)
 	{
 		printf("\nPlaylist aggiunta con successo! \n");
 		do {
+			titolo();
 			printf("Scegli un brano da aggiungere alla playlist. \n\n");
 			mostra_brani();
 			printf("ID brano: (-1 per terminare) ");
@@ -332,7 +360,7 @@ void interfaccia_registrazione()
 		if( aggiunto == 1 )			printf("\nUtente aggiunto con successo \n");
 		else 						printf("\nQualcosa e' andato storto. Ti preghiamo di riprovare \n");
 	} else {
-		printf("\nLo username che hai scelto è già stato preso. Prova a sceglierne un altro! \n");
+		printf("\nLo username che hai scelto e' gia' stato preso. Prova a sceglierne un altro! \n");
 	}
 }
 

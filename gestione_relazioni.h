@@ -151,6 +151,12 @@ brano_artista cerca_branoArtista( int id_branoArtista );
 // funzione per modificare una relazione brano_artista
 int modifica_branoArtista( brano_artista relazione_modificata );
 
+// funzione per mostrare tutte le relazioni brano_artista
+void mostra_relazioni_brano_artista();
+
+// funzione per mostrare la singola relazione brano_artista
+void mostra_brano_artista(brano_artista brano_artista_selezionato);
+
 
 /*********************************************
  * 
