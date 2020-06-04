@@ -384,7 +384,7 @@ void ricerca_genere_nome( char *nome_genere_cercato )
  * 
  ********************************************************/
 
-void ricerca_playlist_nome( char* nome_cercato )
+void ricerca_playlist_nome( char* nome_cercato, int id_utente_cercato )
 {
 	FILE* tabella_playlist;
 	tabella_playlist = fopen("playlists.dat","rb");
@@ -398,17 +398,21 @@ void ricerca_playlist_nome( char* nome_cercato )
 
 		while( fread(&playlist_corrente, sizeof(playlist), 1, tabella_playlist) )
 		{
-			char nome_confronto[DIMNOME];
-			leggi_nome_playlist(playlist_corrente, nome_confronto);
+			int utente_playlist_confronto;
+			utente_playlist_confronto = leggi_utente_playlist(playlist_corrente);
 
-			if( strtok(nome_confronto, nome_cercato) != NULL )
+			// verifico la corrispondenza dell'utente che effetua la ricerca
+			if( utente_playlist_confronto == id_utente_cercato )
 			{
-				mostra_playlist(playlist_corrente);
+				char nome_confronto[DIMNOME];
+				leggi_nome_playlist(playlist_corrente, nome_confronto);
 
-				contatore_playlist = contatore_playlist + 1;
-				/**
-				 * Da aggiungere opzione per mostrare i brani della playlist 
-				*/
+				if( strtok(nome_confronto, nome_cercato) != NULL )
+				{
+					mostra_playlist(playlist_corrente);
+					contatore_playlist = contatore_playlist + 1;
+
+				}
 			}
 		}
 
@@ -441,11 +445,7 @@ void ricerca_playlist_pubbliche()
 			if( flag_pubblica_playlist == 1 )
 			{
 				mostra_playlist(playlist_confronto);
-
 				contatore_playlist = contatore_playlist + 1;
-				/**
-				 * Da aggiungere opzione per mostrare i brani della playlist 
-				*/
 			} 
 		}
 		if( contatore_playlist == 0 )
