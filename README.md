@@ -1,2 +1,16 @@
-# Phonos BETA
-Progetto di un software gestionale per brani musicali realizzato per l'esame di Laboratorio di informatica, 1°anno C.d.L. in Informatica - UniBA
+# Phonos
+
+Phonos è un gestionale musicale realizzato in C.
+
+Cosa funziona:
+  - Registrazione/Login utente
+  - Autenticazione ed accesso permanente
+  - Aggiunta/modifica/rimozione di tutti i record
+  - "Database relazionale", ma fatto con files binari (non fatelo a casa)
+  - Interfacce separate in base al tipo di utente loggato (admin o utente generico)
+  - Backup e ripristino dei dati
+  - Generazione di id univoci
+  - Gestione di playlist pubbliche/private
+  - Ricerca per titolo, durata ecc...
+
+Questo progetto è stato realizzato per l'esame di Laboratorio di Programmazione - 1° anno CdL Informatica UniBA
