@@ -89,8 +89,8 @@ int ripristina_album()
 
 int ripristina_generi()
 {
-    FILE* tabella_generi;
-   int ripristinato;
+	FILE* tabella_generi;
+	int ripristinato;
 
     tabella_generi = fopen("generi.dat","rb+");
     ripristinato = 0;
@@ -109,7 +109,7 @@ int ripristina_generi()
     }
     fclose(tabella_generi);
 
-    return 0;
+    return ripristinato;
 }
 
 int ripristina_playlist_utente( int id_utente )
