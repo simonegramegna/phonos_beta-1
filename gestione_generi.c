@@ -128,8 +128,9 @@ long posizione_genere( int id_genere)
 
     return posizione;
 }
-int elimina_genere(int id_genere){
-	
+
+int elimina_genere( int id_genere )
+{
 	FILE *tabella_generi;
 	int eliminato;
 	
@@ -197,7 +198,6 @@ int modifica_genere(genere genere_modificato)
 		
 		id_genere = leggi_id_genere(genere_modificato);
 		posizione = posizione_genere(id_genere);
-
 
 		fseek(tabella_generi, posizione, SEEK_SET);
 		fwrite(&genere_modificato, sizeof(genere), 1, tabella_generi);
