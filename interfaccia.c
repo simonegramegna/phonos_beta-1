@@ -64,6 +64,10 @@ void interfaccia_principale()
 
 	utente_corrente = leggi_utente_corrente();
 
+	if(utente_corrente.admin != -1){
+		printf("Bentornato, %s! \n\n", utente_corrente.username);
+	}
+
 	if(utente_corrente.admin == 1){
 		interfaccia_admin();
 	} else if(utente_corrente.admin == 0){
@@ -92,8 +96,6 @@ void interfaccia_iniziale(){
 void interfaccia_utente(){
 	int scelta;
 
-	titolo();
-
 	printf("[1] Visualizza tutti i brani		\n");
 	printf("[2] Visualizza tutti gli artisti	\n");
 	printf("[3] Visualizza tutti i generi		\n");
@@ -121,8 +123,6 @@ void interfaccia_utente(){
 
 void interfaccia_admin(){
 	int scelta;
-
-	titolo();
 
 	printf("[1] Visualizza tutti i brani				\n");
 	printf("[2] Visualizza tutti gli artisti			\n");
@@ -322,9 +322,7 @@ void interfaccia_inserimento_playlist()
 			printf("ID brano: (-1 per terminare) ");
 			leggere_intero(&id_brano);
 
-			if(id_brano != -1){
-				scrivi_relazione_playlistBrano(&relazione_playlistBrano, id_brano, id_playlist);
-			}
+			if(id_brano != -1)		scrivi_relazione_playlistBrano(&relazione_playlistBrano, id_brano, id_playlist);
 
 		} while (id_brano != -1);
 	}

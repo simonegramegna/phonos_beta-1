@@ -327,6 +327,8 @@ utente leggi_utente_corrente()
 	utente utente_autenticato;
 	FILE *file_autenticazione;
 
+	utente_autenticato.admin = -1;
+
 	file_autenticazione = fopen("autenticazione.dat", "rb");
 
 	if(file_autenticazione != NULL)
