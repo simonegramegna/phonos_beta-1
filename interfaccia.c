@@ -59,18 +59,22 @@ void replay()
 void interfaccia_principale()
 {
 	utente utente_corrente;
+	int admin;
+	char username[DIMUSER];
 
 	titolo();
 
 	utente_corrente = leggi_utente_corrente();
+	admin = leggi_admin_utente(utente_corrente);
+	leggi_username_utente(utente_corrente, username);
 
-	if(utente_corrente.admin != -1){
-		printf("Bentornato, %s! \n\n", utente_corrente.username);
+	if(admin != -1){
+		printf("Bentornato, %s! \n\n", username);
 	}
 
-	if(utente_corrente.admin == 1){
+	if(admin == 1){
 		interfaccia_admin();
-	} else if(utente_corrente.admin == 0){
+	} else if(admin == 0){
 		interfaccia_utente();
 	} else {
 		interfaccia_iniziale();
