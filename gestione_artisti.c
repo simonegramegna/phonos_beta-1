@@ -1,28 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gestione_artisti.h"
+
 #include "genera_id.h"
+#include "gestione_artisti.h"
+
 
 /* -------------------------
 	Funzioni di lettura
 ------------------------- */
+
 int leggi_id_artista( artista artista_selezionato )
 {
 	return artista_selezionato.id;
 }
+
 void leggi_nome_artista( artista artista_selezionato, char *nome_letto )
 {
 	strcpy(nome_letto, artista_selezionato.nome);
 }
+
 void leggi_cognome_artista( artista artista_selezionato, char *cognome_letto )
 {
 	strcpy(cognome_letto, artista_selezionato.cognome);
 }
+
 void leggi_nome_arte_artista( artista artista_selezionato, char *nome_arte_letto )
 {
 	strcpy(nome_arte_letto, artista_selezionato.nome_arte);
 }
+
 int leggi_flag_eliminato_artista( artista artista_selezionato )
 {
 	return artista_selezionato.eliminato;
@@ -31,22 +38,27 @@ int leggi_flag_eliminato_artista( artista artista_selezionato )
 /* -------------------------
 	Funzioni di scrittura
 ------------------------- */
+
 void scrivi_id_artista( artista *artista_selezionato, int id )
 {
 	artista_selezionato->id = id;
 }
+
 void scrivi_nome_artista( artista *artista_selezionato, char *nome )
 {
     strcpy(artista_selezionato->nome, nome);
 }
+
 void scrivi_cognome_artista( artista *artista_selezionato, char *cognome )
 {
     strcpy(artista_selezionato->cognome, cognome);
 }
+
 void scrivi_nome_arte_artista( artista *artista_selezionato, char *nome_arte )
 {
     strcpy(artista_selezionato->nome_arte, nome_arte);
 }
+
 void scrivi_flag_eliminato_artista( artista *artista_selezionato, int flag_eliminato )
 {
 	artista_selezionato->eliminato = flag_eliminato;
@@ -55,6 +67,7 @@ void scrivi_flag_eliminato_artista( artista *artista_selezionato, int flag_elimi
 /* -------------------------
 	Funzioni su file
 ------------------------- */
+
 int aggiungi_artista(artista *artista_selezionato)
 {
 	FILE *tabella_artisti;
@@ -99,10 +112,22 @@ void mostra_artista( artista artista_selezionato )
 
 	if( flag_artista != 1 )
 	{
-		printf("ID: %d				\n", artista_selezionato.id);
-		printf("Nome: %s			\n", artista_selezionato.nome);
-		printf("Cognome: %s			\n", artista_selezionato.cognome);
-		printf("Nome d'arte: %s		\n", artista_selezionato.nome_arte);
+		int id_artista_letto;
+		char nome_artista_letto[DIMNOME_ARTISTA];
+		char cognome_artista_letto[DIMNOME_ARTISTA];
+		char nomearte_artista_letto[DIMNOME_ARTISTA];
+
+		// lettura informazioni dai campi dell'artista
+		id_artista_letto = leggi_id_artista(artista_selezionato);
+		leggi_nome_artista(artista_selezionato, nome_artista_letto);
+		leggi_cognome_artista(artista_selezionato, cognome_artista_letto);
+		leggi_nome_arte_artista(artista_selezionato, nomearte_artista_letto);
+
+		// stampa informazioni a video
+		printf("ID: %d				\n", id_artista_letto);
+		printf("Nome: %s			\n", nome_artista_letto);
+		printf("Cognome: %s			\n", cognome_artista_letto);
+		printf("Nome d'arte: %s		\n",nomearte_artista_letto);
 	}
 	printf("\n");
 }
@@ -135,6 +160,7 @@ long posizione_artista(int id_artista)
 
     return posizione;
 }
+
 int elimina_artista(int id_artista)
 {
 	FILE *tabella_artisti;
@@ -151,8 +177,8 @@ int elimina_artista(int id_artista)
 		artista_eliminato = cerca_artista(id_artista);
 		scrivi_flag_eliminato_artista(&artista_eliminato, 1);
 
+		// leggo la posizione nella tabella dell'artista da eliminare
 		posizione = posizione_artista(id_artista);
-
 		fseek(tabella_artisti, posizione, SEEK_SET);
 		
 		fwrite(&artista_eliminato, sizeof(artista), 1, tabella_artisti);
@@ -162,10 +188,12 @@ int elimina_artista(int id_artista)
 
 	return eliminato;
 }
+
 artista cerca_artista(int id_artista)
 {
 	artista artista_trovato;
 	FILE *tabella_artisti;
+
 	tabella_artisti = fopen("artisti.dat", "rb");
 
 	if(tabella_artisti != NULL)
@@ -204,9 +232,10 @@ int modifica_artista(artista artista_modificato)
 		int id_artista;
 		id_artista = leggi_id_artista(artista_modificato);
 
+		// leggo la posizione dell'artista da modificare
 		posizione = posizione_artista(id_artista);
-
 		fseek(tabella_artisti, posizione, SEEK_SET);
+
 		fwrite(&artista_modificato, sizeof(artista), 1, tabella_artisti);
 		modificato = 1;
 	}

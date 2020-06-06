@@ -12,22 +12,27 @@ int leggi_id_brano(brano brano_selezionato)
 {
 	return brano_selezionato.id;
 }
+
 void leggi_titolo_brano(brano brano_selezionato, char *titolo_letto)
 {
 	strcpy(titolo_letto, brano_selezionato.titolo);
 }
+
 int leggi_durata_brano(brano brano_selezionato)
 {
 	return brano_selezionato.durata;
 }
+
 int leggi_anno_brano(brano brano_selezionato)
 {
 	return brano_selezionato.anno;
 }
+
 int leggi_ascolti_brano(brano brano_selezionato)
 {
 	return brano_selezionato.ascolti;
 }
+
 int leggi_flag_eliminato_brano(brano brano_selezionato)
 {
 	return brano_selezionato.eliminato;
@@ -36,26 +41,32 @@ int leggi_flag_eliminato_brano(brano brano_selezionato)
 /* -------------------------
 	Funzioni di scrittura
 ------------------------- */
+
 void scrivi_id_brano(brano *brano_selezionato, int id)
 {
 	brano_selezionato->id = id;
 }
+
 void scrivi_titolo_brano(brano *brano_selezionato, char *titolo)
 {
     strcpy(brano_selezionato->titolo, titolo);
 }
+
 void scrivi_durata_brano(brano *brano_selezionato, int durata)
 {
 	brano_selezionato->durata = durata;
 }
+
 void scrivi_anno_brano(brano *brano_selezionato, int anno)
 {
 	brano_selezionato->anno = anno;
 }
+
 void scrivi_ascolti_brano(brano *brano_selezionato, int ascolti)
 {
 	brano_selezionato->ascolti = ascolti;
 }
+
 void scrivi_flag_eliminato_brano(brano *brano_selezionato, int flag_eliminato)
 {
 	brano_selezionato->eliminato = flag_eliminato;
@@ -64,6 +75,7 @@ void scrivi_flag_eliminato_brano(brano *brano_selezionato, int flag_eliminato)
 /* -------------------------
 	Funzioni su file
 ------------------------- */
+
 int aggiungi_brano(brano *brano_selezionato)
 {
 	FILE *tabella_brani;
@@ -104,15 +116,31 @@ void mostra_brani()
 
 void mostra_brano(brano brano_selezionato)
 {
-	//if( brano_selezionato.eliminato != 1 )
-	//{
-		printf("ID: %d				\n", brano_selezionato.id);
-		printf("Titolo: %s			\n", brano_selezionato.titolo);
-		printf("Anno: %d 			\n", brano_selezionato.anno);
-		printf("Durata: %d secondi	\n", brano_selezionato.durata);
-		printf("Ascoltato %d volte	\n", brano_selezionato.ascolti);
-		printf("Eliminato: %d		\n", brano_selezionato.eliminato);
-	//}
+	int flag_eliminazione_brano;
+	flag_eliminazione_brano = leggi_flag_eliminato_brano(brano_selezionato);
+
+	if(flag_eliminazione_brano != 1 )
+	{
+		int id_brano_letto;
+		char titolo_brano_letto[DIMTITOLO_BRANO];
+		int anno_brano_letto;
+		int durata_brano_letto;
+		int ascolti_brano_letto;
+
+		// leggo i dati dai campi del brano
+		id_brano_letto = leggi_id_brano(brano_selezionato);
+		leggi_titolo_brano(brano_selezionato, titolo_brano_letto);
+		anno_brano_letto = leggi_anno_brano(brano_selezionato);
+		durata_brano_letto = leggi_durata_brano(brano_selezionato);
+		ascolti_brano_letto = leggi_ascolti_brano(brano_selezionato);
+
+		// stampo i dati letti
+		printf("ID: %d				\n", id_brano_letto);
+		printf("Titolo: %s			\n", titolo_brano_letto);
+		printf("Anno: %d 			\n", anno_brano_letto);
+		printf("Durata: %d secondi	\n", durata_brano_letto);
+		printf("Ascoltato %d volte	\n", ascolti_brano_letto);
+	}
 	printf("\n");
 }
 
@@ -216,8 +244,8 @@ int modifica_brano(brano brano_modificato)
 
 		// cerco la poszione del brano nella tabella
 		id_brano = leggi_id_brano(brano_modificato);
-		posizione = posizione_brano(id_brano);
 
+		posizione = posizione_brano(id_brano);
 		fseek(tabella_brani, posizione, SEEK_SET);
 
 		fwrite(&brano_modificato, sizeof(brano), 1, tabella_brani);

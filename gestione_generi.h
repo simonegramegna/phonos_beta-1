@@ -2,13 +2,13 @@
 #define GESTIONE_GENERI_H_
 
 // dimensione massima del nome di un genere 
-#define DIMSTRING 30
+#define DIMNOME_GENERE 30
 
 // definisco tipo di dato genere
 typedef struct{
 
 	int id;
-	char nome[DIMSTRING];
+	char nome[DIMNOME_GENERE];
 	int eliminato;
 
 }genere;

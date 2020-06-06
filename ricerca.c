@@ -82,7 +82,7 @@ void ricerca_brani_titolo( char *titolo_cercato )
 		while( fread(&brano_corrente, sizeof(brano), 1, tabella_brani) )
 		{
 			// leggo il nome del brano appena letto
-			char nome_titolo_confronto[DIMTITOLO];
+			char nome_titolo_confronto[DIMTITOLO_BRANO];
 			leggi_titolo_brano(brano_corrente, nome_titolo_confronto);
 
 			// verifico che i titoli coincidano
@@ -202,7 +202,7 @@ void ricerca_artisti_nome( char *nome_cercato )
 		while( fread(&artista_corrente, sizeof(artista), 1, tabella_artisti) )
 		{
 			// leggo il nome di un artista
-			char nome_artista_confronto[DIMNOME];
+			char nome_artista_confronto[DIMNOME_ARTISTA];
 			leggi_nome_artista(artista_corrente, nome_artista_confronto);
 
 			// verifico che i due nomi coincidano
@@ -237,7 +237,7 @@ void ricerca_artisti_nome_arte( char *nome_arte_cerca )
 
 		while( fread(&artista_corrente, sizeof(artista), 1, tabella_artisti) )
 		{
-			char nome_arte_corrente[DIMNOME];
+			char nome_arte_corrente[DIMNOME_ARTISTA];
 			leggi_nome_arte_artista(artista_corrente, nome_arte_corrente);
 
 			if( strtok(nome_arte_corrente, nome_arte_cerca) != NULL )
@@ -358,7 +358,7 @@ void ricerca_genere_nome( char *nome_genere_cercato )
 
 		while( fread(&genere_corrente, sizeof(genere), 1, tabella_generi) )
 		{
-			char nome_confronto[DIMSTRING];
+			char nome_confronto[DIMNOME_GENERE];
 			leggi_nome_genere(genere_corrente, nome_confronto);
 
 			if( strtok(nome_confronto, nome_genere_cercato) != NULL )
@@ -404,7 +404,7 @@ void ricerca_playlist_nome( char* nome_cercato, int id_utente_cercato )
 			// verifico la corrispondenza dell'utente che effetua la ricerca
 			if( utente_playlist_confronto == id_utente_cercato )
 			{
-				char nome_confronto[DIMNOME];
+				char nome_confronto[DIMNOME_PLAYLIST];
 				leggi_nome_playlist(playlist_corrente, nome_confronto);
 
 				if( strtok(nome_confronto, nome_cercato) != NULL )

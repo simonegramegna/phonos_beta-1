@@ -2,7 +2,7 @@
 #define GESTIONE_PLAYLIST_H_
 
 // dimensione massima del nome di una playlist 
-#define DIMNOME 30
+#define DIMNOME_PLAYLIST 30
 
 // dimensione massima della descrizione di una playlist
 #define DIMDESC 250
@@ -12,7 +12,7 @@ typedef struct {
 
 	int id;
 	int utente;
-	char nome[DIMNOME];
+	char nome[DIMNOME_PLAYLIST];
 	char descrizione[DIMDESC];
 	int pubblica;
 	int eliminata;

@@ -110,14 +110,31 @@ void mostra_playlists()
 
 void mostra_playlist(playlist playlist_selezionata)
 {
-	if(playlist_selezionata.eliminata != 1)
+	int flag_eliminazione_playlist;
+	flag_eliminazione_playlist = leggi_flag_eliminato_playlist(playlist_selezionata);
+
+	if( flag_eliminazione_playlist != 1 )
 	{
-		printf("ID: %d				\n", playlist_selezionata.id);
-		printf("Nome: %s			\n", playlist_selezionata.nome);
-		printf("Descrizione: %s		\n", playlist_selezionata.descrizione);
-		printf("Utente: %d 			\n", playlist_selezionata.utente);
-		printf("Pubblica: %d		\n", playlist_selezionata.pubblica);
-		printf("Eliminata: %d		\n", playlist_selezionata.eliminata);
+		int id_playlist_letta;
+		char nome_playlist_letta[DIMNOME_PLAYLIST];
+		char descrizione_playlist_letta[DIMDESC];
+		int utente_playlist_letta;
+		int flag_pubblica_playlist_letta;
+
+
+		// leggo i dati dai campi della playlist
+		id_playlist_letta = leggi_id_playlist(playlist_selezionata);
+		leggi_nome_playlist(playlist_selezionata, nome_playlist_letta);
+		leggi_descrizione_playlist(playlist_selezionata, descrizione_playlist_letta);
+		utente_playlist_letta = leggi_utente_playlist(playlist_selezionata);
+		flag_pubblica_playlist_letta = leggi_flag_pubblica_playlist(playlist_selezionata);
+
+		// stampo i dati della playlist
+		printf("ID: %d				\n", id_playlist_letta);
+		printf("Nome: %s			\n", nome_playlist_letta);
+		printf("Descrizione: %s		\n", descrizione_playlist_letta);
+		printf("Utente: %d 			\n", utente_playlist_letta);
+		printf("Pubblica: %d		\n", flag_pubblica_playlist_letta);
 	}
 	printf("\n");
 }
@@ -132,7 +149,7 @@ long posizione_playlist(int id_playlist)
 
     if (tabella_playlist != NULL)
 	{
-        while(!feof(tabella_playlist) && posizione == -1)
+        while( !feof(tabella_playlist) && posizione == -1 )
 		{
 			playlist playlist_corrente;
     		int id_corrente;
