@@ -411,7 +411,6 @@ void ricerca_playlist_nome( char* nome_cercato, int id_utente_cercato )
 				{
 					mostra_playlist(playlist_corrente);
 					contatore_playlist = contatore_playlist + 1;
-
 				}
 			}
 		}
@@ -419,6 +418,41 @@ void ricerca_playlist_nome( char* nome_cercato, int id_utente_cercato )
 		if( contatore_playlist == 0 )
 		{
 			printf("Nessuna playlist corrisponde al nome cercato..\n");
+		}
+	}
+
+	fclose(tabella_playlist);
+}
+
+void ricerca_playlist_pubbliche_nome( char* nome_cercato )
+{
+	FILE* tabella_playlist;
+	tabella_playlist = fopen("playlists.dat","rb");
+
+	if( tabella_playlist != NULL )
+	{
+		playlist playlist_confronto;
+		int contatore_playlist;
+
+		contatore_playlist = 0;
+
+		while( fread(&playlist_confronto, sizeof(playlist), 1, tabella_playlist) )
+		{
+			char nome_playlist_confronto[DIMNOME_PLAYLIST];
+			int flag_pubblica_playlist;
+			
+			leggi_nome_playlist(playlist_confronto, nome_playlist_confronto);
+			flag_pubblica_playlist = leggi_flag_pubblica_playlist(playlist_confronto);
+
+			if( flag_pubblica_playlist == 1 && strstr(nome_playlist_confronto, nome_cercato) != NULL )
+			{
+				mostra_playlist(playlist_confronto);
+				contatore_playlist = contatore_playlist + 1;
+			} 
+		}
+		if( contatore_playlist == 0 )
+		{
+			printf("Non ho trovato alcuna playlist pubblica che corrsponde al nome %s che hai cercato..\n",nome_cercato);
 		}
 	}
 
