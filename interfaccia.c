@@ -58,11 +58,12 @@ void replay()
 
 void interfaccia_principale()
 {
+	titolo();
+
 	utente utente_corrente;
 	int admin;
 	char username[DIMUSER];
 
-	titolo();
 
 	utente_corrente = leggi_utente_corrente();
 	admin = leggi_admin_utente(utente_corrente);
