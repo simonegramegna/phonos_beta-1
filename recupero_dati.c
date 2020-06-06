@@ -509,6 +509,97 @@ int backup_playlistBrano()
     return esito_backup;
 }
 
+/*****************************
+ * 
+ * Funzione di test per la stampa dei filese dei backup
+ * 
+ * ***************************/
+void stampa_backup_brani()
+{
+    FILE* tab = fopen("backup_brani.dat","rb");
+
+    if( tab != NULL )
+    {
+        brano input;
+
+        while( fread(&input, sizeof(brano), 1, tab) )
+        {
+            mostra_brano(input);
+
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+    
+
+    fclose(tab);
+}
+
+void stampa_backup_artisti()
+{
+    FILE* tab = fopen("backup_artisti.dat","rb");
+
+    if( tab != NULL )
+    {
+        artista input;
+
+        while( fread(&input, sizeof(input), 1, tab) )
+        {
+            mostra_artista(input);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+
+    fclose(tab);
+}
+
+void stampa_backup_album()
+{
+    FILE* tab = fopen("backup_album.dat","rb");
+
+    if( tab != NULL )
+    {
+        album input;
+
+        while( fread(&input, sizeof(album), 1, tab) )
+        {
+            mostra_album_singolo(input);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+
+
+    fclose(tab);
+}
+
+void stampa_backup_generi()
+{
+    FILE* tab = fopen("backup_genere.dat","rb");
+
+    if( tab != NULL )
+    {
+        genere input;
+
+        while( fread(&input, sizeof(genere), 1, tab) )
+        {
+            mostra_genere(input);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+
+    fclose(tab);
+}
 
 void stampa_backup_playlist()
 {
@@ -545,4 +636,108 @@ void stampa_backup_playlist()
     
 
     fclose(backup);
+}
+
+
+
+/*************************
+ * 
+ * Stampa backup relazioni 
+ * 
+ ***************************/
+
+void stampa_backup_branoAlbum()
+{
+    FILE* tab = fopen("backup_brano_album.dat","rb");
+
+    if( tab != NULL )
+    {
+        brano_album input;
+
+        printf("brano album backup..\n\n");
+
+        while( fread(&input, sizeof(brano_album), 1, tab) )
+        {
+            printf("id relazione: %d, id brano: %d, id album: %d, flag: %d\n",input.id_brano_album, input.id_brano, input.id_album, input.flag_brano_album);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+    
+
+    fclose(tab);
+}
+
+void stampa_backup_branoArtista()
+{
+    FILE* tab = fopen("backup_brano_artista.dat","rb");
+
+    if( tab != NULL )
+    {
+        brano_artista input;
+
+        printf("brano artista backup..\n\n");
+
+        while( fread(&input, sizeof(brano_artista), 1, tab) )
+        {
+            printf("id relazione: %d, id brano: %d, id artista: %d, flag: %d\n",input.id_brano_artista,input.id_brano,input.id_artista,input.flag_brano_artista);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+    
+
+    fclose(tab);
+}
+
+void stampa_backup_branoGenere()
+{
+    FILE* tab = fopen("backup_brano_genere.dat","rb");
+
+    if( tab != NULL )
+    {
+        brano_genere input;
+
+        printf("brano genere backup..\n\n");
+
+        while( fread(&input, sizeof(brano_genere), 1, tab) )
+        {
+            printf("id relazione: %d, id brano: %d, id genere: %d, flag: %d\n",input.id_branoGenere, input.id_brano, input.id_genere, input.flag_brano_genere);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+    
+
+    fclose(tab);
+}
+
+void stampa_backup_playlistBrano()
+{
+    FILE* tab = fopen("backup_playlist_brani.dat","rb");
+
+     printf("playlist brano backup..\n\n");
+
+    if( tab != NULL )
+    {
+        playlist_brano input;
+
+        while( fread(&input, sizeof(playlist_brano), 1, tab) )
+        {
+            printf("id relazione: %d, id brano: %d, id playlist: %d, flag: %d \n",input.id_playlistBrano, input.id_brano, input.id_playlist, input.flag_playlist_brano);
+        }
+    }
+    else
+    {
+        perror("fopen");
+    }
+    
+
+    fclose(tab);
 }
