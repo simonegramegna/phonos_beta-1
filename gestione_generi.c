@@ -93,9 +93,14 @@ void mostra_genere( genere genere_selezionato )
 
 	if( flag_genere != 1)
 	{
-		printf("ID: %d				\n", genere_selezionato.id);
-		printf("Nome: %s			\n", genere_selezionato.nome);
-		printf("Eliminato: %d		\n", genere_selezionato.eliminato);
+		int id_genere_letto;
+		int nome_genere_letto[DIMNOME_GENERE];
+
+		id_genere_letto = leggi_id_genere(genere_selezionato);
+		leggi_nome_genere(genere_selezionato, nome_genere_letto);
+
+		printf("ID: %d				\n", id_genere_letto);
+		printf("Nome: %s			\n", nome_genere_letto);
 	}
 	printf("\n");
 }

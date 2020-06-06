@@ -69,20 +69,27 @@ void interfaccia_principale()
 	admin = leggi_admin_utente(utente_corrente);
 	leggi_username_utente(utente_corrente, username);
 
-	if(admin != -1){
+	if(admin != -1)
+	{
 		printf("Bentornato, %s! \n\n", username);
 	}
 
-	if(admin == 1){
+	if(admin == 1)
+	{
 		interfaccia_admin();
-	} else if(admin == 0){
+	} 
+	else if(admin == 0)
+	{
 		interfaccia_utente();
-	} else {
+	} 
+	else 
+	{
 		interfaccia_iniziale();
 	}
 }
 
-void interfaccia_iniziale(){
+void interfaccia_iniziale()
+{
 	int scelta;
 
 	printf("[1] Login				\n");
@@ -98,7 +105,8 @@ void interfaccia_iniziale(){
 	replay();
 }
 
-void interfaccia_utente(){
+void interfaccia_utente()
+{
 	int scelta;
 
 	printf("[1] Visualizza tutti i brani		\n");
@@ -126,7 +134,8 @@ void interfaccia_utente(){
 	replay();
 }
 
-void interfaccia_admin(){
+void interfaccia_admin()
+{
 	int scelta;
 
 	printf("[1] Visualizza tutti i brani				\n");
@@ -165,7 +174,7 @@ void interfaccia_inserimento_brano()
 	brano nuovo_brano;
 	brano_artista relazione_branoArtista;
 	brano_genere relazione_branoGenere;
-	char titolo_brano[DIMSTRING];
+	char titolo_brano[DIMTITOLO_BRANO];
 	int anno_brano;
 	int durata_brano;
 	int id_brano;
@@ -219,10 +228,12 @@ void interfaccia_inserimento_brano()
 	relazione_branoArtista_aggiunta = aggiungi_branoArtista(&relazione_branoArtista);
 	relazione_branoGenere_aggiunta = aggiungi_branoGenere(&relazione_branoGenere);
 
-	if (brano_aggiunto == 1 && relazione_branoArtista_aggiunta == 1 && relazione_branoGenere_aggiunta == 1){
+	if (brano_aggiunto == 1 && relazione_branoArtista_aggiunta == 1 && relazione_branoGenere_aggiunta == 1)
+	{
 		printf("\nBrano aggiunto con successo! \n");
 	}
-	else{
+	else
+	{
 		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 	}
 }
@@ -230,9 +241,9 @@ void interfaccia_inserimento_brano()
 void interfaccia_inserimento_artista()
 {
 	artista nuovo_artista;
-	char nome_artista[DIMSTRING];
-	char cognome_artista[DIMSTRING];
-	char nome_arte_artista[DIMSTRING];
+	char nome_artista[DIMNOME_ARTISTA];
+	char cognome_artista[DIMNOME_ARTISTA];
+	char nome_arte_artista[DIMNOME_ARTISTA];
 	int aggiunto;
 
 	titolo();
@@ -260,7 +271,7 @@ void interfaccia_inserimento_artista()
 void interfaccia_inserimento_genere()
 {
 	genere nuovo_genere;
-	char nome_genere[DIMSTRING];
+	char nome_genere[DIMNOME_GENERE];
 	int aggiunto;
 
 	titolo();
@@ -282,7 +293,7 @@ void interfaccia_inserimento_playlist()
 	utente utente_corrente;
 	playlist nuova_playlist;
 	playlist_brano relazione_playlistBrano;
-	char nome_playlist[DIMSTRING];
+	char nome_playlist[DIMNOME_PLAYLIST];
 	char descrizione_playlist[DIMDESC];
 	int id_playlist;
 	int pubblica;
@@ -357,7 +368,7 @@ void interfaccia_registrazione()
 	scrivi_username_utente(&nuovo_utente, nome_utente);
 	scrivi_password_utente(&nuovo_utente, password);
 
-//	Controllo se lo username è stato già preso
+//	Controllo se lo username ï¿½ stato giï¿½ preso
 	if(username_esiste(nome_utente) == 0){
 		aggiunto = aggiungi_utente(&nuovo_utente);
 		if( aggiunto == 1 )			printf("\nUtente aggiunto con successo \n");

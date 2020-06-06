@@ -2,7 +2,7 @@
 #define GESTIONE_ARTISTI_H_
 
 // definisco dimensione massima del nome di un artista
-#define DIMSTRING 30
+#define DIMNOME_ARTISTA 30
 
 // definisco tipo di dato artista
 typedef struct{

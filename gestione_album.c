@@ -53,6 +53,7 @@ void scrivi_flag_eliminato_album( album *album_selezionato, int flag_eliminato )
 /* -------------------------
 	Funzioni su file
 ------------------------- */
+
 int aggiungi_album(album *album_selezionato)
 {
 	FILE *tabella_album;
@@ -72,7 +73,9 @@ int aggiungi_album(album *album_selezionato)
 
 	return aggiunto;
 }
-void mostra_album(){
+
+void mostra_album()
+{
 	
 	FILE *tabella_album;
 	tabella_album = fopen("album.dat", "rb");
@@ -96,10 +99,19 @@ void mostra_album_singolo(album album_selezionato)
 
 	if( flag_album != 1 )
 	{
-		printf("ID: %d				\n", album_selezionato.id);
-		printf("Titolo: %s			\n", album_selezionato.titolo);
-		printf("Anno: %d			\n", album_selezionato.anno);
-		printf("flag: %d\n", album_selezionato.eliminato);
+		int id_album_letto;
+		char titolo_album_letto[DIMTITOLO_ALBUM];
+		int anno_album_letto;
+
+		// leggo i campi dell'album
+		id_album_letto = leggi_id_album(album_selezionato);
+		leggi_titolo_album(album_selezionato, titolo_album_letto);
+		anno_album_letto = leggi_anno_album(album_selezionato);
+
+		// stampo i campi dell'album
+		printf("ID: %d				\n", id_album_letto);
+		printf("Titolo: %s			\n", titolo_album_letto);
+		printf("Anno: %d			\n", anno_album_letto);
 	}
 	printf("\n");
 }
@@ -197,8 +209,10 @@ int modifica_album(album album_modificato)
 
 	if(tabella_album != NULL)
 	{
+		int id_album;
 		long posizione;
-		int id_album = leggi_id_album(album_modificato);
+	
+		id_album = leggi_id_album(album_modificato);
 		posizione = posizione_album(id_album);
 
 		fseek(tabella_album, posizione, SEEK_SET);
