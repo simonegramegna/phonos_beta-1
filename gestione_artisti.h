@@ -3,14 +3,16 @@
 
 // definisco dimensione massima del nome di un artista
 #define DIMNOME_ARTISTA 30
+#define DIMCOGNOME_ARTISTA 30
+#define DIMNOMEARTE_ARTISTA 30
 
 // definisco tipo di dato artista
 typedef struct{
 
 	int id;
-	char nome[DIMSTRING];
-	char cognome[DIMSTRING];
-	char nome_arte[DIMSTRING];
+	char nome[DIMNOME_ARTISTA];
+	char cognome[DIMCOGNOME_ARTISTA];
+	char nome_arte[DIMNOMEARTE_ARTISTA];
 	int eliminato;
 
 }artista;

@@ -521,7 +521,7 @@ void stampa_backup_playlist()
         printf("backup brani: \n\n");
         while( fread(&playlist_letta, sizeof(playlist), 1, backup) )
         {
-            char nome[DIMNOME];
+            char nome[DIMNOME_PLAYLIST];
             char descr[DIMDESC];
 
             int id = leggi_id_playlist(playlist_letta);

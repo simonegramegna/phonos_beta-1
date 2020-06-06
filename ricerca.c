@@ -86,7 +86,7 @@ void ricerca_brani_titolo( char *titolo_cercato )
 			leggi_titolo_brano(brano_corrente, nome_titolo_confronto);
 
 			// verifico che i titoli coincidano
-			if( strtok(nome_titolo_confronto, titolo_cercato) != NULL )
+			if( strstr(nome_titolo_confronto, titolo_cercato) != NULL )
 			{
 				mostra_brano(brano_corrente);
 				contatore_brani = contatore_brani + 1;
@@ -206,7 +206,7 @@ void ricerca_artisti_nome( char *nome_cercato )
 			leggi_nome_artista(artista_corrente, nome_artista_confronto);
 
 			// verifico che i due nomi coincidano
-			if( strtok(nome_artista_confronto, nome_cercato) != NULL )
+			if( strstr(nome_artista_confronto, nome_cercato) != NULL )
 			{
 				mostra_artista(artista_corrente);
 
@@ -240,7 +240,7 @@ void ricerca_artisti_nome_arte( char *nome_arte_cerca )
 			char nome_arte_corrente[DIMNOME_ARTISTA];
 			leggi_nome_arte_artista(artista_corrente, nome_arte_corrente);
 
-			if( strtok(nome_arte_corrente, nome_arte_cerca) != NULL )
+			if( strstr(nome_arte_corrente, nome_arte_cerca) != NULL )
 			{
 				mostra_artista(artista_corrente);
 
@@ -280,7 +280,7 @@ void ricerca_album_titolo( char *titolo_cercato )
 			char titolo_confronto[DIMTITOLO_ALBUM];
 			leggi_titolo_album(album_corrente, titolo_confronto);
 
-			if( strtok(titolo_confronto, titolo_cercato) != NULL )
+			if( strstr(titolo_confronto, titolo_cercato) != NULL )
 			{
 				mostra_album_singolo(album_corrente);
 
@@ -361,7 +361,7 @@ void ricerca_genere_nome( char *nome_genere_cercato )
 			char nome_confronto[DIMNOME_GENERE];
 			leggi_nome_genere(genere_corrente, nome_confronto);
 
-			if( strtok(nome_confronto, nome_genere_cercato) != NULL )
+			if( strstr(nome_confronto, nome_genere_cercato) != NULL )
 			{
 				mostra_genere(genere_corrente);
 
@@ -407,7 +407,7 @@ void ricerca_playlist_nome( char* nome_cercato, int id_utente_cercato )
 				char nome_confronto[DIMNOME_PLAYLIST];
 				leggi_nome_playlist(playlist_corrente, nome_confronto);
 
-				if( strtok(nome_confronto, nome_cercato) != NULL )
+				if( strstr(nome_confronto, nome_cercato) != NULL )
 				{
 					mostra_playlist(playlist_corrente);
 					contatore_playlist = contatore_playlist + 1;

@@ -49,4 +49,18 @@ void interfaccia_admin();
 //funzione che permette all'utente di scegliere se accedere o registrarsi
 void interfaccia_iniziale();
 
+
+void interfaccia_ricerca();
+
+void interfaccia_ricerca_brani();
+void interfaccia_ricerca_brano_per_titolo();
+void interfaccia_ricerca_brano_per_anno();
+void interfaccia_ricerca_brano_per_durata();
+
+void interfaccia_ricerca_artisti();
+void interfaccia_ricerca_artista_per_nome();
+void interfaccia_ricerca_artista_per_nome_arte();
+
+void interfaccia_ricerca_playlist();
+
 #endif /* INTERFACCIA_H_ */

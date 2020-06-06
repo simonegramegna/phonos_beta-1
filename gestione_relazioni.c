@@ -369,25 +369,6 @@ int modifica_branoArtista( brano_artista relazione_modificata )
     return modificato;
 }
 
-void mostra_relazioni_brano_artista(){
-	FILE *tabella_branoArtista;
-	brano_artista brano_artista_corrente;
-
-	tabella_branoArtista = fopen("brano_artista.dat", "rb");
-	if(tabella_branoArtista != NULL){
-		while( fread(&brano_artista_corrente, sizeof(brano_artista), 1, tabella_branoArtista) ){
-			mostra_brano_artista(brano_artista_corrente);
-		}
-	}
-}
-
-void mostra_brano_artista(brano_artista brano_artista_selezionato){
-	printf("ID: %d 			\n", brano_artista_selezionato.id_brano_artista);
-	printf("ID brano: %d 	\n", brano_artista_selezionato.id_brano);
-	printf("ID artista: %d	\n", brano_artista_selezionato.id_artista);
-
-	printf("\n");
-}
 
 /*********************************************
  * 

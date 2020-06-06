@@ -147,8 +147,7 @@ void interfaccia_admin()
 	printf("[7] Aggiungi un artista						\n");
 	printf("[8] Aggiungi una playlist					\n");
 	printf("[9] Aggiungi un genere						\n");
-	printf("[10] Visualizza tutti gli utenti			\n");
-	printf("[11] Visualizza le relazioni brano-artista	\n");
+	printf("[10] Ricerca								\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -162,8 +161,7 @@ void interfaccia_admin()
 	else if (scelta == 7)		interfaccia_inserimento_artista();
 	else if (scelta == 8)		interfaccia_inserimento_playlist();
 	else if (scelta == 9)		interfaccia_inserimento_genere();
-	else if (scelta == 10)		mostra_utenti();
-	else if (scelta == 11)		mostra_relazioni_brano_artista();
+	else if (scelta == 10)		interfaccia_ricerca();
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -416,3 +414,139 @@ void interfaccia_login()
 		printf("\nL'utente non esiste \n");
 	}
 }
+
+void interfaccia_ricerca(){
+	titolo();
+
+	int scelta;
+
+	printf("Che tipo di ricerca vuoi effettuare? \n");
+
+	printf("[1] Cerca brani				\n");
+	printf("[2] Cerca artisti			\n");
+	printf("[3] Cerca playlist			\n");
+	printf("[4] Cerca album				\n");
+
+	leggere_intero(&scelta);
+
+	if (scelta == 1)			interfaccia_ricerca_brani();
+	else if (scelta == 2)		interfaccia_ricerca_artisti();
+	else if (scelta == 3)		interfaccia_ricerca_playlist();
+//	else if (scelta == 4)		interfaccia_ricerca_album();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+
+}
+
+void interfaccia_ricerca_brani(){
+	titolo();
+
+	int scelta;
+
+	printf("Come preferisci cercare il brano? \n");
+
+	printf("[1] Cerca per titolo					\n");
+	printf("[2] Cerca per anno di pubblicazione		\n");
+	printf("[3] Cerca per durata					\n");
+
+	leggere_intero(&scelta);
+
+	if (scelta == 1)			interfaccia_ricerca_brano_per_titolo();
+	else if (scelta == 2)		interfaccia_ricerca_brano_per_anno();
+	else if (scelta == 3)		interfaccia_ricerca_brano_per_durata();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+}
+
+void interfaccia_ricerca_brano_per_titolo(){
+	titolo();
+
+	char titolo[DIMTITOLO_BRANO];
+
+	printf("Qual e' il titolo del brano? ");
+	leggere_stringa(titolo);
+
+	ricerca_brani_titolo(titolo);
+}
+
+void interfaccia_ricerca_brano_per_anno(){
+	titolo();
+
+	int anno;
+
+	printf("Qual e' l'anno di pubblicazione che ti interessa? ");
+	leggere_intero(&anno);
+
+	ricerca_brani_anno(anno);
+}
+
+void interfaccia_ricerca_brano_per_durata(){
+	titolo();
+
+	int durata;
+
+	printf("Indica una durata (in minuti) approssimativa ");
+	leggere_intero(&durata);
+
+	ricerca_brani_durata(durata);
+}
+
+void interfaccia_ricerca_artisti(){
+	titolo();
+
+	int scelta;
+
+	printf("Come preferisci cercare l'artista? \n");
+
+	printf("[1] Cerca per nome				\n");
+	printf("[2] Cerca per nome d'arte		\n");
+
+	leggere_intero(&scelta);
+
+	if (scelta == 1)			interfaccia_ricerca_artista_per_nome();
+	else if (scelta == 2)		interfaccia_ricerca_artista_per_nome_arte();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+}
+
+void interfaccia_ricerca_artista_per_nome(){
+	titolo();
+
+	char nome[DIMNOME_ARTISTA];
+
+	printf("Qual e' il nome dell'artista? ");
+	leggere_stringa(nome);
+
+	ricerca_artisti_nome(nome);
+}
+
+void interfaccia_ricerca_artista_per_nome_arte(){
+	titolo();
+
+	char nome_arte[DIMNOMEARTE_ARTISTA];
+
+	printf("Qual e' il nome d'arte dell'artista? ");
+	leggere_stringa(nome_arte);
+
+	ricerca_artisti_nome_arte(nome_arte);
+}
+
+void interfaccia_ricerca_playlist(){
+	titolo();
+
+	char nome[DIMNOME_PLAYLIST];
+
+	printf("Qual e' il nome della playlist? ");
+	leggere_stringa(nome);
+
+	// Cercare playlist pubbliche per nome
+}
+
+
+
+
+
+
+
+
+
+
+
+
