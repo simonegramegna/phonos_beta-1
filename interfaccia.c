@@ -432,7 +432,7 @@ void interfaccia_ricerca(){
 	if (scelta == 1)			interfaccia_ricerca_brani();
 	else if (scelta == 2)		interfaccia_ricerca_artisti();
 	else if (scelta == 3)		interfaccia_ricerca_playlist();
-//	else if (scelta == 4)		interfaccia_ricerca_album();
+	else if (scelta == 4)		interfaccia_ricerca_album();
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 }
@@ -536,15 +536,47 @@ void interfaccia_ricerca_playlist(){
 	printf("Qual e' il nome della playlist? ");
 	leggere_stringa(nome);
 
-	// Cercare playlist pubbliche per nome
+	ricerca_playlist_pubbliche_nome(nome);
 }
 
+void interfaccia_ricerca_album(){
+	titolo();
 
+	int scelta;
 
+	printf("Come preferisci cercare l'album? \n");
 
+	printf("[1] Cerca per titolo					\n");
+	printf("[2] Cerca per anno di pubblicazione		\n");
 
+	leggere_intero(&scelta);
 
+	if (scelta == 1)			interfaccia_ricerca_album_per_titolo();
+	else if (scelta == 2)		interfaccia_ricerca_album_per_anno();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+}
 
+void interfaccia_ricerca_album_per_titolo(){
+	titolo();
+
+	char titolo[DIMTITOLO_BRANO];
+
+	printf("Qual e' il titolo dell'album? ");
+	leggere_stringa(titolo);
+
+	ricerca_album_titolo(titolo);
+}
+
+void interfaccia_ricerca_album_per_anno(){
+	titolo();
+
+	int anno;
+
+	printf("Qual e' l'anno di pubblicazione che ti interessa? ");
+	leggere_intero(&anno);
+
+	ricerca_album_anno(anno);
+}
 
 
 
