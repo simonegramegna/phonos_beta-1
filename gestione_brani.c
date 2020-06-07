@@ -3,6 +3,8 @@
 #include <string.h>
 
 #include "gestione_brani.h"
+#include "gestione_relazioni.h"
+#include "ricerca.h"
 #include "genera_id.h"
 
 /* -------------------------
@@ -117,6 +119,10 @@ void mostra_brani()
 void mostra_brano(brano brano_selezionato)
 {
 	int flag_eliminazione_brano;
+	brano_artista relazione_branoArtista;
+	brano_album relazione_branoAlbum;
+	brano_genere relazione_branoGenere;
+
 	flag_eliminazione_brano = leggi_flag_eliminato_brano(brano_selezionato);
 
 	if(flag_eliminazione_brano != 1 )
@@ -135,11 +141,16 @@ void mostra_brano(brano brano_selezionato)
 		ascolti_brano_letto = leggi_ascolti_brano(brano_selezionato);
 
 		// leggo le relazioni associate al brano
-		// TODO: cerca relazioni passando l'id del brano
+		relazione_branoArtista = cerca_relazione_branoArtista(id_brano_letto);
+		relazione_branoAlbum = cerca_relazione_branoAlbum(id_brano_letto);
+		relazione_branoGenere = cerca_relazione_branoGenere(id_brano_letto);
 
 		// stampo i dati letti
 		printf("ID: %d				\n", id_brano_letto);
 		printf("Titolo: %s			\n", titolo_brano_letto);
+		printf("Artista: %d			\n", relazione_branoArtista.id_artista);
+		printf("Album: %d			\n", relazione_branoAlbum.id_album);
+		printf("Genere: %d			\n", relazione_branoGenere.id_genere);
 		printf("Anno: %d 			\n", anno_brano_letto);
 		printf("Durata: %d secondi	\n", durata_brano_letto);
 		printf("Ascoltato %d volte	\n", ascolti_brano_letto);
