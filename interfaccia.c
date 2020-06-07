@@ -10,6 +10,7 @@
 #include "gestione_playlist.h"
 #include "gestione_relazioni.h"
 #include "ricerca.h"
+#include "recupero_dati.h"
 #include "interfaccia.h"
 
 void leggere_intero(int *valore)
@@ -117,6 +118,7 @@ void interfaccia_utente()
 	printf("[6] Aggiungi un brano				\n");
 	printf("[7] Aggiungi un artista				\n");
 	printf("[8] Aggiungi una playlist			\n");
+	printf("[9] Ricerca							\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -129,6 +131,7 @@ void interfaccia_utente()
 	else if (scelta == 6)		interfaccia_inserimento_brano();
 	else if (scelta == 7)		interfaccia_inserimento_artista();
 	else if (scelta == 8)		interfaccia_inserimento_playlist();
+	else if (scelta == 9)		interfaccia_ricerca();
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -148,6 +151,7 @@ void interfaccia_admin()
 	printf("[8] Aggiungi una playlist					\n");
 	printf("[9] Aggiungi un genere						\n");
 	printf("[10] Ricerca								\n");
+	printf("[11] Backup dei dati						\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -162,6 +166,7 @@ void interfaccia_admin()
 	else if (scelta == 8)		interfaccia_inserimento_playlist();
 	else if (scelta == 9)		interfaccia_inserimento_genere();
 	else if (scelta == 10)		interfaccia_ricerca();
+	else if (scelta == 11)		interfaccia_backup();
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -578,7 +583,55 @@ void interfaccia_ricerca_album_per_anno(){
 	ricerca_album_anno(anno);
 }
 
+void interfaccia_backup(){
+	titolo();
 
+	int scelta;
 
+	printf("Che tipo di backup vuoi effettuare? \n");
 
+	printf("[1] Backup brani			\n");
+	printf("[2] Backup artisti			\n");
+	printf("[3] Backup playlist			\n");
+	printf("[4] Backup album				\n");
 
+	leggere_intero(&scelta);
+
+	if (scelta == 1)			interfaccia_backup_brani();
+	else if (scelta == 2)		interfaccia_backup_artisti();
+	else if (scelta == 3)		interfaccia_backup_playlist();
+	else if (scelta == 4)		interfaccia_backup_album();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+}
+
+void interfaccia_backup_brani(){
+	int esito;
+	esito = backup_brani();
+
+	if(esito == 1)		printf("Backup dei brani effettuato con successo \n");
+	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_backup_artisti(){
+	int esito;
+	esito = backup_artisti();
+
+	if(esito == 1)		printf("Backup degli artisti effettuato con successo \n");
+	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_backup_playlist(){
+	int esito;
+	esito = backup_playlist();
+
+	if(esito == 1)		printf("Backup delle playlist effettuato con successo \n");
+	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_backup_album(){
+	int esito;
+	esito = backup_album();
+
+	if(esito == 1)		printf("Backup degli album effettuato con successo \n");
+	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
