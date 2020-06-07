@@ -172,7 +172,7 @@ void interfaccia_admin()
 	else if (scelta == 10)		interfaccia_inserimento_album();
 	else if (scelta == 11)		interfaccia_ricerca();
 	else if (scelta == 12)		interfaccia_backup();
-//	else if (scelta == 12)		interfaccia_ripristino();
+	else if (scelta == 13)		interfaccia_ripristino();
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -684,5 +684,59 @@ void interfaccia_backup_album(){
 	esito = backup_album();
 
 	if(esito == 1)		printf("Backup degli album effettuato con successo \n");
+	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_ripristino(){
+	titolo();
+
+	int scelta;
+
+	printf("Cosa desideri ripristinare? \n");
+
+	printf("[1] Ripristina brani			\n");
+	printf("[2] Ripristina artisti			\n");
+	printf("[3] Ripristina playlist			\n");
+	printf("[4] Ripristina album			\n");
+
+	leggere_intero(&scelta);
+
+	if (scelta == 1)			interfaccia_ripristino_brani();
+	else if (scelta == 2)		interfaccia_ripristino_artisti();
+	else if (scelta == 3)		interfaccia_ripristino_playlist();
+	else if (scelta == 4)		interfaccia_ripristino_album();
+	else						printf("\nValore non valido, si prega di riprovare \n");
+}
+
+void interfaccia_ripristino_brani(){
+	int esito;
+	esito = ripristina_brani();
+
+	if(esito == 1)		printf("Ripristino dei brani effettuato con successo \n");
+	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
+
+
+void interfaccia_ripristino_artisti(){
+	int esito;
+	esito = ripristina_artisti();
+
+	if(esito == 1)		printf("Ripristino degli artisti effettuato con successo \n");
+	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_ripristino_playlist(){
+	int esito;
+	esito = ripristina_playlist();
+
+	if(esito == 1)		printf("Ripristino delle playlist effettuato con successo \n");
+	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_ripristino_album(){
+	int esito;
+	esito = ripristina_album();
+
+	if(esito == 1)		printf("Ripristino degli album effettuato con successo \n");
 	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
 }

@@ -103,4 +103,19 @@ void interfaccia_backup_playlist();
 //funzione che mostra l'esito del backup degli album
 void interfaccia_backup_album();
 
+//funzione che mostra l'interfaccia per effettuare il ripristino dei dati
+void interfaccia_ripristino();
+
+//funzione che mostra l'esito del ripristino dei brani
+void interfaccia_ripristino_brani();
+
+//funzione che mostra l'esito del ripristino degli artisti
+void interfaccia_ripristino_artisti();
+
+//funzione che mostra l'esito del ripristino delle playlist
+void interfaccia_ripristino_playlist();
+
+//funzione che mostra l'esito del ripristino degli album
+void interfaccia_ripristino_album();
+
 #endif /* INTERFACCIA_H_ */
