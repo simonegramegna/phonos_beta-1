@@ -34,6 +34,9 @@ void interfaccia_inserimento_genere();
 // funzione per mostrare l'interfaccia di inserimento playlist
 void interfaccia_inserimento_playlist();
 
+//funzione per mostrare l'interfaccia di inserimento album
+void interfaccia_inserimento_album();
+
 // funzione per mostrare l'interfaccia di registrazione
 void interfaccia_registrazione();
 

@@ -150,8 +150,10 @@ void interfaccia_admin()
 	printf("[7] Aggiungi un artista						\n");
 	printf("[8] Aggiungi una playlist					\n");
 	printf("[9] Aggiungi un genere						\n");
-	printf("[10] Ricerca								\n");
-	printf("[11] Backup dei dati						\n");
+	printf("[10] Aggiungi un genere						\n");
+	printf("[11] Ricerca								\n");
+	printf("[12] Backup dei dati						\n");
+	printf("[13] Ripristino dei dati					\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -165,8 +167,10 @@ void interfaccia_admin()
 	else if (scelta == 7)		interfaccia_inserimento_artista();
 	else if (scelta == 8)		interfaccia_inserimento_playlist();
 	else if (scelta == 9)		interfaccia_inserimento_genere();
-	else if (scelta == 10)		interfaccia_ricerca();
-	else if (scelta == 11)		interfaccia_backup();
+	else if (scelta == 10)		interfaccia_inserimento_album();
+	else if (scelta == 11)		interfaccia_ricerca();
+	else if (scelta == 12)		interfaccia_backup();
+//	else if (scelta == 12)		interfaccia_ripristino();
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -342,6 +346,51 @@ void interfaccia_inserimento_playlist()
 			leggere_intero(&id_brano);
 
 			if(id_brano != -1)		scrivi_relazione_playlistBrano(&relazione_playlistBrano, id_brano, id_playlist);
+
+		} while (id_brano != -1);
+	}
+	else
+	{
+		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+	}
+
+
+}
+
+void interfaccia_inserimento_album()
+{
+	album nuovo_album;
+	brano_album relazionebranoAlbum;
+	char titolo_album[DIMTITOLO_ALBUM];
+	int id_album;
+	int album_aggiunto;
+	int id_brano;
+
+	titolo();
+
+	printf("Qual e' il titolo dell'album? ");
+	leggere_stringa(titolo_album);
+
+//	Scrivo i dati dell'album
+	id_album = genera_id();
+	scrivi_id_album(&nuovo_album, id_album);
+	scrivi_titolo_album(&nuovo_album, titolo_album);
+
+//	Aggiungo l'album
+	album_aggiunto = aggiungi_album(&nuovo_album);
+
+//	Aggiunta brani
+	if (album_aggiunto == 1)
+	{
+		printf("\nAlbum aggiunto con successo! \n");
+		do {
+			titolo();
+			printf("Scegli un brano da aggiungere all'album. \n\n");
+			mostra_brani();
+			printf("ID brano: (-1 per terminare) ");
+			leggere_intero(&id_brano);
+
+			if(id_brano != -1)		scrivi_relazione_branoAlbum(&relazionebranoAlbum, id_brano, id_album);
 
 		} while (id_brano != -1);
 	}
