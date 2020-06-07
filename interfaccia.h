@@ -63,4 +63,8 @@ void interfaccia_ricerca_artista_per_nome_arte();
 
 void interfaccia_ricerca_playlist();
 
+void interfaccia_ricerca_album();
+void interfaccia_ricerca_album_per_titolo();
+void interfaccia_ricerca_album_per_anno();
+
 #endif /* INTERFACCIA_H_ */
