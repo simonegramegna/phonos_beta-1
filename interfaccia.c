@@ -150,7 +150,7 @@ void interfaccia_admin()
 	printf("[7] Aggiungi un artista						\n");
 	printf("[8] Aggiungi una playlist					\n");
 	printf("[9] Aggiungi un genere						\n");
-	printf("[10] Aggiungi un genere						\n");
+	printf("[10] Aggiungi un album						\n");
 	printf("[11] Ricerca								\n");
 	printf("[12] Backup dei dati						\n");
 	printf("[13] Ripristino dei dati					\n");
