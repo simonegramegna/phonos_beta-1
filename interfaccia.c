@@ -536,7 +536,7 @@ void interfaccia_ricerca_playlist(){
 	printf("Qual e' il nome della playlist? ");
 	leggere_stringa(nome);
 
-	// Cercare playlist pubbliche per nome
+	ricerca_playlist_pubbliche_nome(nome);
 }
 
 
