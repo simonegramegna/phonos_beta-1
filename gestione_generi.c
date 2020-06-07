@@ -94,7 +94,7 @@ void mostra_genere( genere genere_selezionato )
 	if( flag_genere != 1)
 	{
 		int id_genere_letto;
-		int nome_genere_letto[DIMNOME_GENERE];
+		char nome_genere_letto[DIMNOME_GENERE];
 
 		id_genere_letto = leggi_id_genere(genere_selezionato);
 		leggi_nome_genere(genere_selezionato, nome_genere_letto);
