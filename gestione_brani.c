@@ -134,6 +134,9 @@ void mostra_brano(brano brano_selezionato)
 		durata_brano_letto = leggi_durata_brano(brano_selezionato);
 		ascolti_brano_letto = leggi_ascolti_brano(brano_selezionato);
 
+		// leggo le relazioni associate al brano
+		// TODO: cerca relazioni passando l'id del brano
+
 		// stampo i dati letti
 		printf("ID: %d				\n", id_brano_letto);
 		printf("Titolo: %s			\n", titolo_brano_letto);

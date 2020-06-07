@@ -4,7 +4,7 @@
 #include <time.h>
 
 // numero di secondi in un minuto
-#define MINUTO 60 
+#define MINUTO 60
 
 // valore minimo dell'anno
 #define MIN_ANNO 1900
@@ -15,6 +15,7 @@
 #include "gestione_generi.h"
 #include "gestione_artisti.h"
 #include "gestione_playlist.h"
+#include "gestione_relazioni.h"
 
 
 /********************************************************
@@ -489,4 +490,62 @@ void ricerca_playlist_pubbliche()
 	}
 
 	fclose(tabella_playlist);
+}
+
+
+/********************************************************
+ *
+ *  Funzioni di ricerca per le relazioni
+ *
+ ********************************************************/
+
+brano_artista cerca_relazione_branoArtista(int id_brano){
+	brano_artista relazione_trovata;
+	brano_artista relazione_corrente;
+	FILE *tabella_brano_artista;
+
+	tabella_brano_artista = fopen("brano_artista.dat", "rb");
+	if(tabella_brano_artista != NULL){
+		while( fread(&relazione_corrente, sizeof(brano_artista), 1, tabella_brano_artista) ){
+			if(relazione_corrente.id_brano == id_brano){
+				relazione_trovata = relazione_corrente;
+			}
+		}
+	}
+
+	return relazione_trovata;
+}
+
+brano_album cerca_relazione_branoAlbum(int id_brano){
+	brano_album relazione_trovata;
+	brano_album relazione_corrente;
+	FILE *tabella_brano_album;
+
+	tabella_brano_album = fopen("brano_album.dat", "rb");
+	if(tabella_brano_album != NULL){
+		while( fread(&relazione_corrente, sizeof(brano_album), 1, tabella_brano_album) ){
+			if(relazione_corrente.id_brano == id_brano){
+				relazione_trovata = relazione_corrente;
+			}
+		}
+	}
+
+	return relazione_trovata;
+}
+
+brano_genere cerca_relazione_branoGenere(int id_brano){
+	brano_genere relazione_trovata;
+	brano_genere relazione_corrente;
+	FILE *tabella_brano_genere;
+
+	tabella_brano_genere = fopen("brano_genere.dat", "rb");
+	if(tabella_brano_genere != NULL){
+		while( fread(&relazione_corrente, sizeof(brano_genere), 1, tabella_brano_genere) ){
+			if(relazione_corrente.id_brano == id_brano){
+				relazione_trovata = relazione_corrente;
+			}
+		}
+	}
+
+	return relazione_trovata;
 }

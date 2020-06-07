@@ -1,6 +1,8 @@
 #ifndef RICERCA_H_
 #define RICERCA_H_
 
+#include "gestione_relazioni.h"
+
 /********************************************************
  * 
  *  Funzioni di controllo per le ricerche
@@ -76,5 +78,21 @@ void ricerca_playlist_pubbliche_nome( char* nome_cercato );
 
 // funzione per cercare le playlist pubbliche
 void ricerca_playlist_pubbliche();
+
+
+/********************************************************
+ *
+ *  Funzioni di ricerca per le relazioni
+ *
+ ********************************************************/
+
+//funzione che cerca la relazione branoArtista associata ad un brano
+brano_artista cerca_relazione_branoArtista(int id_brano);
+
+//funzione che cerca la relazione branoAlbum associata ad un brano
+brano_album cerca_relazione_branoAlbum(int id_brano);
+
+//funzione che cerca la relazione branoGenere associata ad un brano
+brano_genere cerca_relazione_branoGenere(int id_brano);
 
 #endif /* RICERCA_H_ */
