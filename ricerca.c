@@ -499,53 +499,137 @@ void ricerca_playlist_pubbliche()
  *
  ********************************************************/
 
-brano_artista cerca_relazione_branoArtista(int id_brano){
+brano_artista cerca_relazione_branoArtista( int id_brano )
+{
 	brano_artista relazione_trovata;
-	brano_artista relazione_corrente;
 	FILE *tabella_brano_artista;
 
 	tabella_brano_artista = fopen("brano_artista.dat", "rb");
-	if(tabella_brano_artista != NULL){
-		while( fread(&relazione_corrente, sizeof(brano_artista), 1, tabella_brano_artista) ){
-			if(relazione_corrente.id_brano == id_brano){
-				relazione_trovata = relazione_corrente;
+
+	if(tabella_brano_artista != NULL)
+	{
+		int trovato;
+		brano_artista relazione_corrente;
+
+		trovato = 0;
+
+		while( fread(&relazione_corrente, sizeof(brano_artista), 1, tabella_brano_artista) && trovato == 0 )
+		{
+			int id_brano_letto;
+			int flag_relazione;
+
+			id_brano_letto = id_brano_branoArtista(relazione_corrente);
+			flag_relazione = leggi_flag_branoArtista(relazione_corrente);
+
+
+			// verfico che i brani coincidano e che la relazione esiste
+			if( id_brano_letto == id_brano && flag_relazione == 0 )
+			{
+				int id_relazione_letta;
+				int artista_relazione_letta;
+
+				id_relazione_letta = leggi_id_branoArtista(relazione_corrente);
+				artista_relazione_letta = id_artista_branoArtista(relazione_corrente);
+
+				// scrivo i dati nella relazione da restituire
+				scrivi_id_branoArtista(&relazione_trovata, id_relazione_letta);
+				scrivi_relazione_branoArtista(&relazione_trovata, id_brano_letto, artista_relazione_letta);
+				scrivi_flag_branoArtista(&relazione_trovata, flag_relazione);
+
+
+				trovato = 1;
 			}
 		}
 	}
+	fclose(tabella_brano_artista);
 
 	return relazione_trovata;
 }
 
-brano_album cerca_relazione_branoAlbum(int id_brano){
+brano_album cerca_relazione_branoAlbum( int id_brano )
+{
 	brano_album relazione_trovata;
-	brano_album relazione_corrente;
 	FILE *tabella_brano_album;
 
 	tabella_brano_album = fopen("brano_album.dat", "rb");
-	if(tabella_brano_album != NULL){
-		while( fread(&relazione_corrente, sizeof(brano_album), 1, tabella_brano_album) ){
-			if(relazione_corrente.id_brano == id_brano){
+
+	if( tabella_brano_album != NULL )
+	{
+		int trovato;
+		brano_album relazione_corrente;
+
+		trovato = 0;
+
+		while( fread(&relazione_corrente, sizeof(brano_album), 1, tabella_brano_album) && trovato == 0 )
+		{
+			int id_brano_letto;
+			id_brano_letto = id_brano_branoAlbum(relazione_corrente);
+
+			if( relazione_corrente.id_brano == id_brano )
+			{
 				relazione_trovata = relazione_corrente;
+				trovato = 1;
 			}
 		}
 	}
+	fclose(tabella_brano_album);
 
 	return relazione_trovata;
 }
 
-brano_genere cerca_relazione_branoGenere(int id_brano){
+brano_genere cerca_relazione_branoGenere( int id_brano )
+{
 	brano_genere relazione_trovata;
-	brano_genere relazione_corrente;
 	FILE *tabella_brano_genere;
 
 	tabella_brano_genere = fopen("brano_genere.dat", "rb");
-	if(tabella_brano_genere != NULL){
-		while( fread(&relazione_corrente, sizeof(brano_genere), 1, tabella_brano_genere) ){
-			if(relazione_corrente.id_brano == id_brano){
+
+	if(tabella_brano_genere != NULL)
+	{
+		int trovato;
+		brano_genere relazione_corrente;
+
+		while( fread(&relazione_corrente, sizeof(brano_genere), 1, tabella_brano_genere) && trovato == 0 )
+		{
+			int id_brano_letto;
+			id_brano_letto = id_brano_branoGenere(relazione_corrente);
+
+			if( id_brano_letto == id_brano )
+			{
 				relazione_trovata = relazione_corrente;
+				trovato = 1;
 			}
 		}
 	}
+	fclose(tabella_brano_genere);
 
 	return relazione_trovata;
+}
+
+int conta_brani_playlist( int id_brano )
+{
+	int occorrenze_brano;
+	FILE* tabella_playlistBrano;
+
+	occorrenze_brano = 0;
+	tabella_playlistBrano = fopen("playlist_brani.dat","rb");
+
+	if( tabella_playlistBrano != NULL )
+	{
+		playlist_brano relazione_letta;
+
+		while( fread(&relazione_letta, sizeof(playlist_brano), 1, tabella_playlistBrano) )
+		{
+			int id_brano_letto;
+			id_brano_letto = id_brano_playlistBrano(relazione_letta);
+
+			if( id_brano == id_brano_letto )
+			{
+				occorrenze_brano = occorrenze_brano + 1;
+			}
+		}
+	}
+	fclose(tabella_playlistBrano);
+
+	return occorrenze_brano;
 }

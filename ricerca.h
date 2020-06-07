@@ -87,12 +87,15 @@ void ricerca_playlist_pubbliche();
  ********************************************************/
 
 //funzione che cerca la relazione branoArtista associata ad un brano
-brano_artista cerca_relazione_branoArtista(int id_brano);
+brano_artista cerca_relazione_branoArtista( int id_brano );
 
 //funzione che cerca la relazione branoAlbum associata ad un brano
-brano_album cerca_relazione_branoAlbum(int id_brano);
+brano_album cerca_relazione_branoAlbum( int id_brano );
 
 //funzione che cerca la relazione branoGenere associata ad un brano
-brano_genere cerca_relazione_branoGenere(int id_brano);
+brano_genere cerca_relazione_branoGenere( int id_brano );
+
+// funzione che conta il numero di voltec che compare un brano in una playlist
+int conta_brani_playlist( int id_brano );
 
 #endif /* RICERCA_H_ */
