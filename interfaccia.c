@@ -760,10 +760,15 @@ void interfaccia_modifica_brano(){
 
 	printf("Titolo [%s]:", titolo_brano);
 	leggere_stringa(titolo_brano);
+	scrivi_titolo_brano(&brano_trovato, titolo_brano);
+
 	printf("Anno [%d]:", anno_brano);
 	leggere_intero(&anno_brano);
+	scrivi_anno_brano(&brano_trovato, anno_brano);
+
 	printf("Durata [%d]:", durata_brano);
 	leggere_intero(&durata_brano);
+	scrivi_durata_brano(&brano_trovato, durata_brano);
 
 	esito = modifica_brano(brano_trovato);
 
@@ -792,10 +797,15 @@ void interfaccia_modifica_artista(){
 
 	printf("Nome [%s]:", nome_artista);
 	leggere_stringa(nome_artista);
+	scrivi_nome_artista(&artista_trovato, nome_artista);
+
 	printf("Cognome [%s]:", cognome_artista);
 	leggere_stringa(cognome_artista);
+	scrivi_cognome_artista(&artista_trovato, cognome_artista);
+
 	printf("Nome d'arte [%s]:", nome_arte_artista);
 	leggere_stringa(nome_arte_artista);
+	scrivi_nome_arte_artista(&artista_trovato, nome_arte_artista);
 
 	esito = modifica_artista(artista_trovato);
 
@@ -822,8 +832,11 @@ void interfaccia_modifica_playlist(){
 
 	printf("Nome [%s]:", nome_playlist);
 	leggere_stringa(nome_playlist);
+	scrivi_nome_playlist(&playlist_trovata, nome_playlist);
+
 	printf("Descrizione [%s]:", descrizione_playlist);
 	leggere_stringa(descrizione_playlist);
+	scrivi_descrizione_playlist(&playlist_trovata, descrizione_playlist);
 
 	esito = modifica_playlist(playlist_trovata);
 
@@ -848,6 +861,7 @@ void interfaccia_modifica_genere(){
 
 	printf("Nome [%s]:", nome_genere);
 	leggere_stringa(nome_genere);
+	scrivi_nome_genere(&genere_trovato, nome_genere);
 
 	esito = modifica_genere(genere_trovato);
 
@@ -869,9 +883,11 @@ void interfaccia_modifica_album(){
 
 	album_trovato = cerca_album(id_album);
 	leggi_titolo_album(album_trovato, titolo_album);
+	scrivi_titolo_album(&album_trovato, titolo_album);
 
 	printf("Titolo [%s]:", titolo_album);
 	leggere_stringa(titolo_album);
+	scrivi_titolo_album(&album_trovato, titolo_album);
 
 	esito = modifica_album(album_trovato);
 
