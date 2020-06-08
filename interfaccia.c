@@ -140,10 +140,15 @@ void interfaccia_admin()
 	printf("[8] Aggiungi una playlist					\n");
 	printf("[9] Aggiungi un genere						\n");
 	printf("[10] Aggiungi un album						\n");
-	printf("[11] Ricerca								\n");
-	printf("[12] Backup dei dati						\n");
-	printf("[13] Ripristino dei dati					\n");
-	printf("[14] Esci									\n");
+	printf("[11] Modifica un brano						\n");
+	printf("[12] Modifica un artista					\n");
+	printf("[13] Modifica una playlist					\n");
+	printf("[14] Modifica un genere						\n");
+	printf("[15] Modifica un album						\n");
+	printf("[16] Ricerca								\n");
+	printf("[17] Backup dei dati						\n");
+	printf("[18] Ripristino dei dati					\n");
+	printf("[19] Esci									\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -158,15 +163,21 @@ void interfaccia_admin()
 	else if (scelta == 8)		interfaccia_inserimento_playlist();
 	else if (scelta == 9)		interfaccia_inserimento_genere();
 	else if (scelta == 10)		interfaccia_inserimento_album();
-	else if (scelta == 11)		interfaccia_ricerca();
-	else if (scelta == 12)		interfaccia_backup();
-	else if (scelta == 13)		interfaccia_ripristino();
-	else if (scelta == 14)		return;
+	else if (scelta == 11)		interfaccia_modifica_brano();
+	else if (scelta == 12)		interfaccia_modifica_artista();
+	else if (scelta == 13)		interfaccia_modifica_playlist();
+	else if (scelta == 14)		interfaccia_modifica_genere();
+	else if (scelta == 15)		interfaccia_modifica_album();
+	else if (scelta == 16)		interfaccia_ricerca();
+	else if (scelta == 17)		interfaccia_backup();
+	else if (scelta == 18)		interfaccia_ripristino();
+	else if (scelta == 19)		return;
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
 }
 
+// Inserimenti
 void interfaccia_inserimento_brano()
 {
 	brano nuovo_brano;
@@ -388,6 +399,7 @@ void interfaccia_inserimento_album()
 	else							printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 }
 
+// Registrazione e login
 void interfaccia_registrazione()
 {
 	utente nuovo_utente;
@@ -455,6 +467,7 @@ void interfaccia_login()
 	}
 }
 
+// Ricerca
 void interfaccia_ricerca(){
 	titolo();
 
@@ -618,6 +631,7 @@ void interfaccia_ricerca_album_per_anno(){
 	ricerca_album_anno(anno);
 }
 
+// Backup e ripristino
 void interfaccia_backup(){
 	titolo();
 
@@ -700,7 +714,6 @@ void interfaccia_ripristino_brani(){
 	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
 }
 
-
 void interfaccia_ripristino_artisti(){
 	int esito;
 	esito = ripristina_artisti();
@@ -723,4 +736,145 @@ void interfaccia_ripristino_album(){
 
 	if(esito == 1)		printf("Ripristino degli album effettuato con successo \n");
 	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+}
+
+// Modifica
+void interfaccia_modifica_brano(){
+	titolo();
+
+	int id_brano;
+	brano brano_trovato;
+	char titolo_brano[DIMTITOLO_BRANO];
+	int anno_brano;
+	int durata_brano;
+	int esito;
+
+	mostra_brani();
+	printf("ID del brano da modificare: ");
+	leggere_intero(&id_brano);
+
+	brano_trovato = cerca_brano(id_brano);
+	leggi_titolo_brano(brano_trovato, titolo_brano);
+	anno_brano = leggi_anno_brano(brano_trovato);
+	durata_brano = leggi_durata_brano(brano_trovato);
+
+	printf("Titolo [%s]:", titolo_brano);
+	leggere_stringa(titolo_brano);
+	printf("Anno [%d]:", anno_brano);
+	leggere_intero(&anno_brano);
+	printf("Durata [%d]:", durata_brano);
+	leggere_intero(&durata_brano);
+
+	esito = modifica_brano(brano_trovato);
+
+	if(esito == 1)		printf("\nBrano modificato con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_modifica_artista(){
+	titolo();
+
+	int id_artista;
+	artista artista_trovato;
+	char nome_artista[DIMNOME_ARTISTA];
+	char cognome_artista[DIMCOGNOME_ARTISTA];
+	char nome_arte_artista[DIMNOMEARTE_ARTISTA];
+	int esito;
+
+	mostra_artisti();
+	printf("ID dell'artista da modificare: ");
+	leggere_intero(&id_artista);
+
+	artista_trovato = cerca_artista(id_artista);
+	leggi_nome_artista(artista_trovato, nome_artista);
+	leggi_cognome_artista(artista_trovato, cognome_artista);
+	leggi_nome_arte_artista(artista_trovato, nome_arte_artista);
+
+	printf("Nome [%s]:", nome_artista);
+	leggere_stringa(nome_artista);
+	printf("Cognome [%s]:", cognome_artista);
+	leggere_stringa(cognome_artista);
+	printf("Nome d'arte [%s]:", nome_arte_artista);
+	leggere_stringa(nome_arte_artista);
+
+	esito = modifica_artista(artista_trovato);
+
+	if(esito == 1)		printf("\nArtista modificato con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_modifica_playlist(){
+	titolo();
+
+	int id_playlist;
+	playlist playlist_trovata;
+	char nome_playlist[DIMNOME_PLAYLIST];
+	char descrizione_playlist[DIMDESC];
+	int esito;
+
+	mostra_playlists();
+	printf("ID della playlist da modificare: ");
+	leggere_intero(&id_playlist);
+
+	playlist_trovata = cerca_playlist(id_playlist);
+	leggi_nome_playlist(playlist_trovata, nome_playlist);
+	leggi_descrizione_playlist(playlist_trovata, descrizione_playlist);
+
+	printf("Nome [%s]:", nome_playlist);
+	leggere_stringa(nome_playlist);
+	printf("Descrizione [%s]:", descrizione_playlist);
+	leggere_stringa(descrizione_playlist);
+
+	esito = modifica_playlist(playlist_trovata);
+
+	if(esito == 1)		printf("\nPlaylist modificata con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_modifica_genere(){
+	titolo();
+
+	int id_genere;
+	genere genere_trovato;
+	char nome_genere[DIMNOME_GENERE];
+	int esito;
+
+	mostra_generi();
+	printf("ID del genere da modificare: ");
+	leggere_intero(&id_genere);
+
+	genere_trovato = cerca_genere(id_genere);
+	leggi_nome_genere(genere_trovato, nome_genere);
+
+	printf("Nome [%s]:", nome_genere);
+	leggere_stringa(nome_genere);
+
+	esito = modifica_genere(genere_trovato);
+
+	if(esito == 1)		printf("\nGenere modificato con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_modifica_album(){
+	titolo();
+
+	int id_album;
+	album album_trovato;
+	char titolo_album[DIMTITOLO_ALBUM];
+	int esito;
+
+	mostra_album();
+	printf("ID dell'album da modificare: ");
+	leggere_intero(&id_album);
+
+	album_trovato = cerca_album(id_album);
+	leggi_titolo_album(album_trovato, titolo_album);
+
+	printf("Titolo [%s]:", titolo_album);
+	leggere_stringa(titolo_album);
+
+	esito = modifica_album(album_trovato);
+
+	if(esito == 1)		printf("\nAlbum modificato con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 }

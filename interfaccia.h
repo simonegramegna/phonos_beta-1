@@ -118,4 +118,19 @@ void interfaccia_ripristino_playlist();
 //funzione che mostra l'esito del ripristino degli album
 void interfaccia_ripristino_album();
 
+//funzione che mostra l'interfaccia di modifica del brano
+void interfaccia_modifica_brano();
+
+//funzione che mostra l'interfaccia di modifica dell'artista
+void interfaccia_modifica_artista();
+
+//funzione che mostra l'interfaccia di modifica della playlist
+void interfaccia_modifica_playlist();
+
+//funzione che mostra l'interfaccia di modifica del genere
+void interfaccia_modifica_genere();
+
+//funzione che mostra l'interfaccia di modifica dell'album
+void interfaccia_modifica_album();
+
 #endif /* INTERFACCIA_H_ */
