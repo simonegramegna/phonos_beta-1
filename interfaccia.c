@@ -16,15 +16,13 @@
 void leggere_intero(int *valore)
 {
 	scanf("%d", valore);
-	while ((getchar()) != '\n')
-		; // Rimuovo il newline
+	while ((getchar()) != '\n');	// Rimuovo il newline
 }
 
 void leggere_stringa(char *stringa)
 {
-	scanf("%[^\n]s", stringa); // Uso un'espressione regolare per leggere sia gli spazi, sia il newline
-	while ((getchar()) != '\n')
-		; // e rimuovo il newline
+	scanf("%[^\n]s", stringa);		// Uso un'espressione regolare per leggere sia gli spazi, sia il newline
+	while ((getchar()) != '\n');	// e rimuovo il newline
 }
 
 void pulisci_schermo()
@@ -183,15 +181,18 @@ void interfaccia_inserimento_brano()
 	brano nuovo_brano;
 	brano_artista relazione_branoArtista;
 	brano_genere relazione_branoGenere;
+	brano_album relazione_branoAlbum;
 	char titolo_brano[DIMTITOLO_BRANO];
 	int anno_brano;
 	int durata_brano;
 	int id_brano;
 	int id_artista;
 	int id_genere;
+	int id_album;
 	int brano_aggiunto;
 	int relazione_branoArtista_aggiunta;
 	int relazione_branoGenere_aggiunta;
+	int relazione_branoAlbum_aggiunta;
 
 	titolo();
 
@@ -218,6 +219,13 @@ void interfaccia_inserimento_brano()
 	printf("ID genere: ");
 	leggere_intero(&id_genere);
 
+//	Scelta dell'album
+	titolo();
+	printf("Scegli uno degli album presenti su Phonos \n\n");
+	mostra_album();
+	printf("ID album: ");
+	leggere_intero(&id_album);
+
 //	Scrivo le informazioni del brano
 	id_brano = genera_id();
 	scrivi_id_brano(&nuovo_brano, id_brano);
@@ -229,6 +237,7 @@ void interfaccia_inserimento_brano()
 //	Definisco le relazioni
 	scrivi_relazione_branoArtista(&relazione_branoArtista, id_brano, id_artista);
 	scrivi_relazione_branoGenere(&relazione_branoGenere, id_brano, id_genere);
+	scrivi_relazione_branoAlbum(&relazione_branoAlbum, id_brano, id_album);
 
 //	Aggiungo il brano
 	brano_aggiunto = aggiungi_brano(&nuovo_brano);
@@ -236,8 +245,9 @@ void interfaccia_inserimento_brano()
 //	Aggiungo le relazioni
 	relazione_branoArtista_aggiunta = aggiungi_branoArtista(&relazione_branoArtista);
 	relazione_branoGenere_aggiunta = aggiungi_branoGenere(&relazione_branoGenere);
+	relazione_branoAlbum_aggiunta = aggiungi_branoAlbum(&relazione_branoAlbum);
 
-	if (brano_aggiunto == 1 && relazione_branoArtista_aggiunta == 1 && relazione_branoGenere_aggiunta == 1)
+	if (brano_aggiunto == 1 && relazione_branoArtista_aggiunta == 1 && relazione_branoGenere_aggiunta == 1 && relazione_branoAlbum_aggiunta == 1)
 	{
 		printf("\nBrano aggiunto con successo! \n");
 	}
@@ -364,46 +374,27 @@ void interfaccia_inserimento_playlist()
 void interfaccia_inserimento_album()
 {
 	album nuovo_album;
-	brano_album relazionebranoAlbum;
 	char titolo_album[DIMTITOLO_ALBUM];
-	int id_album;
-	int album_aggiunto;
-	int id_brano;
+	int anno_album;
+	int aggiunto;
 
 	titolo();
 
 	printf("Qual e' il titolo dell'album? ");
 	leggere_stringa(titolo_album);
 
-//	Scrivo i dati dell'album
-	id_album = genera_id();
-	scrivi_id_album(&nuovo_album, id_album);
+	printf("Qual e' l'anno di pubblicazione dell'album? ");
+	leggere_intero(&anno_album);
+
+	scrivi_id_album(&nuovo_album, genera_id());
 	scrivi_titolo_album(&nuovo_album, titolo_album);
+	scrivi_anno_album(&nuovo_album, anno_album);
 
-//	Aggiungo l'album
-	album_aggiunto = aggiungi_album(&nuovo_album);
+	aggiunto = aggiungi_album(&nuovo_album);
 
-//	Aggiunta brani
-	if (album_aggiunto == 1)
-	{
-		printf("\nAlbum aggiunto con successo! \n");
-		do {
-			titolo();
-			printf("Scegli un brano da aggiungere all'album. \n\n");
-			mostra_brani();
-			printf("ID brano: (-1 per terminare) ");
-			leggere_intero(&id_brano);
-
-			if(id_brano != -1)		scrivi_relazione_branoAlbum(&relazionebranoAlbum, id_brano, id_album);
-
-		} while (id_brano != -1);
-	}
-	else
-	{
-		printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
-	}
-
-
+	// controllo che l'aggiunta dell'album sia avvenuta con successo
+	if ( aggiunto == 1 )			printf("\nAlbum aggiunto con successo! \n");
+	else							printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_registrazione()

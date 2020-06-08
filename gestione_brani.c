@@ -128,6 +128,20 @@ void mostra_brano(brano brano_selezionato)
 		brano_album relazione_branoAlbum;
 		brano_genere relazione_branoGenere;
 
+		// dati sull'artista
+		artista artista_trovato;
+		char nome_artista[DIMNOME_ARTISTA];
+		char cognome_artista[DIMCOGNOME_ARTISTA];
+
+		// dati sull'album
+		album album_trovato;
+		char titolo_album[DIMTITOLO_ALBUM];
+
+		// dati sul genere
+		genere genere_trovato;
+		char nome_genere[DIMNOME_GENERE];
+
+		// dati sul brano
 		int id_brano_letto;
 		char titolo_brano_letto[DIMTITOLO_BRANO];
 		int anno_brano_letto;
@@ -146,12 +160,25 @@ void mostra_brano(brano brano_selezionato)
 		relazione_branoAlbum = cerca_relazione_branoAlbum(id_brano_letto);
 		relazione_branoGenere = cerca_relazione_branoGenere(id_brano_letto);
 		
+		// leggo l'artista
+		artista_trovato = cerca_artista(relazione_branoArtista.id_artista);
+		leggi_nome_artista(artista_trovato, nome_artista);
+		leggi_cognome_artista(artista_trovato, cognome_artista);
+
+		// leggo l'album
+		album_trovato = cerca_album(relazione_branoAlbum.id_album);
+		leggi_titolo_album(album_trovato, titolo_album);
+
+		// leggo il genere
+		genere_trovato = cerca_genere(relazione_branoGenere.id_genere);
+		leggi_nome_genere(genere_trovato, nome_genere);
+
 		// stampo i dati letti
 		printf("ID: %d				\n", id_brano_letto);
 		printf("Titolo: %s			\n", titolo_brano_letto);
-		printf("Artista: %d			\n", relazione_branoArtista.id_artista);
-		printf("Album: %d			\n", relazione_branoAlbum.id_album);
-		printf("Genere: %d			\n", relazione_branoGenere.id_genere);
+		printf("Artista: %s %s		\n", nome_artista, cognome_artista);
+		printf("Album: %s			\n", titolo_album);
+		printf("Genere: %s			\n", nome_genere);
 		printf("Anno: %d 			\n", anno_brano_letto);
 		printf("Durata: %d secondi	\n", durata_brano_letto);
 		printf("Ascoltato %d volte	\n", ascolti_brano_letto);
