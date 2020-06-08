@@ -68,23 +68,10 @@ void interfaccia_principale()
 	admin = leggi_admin_utente(utente_corrente);
 	leggi_username_utente(utente_corrente, username);
 
-	if(admin != -1)
-	{
-		printf("Bentornato, %s! \n\n", username);
-	}
-
-	if(admin == 1)
-	{
-		interfaccia_admin();
-	} 
-	else if(admin == 0)
-	{
-		interfaccia_utente();
-	} 
-	else 
-	{
-		interfaccia_iniziale();
-	}
+	if(admin != -1)				printf("Bentornato, %s! \n\n", username);
+	if(admin == 1)				interfaccia_admin();
+	else if(admin == 0)			interfaccia_utente();
+	else 						interfaccia_iniziale();
 }
 
 void interfaccia_iniziale()
