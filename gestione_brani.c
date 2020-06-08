@@ -130,8 +130,7 @@ void mostra_brano(brano brano_selezionato)
 
 		// dati sull'artista
 		artista artista_trovato;
-		char nome_artista[DIMNOME_ARTISTA];
-		char cognome_artista[DIMCOGNOME_ARTISTA];
+		char nome_arte_artista[DIMNOMEARTE_ARTISTA];
 
 		// dati sull'album
 		album album_trovato;
@@ -162,8 +161,7 @@ void mostra_brano(brano brano_selezionato)
 		
 		// leggo l'artista
 		artista_trovato = cerca_artista(relazione_branoArtista.id_artista);
-		leggi_nome_artista(artista_trovato, nome_artista);
-		leggi_cognome_artista(artista_trovato, cognome_artista);
+		leggi_nome_arte_artista(artista_trovato, nome_arte_artista);
 
 		// leggo l'album
 		album_trovato = cerca_album(relazione_branoAlbum.id_album);
@@ -176,7 +174,7 @@ void mostra_brano(brano brano_selezionato)
 		// stampo i dati letti
 		printf("ID: %d				\n", id_brano_letto);
 		printf("Titolo: %s			\n", titolo_brano_letto);
-		printf("Artista: %s %s		\n", nome_artista, cognome_artista);
+		printf("Artista: %s			\n", nome_arte_artista);
 		printf("Album: %s			\n", titolo_album);
 		printf("Genere: %s			\n", nome_genere);
 		printf("Anno: %d 			\n", anno_brano_letto);
