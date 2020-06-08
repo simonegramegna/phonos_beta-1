@@ -525,16 +525,16 @@ brano_artista cerca_relazione_branoArtista( int id_brano )
 
 brano_album cerca_relazione_branoAlbum( int id_brano )
 {
+	int trovato;
+	brano_album relazione_corrente;
 	brano_album relazione_trovata;
 	FILE *tabella_brano_album;
 
+	trovato = 0;
 	tabella_brano_album = fopen("brano_album.dat", "rb");
 
 	if( tabella_brano_album != NULL )
 	{
-		int trovato;
-		brano_album relazione_corrente;
-
 		trovato = 0;
 
 		while( fread(&relazione_corrente, sizeof(brano_album), 1, tabella_brano_album) && trovato == 0 )
@@ -557,16 +557,15 @@ brano_album cerca_relazione_branoAlbum( int id_brano )
 
 brano_genere cerca_relazione_branoGenere( int id_brano )
 {
+	int trovato;
+	brano_genere relazione_corrente;
 	brano_genere relazione_trovata;
 	FILE *tabella_brano_genere;
 
+	trovato = 0;
 	tabella_brano_genere = fopen("brano_genere.dat", "rb");
-
 	if(tabella_brano_genere != NULL)
 	{
-		int trovato;
-		brano_genere relazione_corrente;
-
 		while( fread(&relazione_corrente, sizeof(brano_genere), 1, tabella_brano_genere) && trovato == 0 )
 		{
 			int id_brano_letto;

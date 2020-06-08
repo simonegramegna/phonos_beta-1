@@ -5,6 +5,7 @@
 #include "gestione_brani.h"
 #include "gestione_playlist.h"
 #include "gestione_relazioni.h"
+#include "ricerca.h"
 
 int main()
 {

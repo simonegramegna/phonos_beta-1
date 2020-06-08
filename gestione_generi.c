@@ -57,7 +57,6 @@ int aggiungi_genere( genere *genere_selezionato )
 
 	if(tabella_generi != NULL)
 	{
-		scrivi_id_genere(genere_selezionato, genera_id());
 		scrivi_flag_eliminato_genere(genere_selezionato, 0);
 
 		fwrite(genere_selezionato, sizeof(genere), 1, tabella_generi);
