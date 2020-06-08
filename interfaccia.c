@@ -118,6 +118,7 @@ void interfaccia_utente()
 	printf("[8] Aggiungi una playlist			\n");
 	printf("[9] Aggiungi un album				\n");
 	printf("[10] Ricerca						\n");
+	printf("[11] Esci							\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -132,6 +133,7 @@ void interfaccia_utente()
 	else if (scelta == 8)		interfaccia_inserimento_playlist();
 	else if (scelta == 9)		interfaccia_inserimento_album();
 	else if (scelta == 10)		interfaccia_ricerca();
+	else if (scelta == 11)		return;
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -154,6 +156,7 @@ void interfaccia_admin()
 	printf("[11] Ricerca								\n");
 	printf("[12] Backup dei dati						\n");
 	printf("[13] Ripristino dei dati					\n");
+	printf("[14] Esci									\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -171,6 +174,7 @@ void interfaccia_admin()
 	else if (scelta == 11)		interfaccia_ricerca();
 	else if (scelta == 12)		interfaccia_backup();
 	else if (scelta == 13)		interfaccia_ripristino();
+	else if (scelta == 14)		return;
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
