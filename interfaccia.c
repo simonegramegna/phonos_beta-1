@@ -100,11 +100,17 @@ void interfaccia_utente()
 	printf("[3] Visualizza tutti i generi		\n");
 	printf("[4] Visualizza tutte le playlist	\n");
 	printf("[5] Visualizza tutti gli album		\n");
+	printf("\n");
+
 	printf("[6] Aggiungi un brano				\n");
 	printf("[7] Aggiungi un artista				\n");
 	printf("[8] Aggiungi una playlist			\n");
 	printf("[9] Aggiungi un album				\n");
+	printf("\n");
+
 	printf("[10] Ricerca						\n");
+	printf("\n");
+
 	printf("[11] Esci							\n");
 
 	printf("\nScegli una delle opzioni: ");
@@ -135,20 +141,37 @@ void interfaccia_admin()
 	printf("[3] Visualizza tutti i generi				\n");
 	printf("[4] Visualizza tutte le playlist			\n");
 	printf("[5] Visualizza tutti gli album				\n");
+	printf("\n");
+
 	printf("[6] Aggiungi un brano						\n");
 	printf("[7] Aggiungi un artista						\n");
 	printf("[8] Aggiungi una playlist					\n");
 	printf("[9] Aggiungi un genere						\n");
 	printf("[10] Aggiungi un album						\n");
+	printf("\n");
+
 	printf("[11] Modifica un brano						\n");
 	printf("[12] Modifica un artista					\n");
 	printf("[13] Modifica una playlist					\n");
 	printf("[14] Modifica un genere						\n");
 	printf("[15] Modifica un album						\n");
-	printf("[16] Ricerca								\n");
-	printf("[17] Backup dei dati						\n");
-	printf("[18] Ripristino dei dati					\n");
-	printf("[19] Esci									\n");
+	printf("\n");
+
+	printf("[16] Elimina un brano						\n");
+	printf("[17] Elimina un artista						\n");
+	printf("[18] Elimina una playlist					\n");
+	printf("[19] Elimina un genere						\n");
+	printf("[20] Elimina un album						\n");
+	printf("\n");
+
+	printf("[21] Ricerca								\n");
+	printf("\n");
+
+	printf("[22] Backup dei dati						\n");
+	printf("[23] Ripristino dei dati					\n");
+	printf("\n");
+
+	printf("[24] Esci									\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -158,20 +181,31 @@ void interfaccia_admin()
 	else if (scelta == 3)		mostra_generi();
 	else if (scelta == 4)		mostra_playlists();
 	else if (scelta == 5)		mostra_album();
+
 	else if (scelta == 6)		interfaccia_inserimento_brano();
 	else if (scelta == 7)		interfaccia_inserimento_artista();
 	else if (scelta == 8)		interfaccia_inserimento_playlist();
 	else if (scelta == 9)		interfaccia_inserimento_genere();
 	else if (scelta == 10)		interfaccia_inserimento_album();
+
 	else if (scelta == 11)		interfaccia_modifica_brano();
 	else if (scelta == 12)		interfaccia_modifica_artista();
 	else if (scelta == 13)		interfaccia_modifica_playlist();
 	else if (scelta == 14)		interfaccia_modifica_genere();
 	else if (scelta == 15)		interfaccia_modifica_album();
-	else if (scelta == 16)		interfaccia_ricerca();
-	else if (scelta == 17)		interfaccia_backup();
-	else if (scelta == 18)		interfaccia_ripristino();
-	else if (scelta == 19)		return;
+
+	else if (scelta == 16)		interfaccia_eliminazione_brano();
+	else if (scelta == 17)		interfaccia_eliminazione_artista();
+	else if (scelta == 18)		interfaccia_eliminazione_playlist();
+	else if (scelta == 19)		interfaccia_eliminazione_genere();
+	else if (scelta == 20)		interfaccia_eliminazione_album();
+
+	else if (scelta == 21)		interfaccia_ricerca();
+
+	else if (scelta == 22)		interfaccia_backup();
+	else if (scelta == 23)		interfaccia_ripristino();
+
+	else if (scelta == 24)		return;
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -892,5 +926,86 @@ void interfaccia_modifica_album(){
 	esito = modifica_album(album_trovato);
 
 	if(esito == 1)		printf("\nAlbum modificato con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+// Eliminazione
+void interfaccia_eliminazione_brano(){
+	titolo();
+
+	int id_brano;
+	int esito;
+
+	mostra_brani();
+	printf("ID del brano da eliminare: ");
+	leggere_intero(&id_brano);
+
+	esito = elimina_brano(id_brano);
+
+	if(esito == 1)		printf("\nBrano eliminato con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_eliminazione_artista(){
+	titolo();
+
+	int id_artista;
+	int esito;
+
+	mostra_artisti();
+	printf("ID dell'artista da eliminare: ");
+	leggere_intero(&id_artista);
+
+	esito = elimina_artista(id_artista);
+
+	if(esito == 1)		printf("\nArtista eliminato con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_eliminazione_playlist(){
+	titolo();
+
+	int id_playlist;
+	int esito;
+
+	mostra_playlists();
+	printf("ID della playlist da eliminare: ");
+	leggere_intero(&id_playlist);
+
+	esito = elimina_playlist(id_playlist);
+
+	if(esito == 1)		printf("\nPlaylist eliminata con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_eliminazione_genere(){
+	titolo();
+
+	int id_genere;
+	int esito;
+
+	mostra_generi();
+	printf("ID del genere da eliminare: ");
+	leggere_intero(&id_genere);
+
+	esito = elimina_genere(id_genere);
+
+	if(esito == 1)		printf("\nGenere eliminato con successo \n");
+	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
+}
+
+void interfaccia_eliminazione_album(){
+	titolo();
+
+	int id_album;
+	int esito;
+
+	mostra_album();
+	printf("ID dell'album da eliminare: ");
+	leggere_intero(&id_album);
+
+	esito = elimina_album(id_album);
+
+	if(esito == 1)		printf("\nAlbum eliminato con successo \n");
 	else				printf("\nQualcosa e' andato storto, ti preghiamo di riprovare \n");
 }

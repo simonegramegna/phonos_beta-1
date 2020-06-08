@@ -133,4 +133,19 @@ void interfaccia_modifica_genere();
 //funzione che mostra l'interfaccia di modifica dell'album
 void interfaccia_modifica_album();
 
+//funzione che mostra l'interfaccia di eliminazione di un brano
+void interfaccia_eliminazione_brano();
+
+//funzione che mostra l'interfaccia di eliminazione di un artista
+void interfaccia_eliminazione_artista();
+
+//funzione che mostra l'interfaccia di eliminazione di una playlist
+void interfaccia_eliminazione_playlist();
+
+//funzione che mostra l'interfaccia di eliminazione di un genere
+void interfaccia_eliminazione_genere();
+
+//funzione che mostra l'interfaccia di eliminazione di un album
+void interfaccia_eliminazione_album();
+
 #endif /* INTERFACCIA_H_ */
