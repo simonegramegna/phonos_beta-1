@@ -502,47 +502,24 @@ void ricerca_playlist_pubbliche()
 brano_artista cerca_relazione_branoArtista( int id_brano )
 {
 	brano_artista relazione_trovata;
-	FILE *tabella_brano_artista;
+	brano_artista relazione_corrente;
+	int id_brano_corrente;
+	int trovata;
+	FILE *tabella_branoArtista;
 
-	tabella_brano_artista = fopen("brano_artista.dat", "rb");
-
-	if(tabella_brano_artista != NULL)
-	{
-		int trovato;
-		brano_artista relazione_corrente;
-
-		trovato = 0;
-
-		while( fread(&relazione_corrente, sizeof(brano_artista), 1, tabella_brano_artista) && trovato == 0 )
-		{
-			int id_brano_letto;
-			int flag_relazione;
-
-			id_brano_letto = id_brano_branoArtista(relazione_corrente);
-			flag_relazione = leggi_flag_branoArtista(relazione_corrente);
-
-
-			// verfico che i brani coincidano e che la relazione esiste
-			if( id_brano_letto == id_brano && flag_relazione == 0 )
-			{
-				int id_relazione_letta;
-				int artista_relazione_letta;
-
-				id_relazione_letta = leggi_id_branoArtista(relazione_corrente);
-				artista_relazione_letta = id_artista_branoArtista(relazione_corrente);
-
-				// scrivo i dati nella relazione da restituire
-				scrivi_id_branoArtista(&relazione_trovata, id_relazione_letta);
-				scrivi_relazione_branoArtista(&relazione_trovata, id_brano_letto, artista_relazione_letta);
-				scrivi_flag_branoArtista(&relazione_trovata, flag_relazione);
-
-
-				trovato = 1;
+	trovata = 0;
+	tabella_branoArtista = fopen("brano_artista.dat", "rb");
+	if(tabella_branoArtista != NULL){
+		while( fread(&relazione_corrente, sizeof(brano_artista), 1, tabella_branoArtista) && trovata == 0 ){
+			id_brano_corrente = id_brano_branoArtista(relazione_corrente);
+			if(id_brano == id_brano_corrente){
+				relazione_trovata = relazione_corrente;
+				trovata = 1;
 			}
 		}
 	}
-	fclose(tabella_brano_artista);
 
+	fclose(tabella_branoArtista);
 	return relazione_trovata;
 }
 
@@ -565,13 +542,14 @@ brano_album cerca_relazione_branoAlbum( int id_brano )
 			int id_brano_letto;
 			id_brano_letto = id_brano_branoAlbum(relazione_corrente);
 
-			if( relazione_corrente.id_brano == id_brano )
+			if( id_brano_letto == id_brano )
 			{
 				relazione_trovata = relazione_corrente;
 				trovato = 1;
 			}
 		}
 	}
+
 	fclose(tabella_brano_album);
 
 	return relazione_trovata;
@@ -601,6 +579,7 @@ brano_genere cerca_relazione_branoGenere( int id_brano )
 			}
 		}
 	}
+
 	fclose(tabella_brano_genere);
 
 	return relazione_trovata;

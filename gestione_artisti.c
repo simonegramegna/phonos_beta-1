@@ -78,7 +78,6 @@ int aggiungi_artista(artista *artista_selezionato)
 
 	if(tabella_artisti != NULL)
 	{
-		scrivi_id_artista(artista_selezionato, genera_id());
 		scrivi_flag_eliminato_artista(artista_selezionato, 0);
 
 		fwrite(artista_selezionato, sizeof(artista), 1, tabella_artisti);

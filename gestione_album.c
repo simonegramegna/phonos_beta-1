@@ -63,7 +63,6 @@ int aggiungi_album(album *album_selezionato)
 
 	if(tabella_album != NULL)
 	{
-		scrivi_id_album(album_selezionato, genera_id());
 		scrivi_flag_eliminato_album(album_selezionato, 0);
 
 		fwrite(album_selezionato, sizeof(album), 1, tabella_album);

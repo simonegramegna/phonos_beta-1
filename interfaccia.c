@@ -266,6 +266,7 @@ void interfaccia_inserimento_artista()
 	printf("Qual e' il nome d'arte dell'artista? ");
 	leggere_stringa(nome_arte_artista);
 
+	scrivi_id_artista(&nuovo_artista, genera_id());
 	scrivi_nome_artista(&nuovo_artista, nome_artista);
 	scrivi_cognome_artista(&nuovo_artista, cognome_artista);
 	scrivi_nome_arte_artista(&nuovo_artista, nome_arte_artista);
@@ -288,6 +289,7 @@ void interfaccia_inserimento_genere()
 	printf("Qual e' il nome del genere? ");
 	leggere_stringa(nome_genere);
 
+	scrivi_id_genere(&nuovo_genere, genera_id());
 	scrivi_nome_genere(&nuovo_genere, nome_genere);
 
 	aggiunto = aggiungi_genere(&nuovo_genere);
