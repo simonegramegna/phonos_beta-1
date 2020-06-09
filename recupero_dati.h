@@ -82,37 +82,4 @@ int backup_branoGenere();
 int backup_playlistBrano();
 
 
-/*****************************
- * 
- * Funzione di test per la stampa dei filese dei backup
- * 
- * ***************************/
-
-void stampa_backup_brani();
-
-void stampa_backup_artisti();
-
-void stampa_backup_album();
-
-void stampa_backup_generi();
-
-// funzione di test per stampare il file di backup
-void stampa_backup_playlist();
-
-/*************************
- * 
- * Stampa backup relazioni 
- * 
- ***************************/
-
-void stampa_backup_branoAlbum();
-
-void stampa_backup_branoArtista();
-
-void stampa_backup_branoGenere();
-
-void stampa_backup_playlistBrano();
-
-
-
 #endif /* RECUPERO_DATI_H_ */
