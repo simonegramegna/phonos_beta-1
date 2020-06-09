@@ -111,8 +111,8 @@ void mostra_album_singolo(album album_selezionato)
 		printf("ID: %d				\n", id_album_letto);
 		printf("Titolo: %s			\n", titolo_album_letto);
 		printf("Anno: %d			\n", anno_album_letto);
+		printf("\n");
 	}
-	printf("\n");
 }
 
 long posizione_album( int id_album )

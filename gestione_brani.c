@@ -180,9 +180,8 @@ void mostra_brano(brano brano_selezionato)
 		printf("Anno: %d 			\n", anno_brano_letto);
 		printf("Durata: %d secondi	\n", durata_brano_letto);
 		printf("Ascoltato %d volte	\n", ascolti_brano_letto);
+		printf("\n");
 	}
-
-	printf("\n");
 }
 
 long posizione_brano(int id_brano)

@@ -109,10 +109,9 @@ void mostra_utente( utente utente_selezionato )
 	{
 		printf("ID: %d				\n", utente_selezionato.id);
 		printf("Username: %s		\n", utente_selezionato.username);
-		printf("Eliminato: %d		\n", utente_selezionato.eliminato);
 		printf("Admin: %d			\n", utente_selezionato.admin);
+		printf("\n");
 	}
-	printf("\n");
 }
 
 long posizione_utente( int id_utente )

@@ -100,8 +100,8 @@ void mostra_genere( genere genere_selezionato )
 
 		printf("ID: %d				\n", id_genere_letto);
 		printf("Nome: %s			\n", nome_genere_letto);
+		printf("\n");
 	}
-	printf("\n");
 }
 
 long posizione_genere( int id_genere) 

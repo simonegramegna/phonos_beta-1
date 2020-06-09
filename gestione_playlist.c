@@ -135,8 +135,8 @@ void mostra_playlist(playlist playlist_selezionata)
 		printf("Descrizione: %s		\n", descrizione_playlist_letta);
 		printf("Utente: %d 			\n", utente_playlist_letta);
 		printf("Pubblica: %d		\n", flag_pubblica_playlist_letta);
+		printf("\n");
 	}
-	printf("\n");
 }
 
 long posizione_playlist(int id_playlist)

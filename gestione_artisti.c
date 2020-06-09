@@ -127,8 +127,8 @@ void mostra_artista( artista artista_selezionato )
 		printf("Nome: %s			\n", nome_artista_letto);
 		printf("Cognome: %s			\n", cognome_artista_letto);
 		printf("Nome d'arte: %s		\n",nomearte_artista_letto);
+		printf("\n");
 	}
-	printf("\n");
 }
 
 long posizione_artista(int id_artista)
