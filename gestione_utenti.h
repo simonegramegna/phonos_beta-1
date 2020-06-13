@@ -96,7 +96,10 @@ void autentica( utente utente_autenticato );
 // funzione per leggere l'utente corrente
 utente leggi_utente_corrente();
 
-//funzione che verifica se un determinato unsername è già stato preso
+//funzione che verifica se un determinato unsername ï¿½ giï¿½ stato preso
 int username_esiste(char *username);
+
+// funzione per effettura il logout
+void logout_utente();
 
 #endif /* GESTIONE_UTENTI_H_ */

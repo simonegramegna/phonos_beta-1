@@ -75,7 +75,7 @@ int aggiungi_utente(utente *utente_selezionato)
 	if(tabella_utenti != NULL)
 	{
 		scrivi_id_utente(utente_selezionato, genera_id());
-		scrivi_admin_utente(utente_selezionato, 1);
+		scrivi_admin_utente(utente_selezionato, 0);
 		scrivi_flag_eliminato_utente(utente_selezionato, 0);
 
 		fwrite(utente_selezionato, sizeof(utente), 1, tabella_utenti);
@@ -311,7 +311,7 @@ int controllo_credenziali( char *username, char *password )
 void autentica( utente utente_autenticato )
 {
 	FILE *file_autenticazione;
-	file_autenticazione = fopen("autenticazione.dat", "rb+");
+	file_autenticazione = fopen("autenticazione.dat", "wb");
 
 	if(file_autenticazione != NULL)
 	{
@@ -357,4 +357,9 @@ int username_esiste(char *username){
 	}
 
 	return username_esiste;
+}
+
+void logout_utente()
+{
+	interfaccia_login();
 }

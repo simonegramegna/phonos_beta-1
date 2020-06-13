@@ -111,7 +111,8 @@ void interfaccia_utente()
 	printf("[10] Ricerca						\n");
 	printf("\n");
 
-	printf("[11] Esci							\n");
+	printf("[11] Logout							\n");
+	printf("[12] Esci							\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -126,7 +127,8 @@ void interfaccia_utente()
 	else if (scelta == 8)		interfaccia_inserimento_playlist();
 	else if (scelta == 9)		interfaccia_inserimento_album();
 	else if (scelta == 10)		interfaccia_ricerca();
-	else if (scelta == 11)		return;
+	else if (scelta == 11)		logout_utente();
+	else if (scelta == 12)		return;
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -171,7 +173,8 @@ void interfaccia_admin()
 	printf("[23] Ripristino dei dati					\n");
 	printf("\n");
 
-	printf("[24] Esci									\n");
+	printf("[24] Logout 								\n");
+	printf("[25] Esci									\n");
 
 	printf("\nScegli una delle opzioni: ");
 	leggere_intero(&scelta);
@@ -205,7 +208,8 @@ void interfaccia_admin()
 	else if (scelta == 22)		interfaccia_backup();
 	else if (scelta == 23)		interfaccia_ripristino();
 
-	else if (scelta == 24)		return;
+	else if (scelta == 24)		logout_utente();
+	else if (scelta == 25)      return;
 	else						printf("\nValore non valido, si prega di riprovare \n");
 
 	replay();
@@ -692,7 +696,7 @@ void interfaccia_backup_brani(){
 	esito = backup_brani();
 
 	if(esito == 1)		printf("Backup dei brani effettuato con successo \n");
-	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+	else				printf("Qualcosa ï¿½ andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_backup_artisti(){
@@ -700,7 +704,7 @@ void interfaccia_backup_artisti(){
 	esito = backup_artisti();
 
 	if(esito == 1)		printf("Backup degli artisti effettuato con successo \n");
-	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+	else				printf("Qualcosa ï¿½ andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_backup_playlist(){
@@ -708,7 +712,7 @@ void interfaccia_backup_playlist(){
 	esito = backup_playlist();
 
 	if(esito == 1)		printf("Backup delle playlist effettuato con successo \n");
-	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+	else				printf("Qualcosa ï¿½ andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_backup_album(){
@@ -716,7 +720,7 @@ void interfaccia_backup_album(){
 	esito = backup_album();
 
 	if(esito == 1)		printf("Backup degli album effettuato con successo \n");
-	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+	else				printf("Qualcosa ï¿½ andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_ripristino(){
@@ -745,7 +749,7 @@ void interfaccia_ripristino_brani(){
 	esito = ripristina_brani();
 
 	if(esito == 1)		printf("Ripristino dei brani effettuato con successo \n");
-	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+	else				printf("Qualcosa ï¿½ andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_ripristino_artisti(){
@@ -753,7 +757,7 @@ void interfaccia_ripristino_artisti(){
 	esito = ripristina_artisti();
 
 	if(esito == 1)		printf("Ripristino degli artisti effettuato con successo \n");
-	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+	else				printf("Qualcosa ï¿½ andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_ripristino_playlist(){
@@ -761,7 +765,7 @@ void interfaccia_ripristino_playlist(){
 	esito = ripristina_playlist();
 
 	if(esito == 1)		printf("Ripristino delle playlist effettuato con successo \n");
-	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+	else				printf("Qualcosa ï¿½ andato storto, ti preghiamo di riprovare \n");
 }
 
 void interfaccia_ripristino_album(){
@@ -769,7 +773,7 @@ void interfaccia_ripristino_album(){
 	esito = ripristina_album();
 
 	if(esito == 1)		printf("Ripristino degli album effettuato con successo \n");
-	else				printf("Qualcosa è andato storto, ti preghiamo di riprovare \n");
+	else				printf("Qualcosa ï¿½ andato storto, ti preghiamo di riprovare \n");
 }
 
 // Modifica
