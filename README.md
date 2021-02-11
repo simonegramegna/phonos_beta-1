@@ -13,7 +13,7 @@ Cosa funziona:
   - Gestione di playlist pubbliche/private
   - Ricerca per titolo, durata ecc...
 
-Questo progetto è stato realizzato per l'esame di Laboratorio di Programmazione - 1° anno CdL Informatica UniBA
+Questo progetto è stato realizzato per l'esame di Laboratorio di Informatica - 1° anno CdL Informatica UniBA
 
 # Edit
 Phonos significava, secondo uno degli sviluppatori del progetto, la traduzione in greco antico di: "suono".
