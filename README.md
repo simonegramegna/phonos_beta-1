@@ -10,7 +10,7 @@ Cosa funziona:
   - Interfacce separate in base al tipo di utente loggato (admin o utente generico)
   - Backup e ripristino dei dati
   - Generazione di id univoci
-  - Gestione di playlist pubbliche/private
+  - Gestione  di playlist pubbliche/private
   - Ricerca per titolo, durata ecc...
 
 Questo progetto è stato realizzato per l'esame di Laboratorio di Informatica - 1° anno CdL Informatica UniBA
